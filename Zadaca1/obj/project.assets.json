@@ -8,19 +8,19 @@
     "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\harun\\.nuget\\packages\\": {}
+    "C:\\Users\\Almina\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\harun\\Desktop\\Zadaca1-master\\Zadaca1\\Zadaca1.csproj",
+      "projectUniqueName": "C:\\Users\\Almina\\Desktop\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj",
       "projectName": "Zadaca1",
-      "projectPath": "C:\\Users\\harun\\Desktop\\Zadaca1-master\\Zadaca1\\Zadaca1.csproj",
-      "packagesPath": "C:\\Users\\harun\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\harun\\Desktop\\Zadaca1-master\\Zadaca1\\obj\\",
+      "projectPath": "C:\\Users\\Almina\\Desktop\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj",
+      "packagesPath": "C:\\Users\\Almina\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Almina\\Desktop\\VVS_zadaca1\\Zadaca1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\harun\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Almina\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
