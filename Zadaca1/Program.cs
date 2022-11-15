@@ -30,14 +30,13 @@ namespace Zadaca1
 
             //HARUN KOD: HaCeOv20sl20
 
-            List<Stranka> stranke = new List<Stranka> { new Stranka("NP", new List<Kandidat> { new Kandidat("Nezir Nezirovic", "NP"), new Kandidat("Hamid Hamidovic", "NP")}),
-                                                        new Stranka("Nasa stranka", new List<Kandidat> { new Kandidat("Pero Peric", "Nasa stranka"), new Kandidat("Ana Anic", "Nasa stranka")})};
-            List<Kandidat> kandidati = new List<Kandidat> { new Kandidat("Nezir Nezirovic", "NP"),
-                                                            new Kandidat("Hamid Hamidovic", "NP"),
-                                                            new Kandidat("Pero Peric", "Nasa stranka"),
-                                                            new Kandidat("Ana Anic", "Nasa stranka"),
-                                                            new Kandidat("Nezavisni Kandidat", null),
-                                                            new Kandidat("Nezavisni Kandidatopet", null)};
+            Kandidat k1 = new Kandidat("Nezir Nezirovic", "NP");
+            Kandidat k2 = new Kandidat("Hamid Hamidovic", "NP");
+            Kandidat k3 = new Kandidat("Pero Peric", "Nasa stranka");
+            Kandidat k4 = new Kandidat("Ana Anic", "Nasa stranka");
+            List <Stranka> stranke = new List<Stranka> { new Stranka("NP", new List<Kandidat> { k1, k2}),
+                                                        new Stranka("Nasa stranka", new List<Kandidat> { k3, k4})};
+            List<Kandidat> kandidati = new List<Kandidat> { k1,k2,k3, k4, new Kandidat("Nezavisni Kandidat", null),new Kandidat("Nezavisni Kandidatopet", null)};
            
             List<Glasac> glasaci = new List<Glasac>();
             string datum = "7/20/2000";

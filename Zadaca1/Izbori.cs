@@ -13,19 +13,12 @@ namespace Zadaca1
         private List<Kandidat> kandidati;
         private List<Glasac> glasaci;
         private int ukupnoGlasovaNaIzborima = 0;
-        private DateTime pocetakIzbora;
-        private DateTime krajIzbora;
 
         public List<Stranka> Stranke { get => stranke; set => stranke = value; }
         public List<Kandidat> Kandidati { get => kandidati; set => kandidati = value; }
         public List<Glasac> Glasaci { get => glasaci; set => glasaci = value; }
 
-        public DateTime PocetakIzbora { get => pocetakIzbora; set => pocetakIzbora = value; }
-
-        public DateTime KrajIzbora { get => krajIzbora; set => krajIzbora = value; }
-
-
-        public Izbori() { } 
+        public Izbori() { }
         public Izbori(List<Stranka> stranke, List<Kandidat> kandidati, List<Glasac> glasaci)
         {
             this.stranke = stranke;

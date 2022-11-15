@@ -118,12 +118,53 @@ namespace Zadaca1
 
         bool ValidirajBrojeve(string jmbg)
         {
+            if (jmbg.Length != 13)
+            {
+                return false;
+            }
             foreach (char c in jmbg)
             {
                 if (c > '9' || c < '0')
                 {
                     return false;
                 }
+            }
+            /* Provjera validnosti mjeseca rodjenja */
+            int mjesec = int.Parse(jmbg.Substring(2, 2));
+            if (mjesec > 12)
+            {
+                return false;
+            }
+            /* Izdvajanje dana i godine rodjenja */
+            int dan = int.Parse(jmbg.Substring(0, 2));
+            int godina = int.Parse(jmbg.Substring(4, 3)) + 1000;
+            if (godina < 1900)
+            {
+                godina += 1000;
+            }
+            int[] mjeseci = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+            /* Prestupne godine */
+            if (godina % 400 == 0 || (godina % 4 == 0 && godina % 100 != 0))
+            {
+                mjeseci[1]++;
+            }
+            /* Provjera validnosti dana rodjenja */
+            if (dan > mjeseci[mjesec - 1])
+            {
+                return false;
+            }
+            /* Provjera regije rodjenja - od 10 do 19 Bosna i Hercegovina */
+            if (jmbg[7] != '1') return false;
+            /* Provjera kontrolne cifre */
+            string j = "";
+            for (int i = 0; i < 13; i++)
+            {
+                j += jmbg[i] - '0';
+            }
+            int kontrolna = 11 - ((7 * (j[0] + j[6]) + 6 * (j[1] + j[7]) + 5 * (j[2] + j[8]) + 4 * (j[3] + j[9]) + 3 * (j[4] + j[10]) + 2 * (j[5] + j[11])) % 11);
+            if (jmbg[12] != kontrolna)
+            {
+                return false;
             }
             return true;
         }
