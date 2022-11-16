@@ -77,7 +77,7 @@ namespace Zadaca1
             {
                 throw new ArgumentException("Neispravan broj licne!");
             }
-            if (!ValidirajBrojeve(jmbg))
+            if (!ValidirajJMBG(jmbg))
             {
                 throw new ArgumentException("Neispravan JMBG!");
             }
@@ -103,6 +103,18 @@ namespace Zadaca1
             return true;
         }
 
+        bool ValidirajBrojeve(string naziv)
+        {
+            foreach (char c in naziv)
+            {
+                if (c > '9' || c < '0')
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         bool ValidirajSlovaBrojeve(string licna)
         {
             foreach (char c in licna)
@@ -116,7 +128,7 @@ namespace Zadaca1
             return true;
         }
 
-        bool ValidirajBrojeve(string jmbg)
+        bool ValidirajJMBG(string jmbg)
         {
             if (jmbg.Length != 13)
             {
@@ -156,13 +168,9 @@ namespace Zadaca1
             /* Provjera regije rodjenja - od 10 do 19 Bosna i Hercegovina */
             if (jmbg[7] != '1') return false;
             /* Provjera kontrolne cifre */
-            string j = "";
-            for (int i = 0; i < 13; i++)
-            {
-                j += jmbg[i] - '0';
-            }
-            int kontrolna = 11 - ((7 * (j[0] + j[6]) + 6 * (j[1] + j[7]) + 5 * (j[2] + j[8]) + 4 * (j[3] + j[9]) + 3 * (j[4] + j[10]) + 2 * (j[5] + j[11])) % 11);
-            if (jmbg[12] != kontrolna)
+            int kontrolna = 11 - ((7 * (jmbg[0] + jmbg[6] - 2 * '0') + 6 * (jmbg[1] + jmbg[7] - 2 * '0') + 5 * (jmbg[2] + jmbg[8] - 2 * '0') + 4 * (jmbg[3] + jmbg[9] - 2 * '0') + 3 * (jmbg[4] + jmbg[10] - 2 * '0') + 2 * (jmbg[5] + jmbg[11] - 2 * '0')) % 11);
+            if (kontrolna > 9) kontrolna = 0;
+            if (jmbg[12] - '0' != kontrolna)
             {
                 return false;
             }

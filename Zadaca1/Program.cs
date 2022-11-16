@@ -44,8 +44,8 @@ namespace Zadaca1
             var jel_ok = DateTime.TryParse(datum, out dt);
             Glasac glasac = new Glasac("Harun", "Cehaljic", "Ovdje moze sta hoces jer je adresa", dt, "slova1br0j3v1", "2007000170005");
             glasaci.Add(glasac); 
-            glasaci.Add(new Glasac("Neko", "Nekic", "Izmisljena bb", DateTime.Now.AddYears(-18), "11882233ab", "1111001170005"));
-            glasaci.Add(new Glasac("Ena", "Enic", "Gradacacka bb", DateTime.Now.AddYears(-25), "1234ab445vh", "1345567895"));
+            glasaci.Add(new Glasac("Neko", "Nekic", "Izmisljena bb", DateTime.Now.AddYears(-18), "11882233ab", "1111001170007"));
+            glasaci.Add(new Glasac("Ena", "Enic", "Gradacacka bb", DateTime.Now.AddYears(-25), "1234ab445vh", "0308964184008"));
 
             Izbori izbori = new Izbori(stranke, kandidati, glasaci);
  
