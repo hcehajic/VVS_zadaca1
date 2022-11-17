@@ -12,7 +12,7 @@ namespace Zadaca1
         private List<Stranka> stranke;
         private List<Kandidat> kandidati;
         private List<Glasac> glasaci;
-        private int ukupnoGlasovaNaIzborima = 0;
+        private int ukupno_glasova_na_izborima = 0;
 
         public List<Stranka> Stranke { get => stranke; set => stranke = value; }
         public List<Kandidat> Kandidati { get => kandidati; set => kandidati = value; }
@@ -27,9 +27,9 @@ namespace Zadaca1
         }
 
 
-        public void Glasaj(Glasac trenutniGlasac)
+        public void Glasaj(Glasac trenutni_glasac)
         {
-            if (trenutniGlasac.birao)
+            if (trenutni_glasac.birao)
             {
                 Console.WriteLine("Vi ste vec glasali na izborima. Dovidjenja");
                 return;
@@ -49,10 +49,10 @@ namespace Zadaca1
             Console.WriteLine("\nSTRANKE");
             Console.WriteLine("Unesite redni broj stranke ili redni broj stranke i njene kandidate za koje glasate:");
             brojac = 1;
-            int brojacStranka = 1;
+            int brojac_stranaka = 1;
             foreach (Stranka s in stranke)
             {
-                Console.WriteLine(brojacStranka++ + ") " + s.naziv);
+                Console.WriteLine(brojac_stranaka++ + ") " + s.naziv);
                 Console.WriteLine("Kandidati stranke:");
                 foreach (Kandidat k in s.clanovi)
                 Console.WriteLine(brojac++ + ") " + k.ime_prezime);
@@ -61,8 +61,8 @@ namespace Zadaca1
                 Console.WriteLine("\n");
             }
 
-            var izborStrankaClanovi = Console.ReadLine();
-            string[] uneseno = izborStrankaClanovi.Split(' ', StringSplitOptions.None);
+            var izbor_stranka_clanovi = Console.ReadLine();
+            string[] uneseno = izbor_stranka_clanovi.Split(' ', StringSplitOptions.None);
 
             brojac = 0;
             foreach (Stranka s in stranke)
@@ -80,21 +80,21 @@ namespace Zadaca1
 
                 else if (brojac == Convert.ToInt32(uneseno[0]) && uneseno.Length > 1)
                 {
-                    int brojacKandidati = 0;
-                    int brojacNizUneseni = 1;
+                    int brojac_kandidati = 0;
+                    int brojac_niz_uneseni = 1;
                     foreach (Kandidat k in kandidati)
                     {
-                        brojacKandidati++;
-                        if (k.stranka != null && k.stranka.Equals(s.naziv) && brojacKandidati == Convert.ToInt32(uneseno[brojacNizUneseni]) && brojacNizUneseni < uneseno.Length)
+                        brojac_kandidati++;
+                        if (k.stranka != null && k.stranka.Equals(s.naziv) && brojac_kandidati == Convert.ToInt32(uneseno[brojac_niz_uneseni]) && brojac_niz_uneseni < uneseno.Length)
                         {
                             k.brojGlasova++;
                             s.brojGlasova++;
-                            brojacNizUneseni++;
+                            brojac_niz_uneseni++;
                         }
                     }
                 }
             }
-            trenutniGlasac.birao = true;
+            trenutni_glasac.birao = true;
 
             Console.WriteLine("ENTER za nastavak...");
             Console.ReadLine();
@@ -109,20 +109,20 @@ namespace Zadaca1
 
             Console.WriteLine("\nBroj mogucih glasaca je " + glasaci.Count + ", od kojih je glasalo " + izlaznost + ", sto je ukupno " + ((izlaznost * 1.0) / glasaci.Count) * 100 + "%.");
             Console.WriteLine("Stranke koje su osvojile mandate za sada (min 2% glasova) su: ");
-            int brojacUkupni = 0;
+            int brojac_ukupni = 0;
             foreach (Stranka s in stranke)
             {
-                if ((s.brojGlasova * 1.0) / ukupnoGlasovaNaIzborima >= 2)
+                if ((s.brojGlasova * 1.0) / ukupno_glasova_na_izborima >= 2)
                 {
-                    brojacUkupni++;
+                    brojac_ukupni++;
                     Console.WriteLine(s.naziv);
                 }
             }
-            if (brojacUkupni == 0)
+            if (brojac_ukupni == 0)
                 Console.WriteLine("Za sada nema takvih");
 
             Console.WriteLine("Kandidati koji su osvojili mandat za sada (min 20% glasova stranke) su:");
-            brojacUkupni = 0;
+            brojac_ukupni = 0;
 
             foreach (Stranka s in stranke)
             {
@@ -131,13 +131,13 @@ namespace Zadaca1
                     double postotak = ((k.brojGlasova * 1.0) / s.brojGlasova) * 100;
                     if (postotak > 20 && k.stranka.Equals(s.naziv))
                     {
-                        brojacUkupni++;
+                        brojac_ukupni++;
                         Console.WriteLine("Stranka: " + s.naziv + " Kandidat: " + k.ime_prezime);
                     }
                    
                 }
             }
-            if (brojacUkupni == 0)
+            if (brojac_ukupni == 0)
                 Console.WriteLine("Za sada nema takvih");
 
             Console.WriteLine("ENTER za nastavak...");
@@ -147,18 +147,18 @@ namespace Zadaca1
         public void GlasaciNaIzborima()
         {
             Console.WriteLine("Glasaci na ovim izborima su do sada: ");
-            int ukupniBrojac = 0;
+            int ukupni_brojac = 0;
             foreach (Glasac gl in glasaci)
             {
                 if (gl.birao)
                 {
-                    ukupniBrojac++;
+                    ukupni_brojac++;
                     Console.WriteLine(gl.ToString());
                 }
             }
-            if (ukupniBrojac == 0)
+            if (ukupni_brojac == 0)
                 Console.WriteLine("Za sada jos niko nije glasao");
-           ukupnoGlasovaNaIzborima= ukupniBrojac;
+           ukupno_glasova_na_izborima = ukupni_brojac;
 
            Console.WriteLine("ENTER za nastavak...");
            Console.ReadLine();
@@ -167,16 +167,16 @@ namespace Zadaca1
         public void GlasaciKojiNisuGlasali()
         {
             Console.WriteLine("Glasaci koji nisu glasali jos uvijek na izborima: ");
-            int ukupniBrojac = 0;
+            int ukupni_brojac = 0;
             foreach (Glasac gl in glasaci)
             {
                 if (!gl.birao)
                 {
-                    ukupniBrojac++;
+                    ukupni_brojac++;
                     Console.WriteLine(gl.ToString());
                 }
             }
-            if (ukupniBrojac == 0)
+            if (ukupni_brojac == 0)
                 Console.WriteLine("Svi glasaci su glasali na ovim izborima");
 
             Console.WriteLine("ENTER za nastavak...");
