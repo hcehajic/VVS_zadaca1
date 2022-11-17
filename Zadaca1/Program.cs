@@ -42,10 +42,10 @@ namespace Zadaca1
             string datum = "7/20/2000";
             DateTime dt;
             var jel_ok = DateTime.TryParse(datum, out dt);
-            Glasac glasac = new Glasac("Harun", "Cehaljic", "Ovdje moze sta hoces jer je adresa", dt, "slova1br0j3v1", "2007000170005");
+            Glasac glasac = new Glasac("Harun", "Cehaljic", "Ovdje moze sta hoces jer je adresa", dt, "slova1br0j3v1", "2308001170009");
             glasaci.Add(glasac);
-            glasaci.Add(new Glasac("Neko", "Nekic", "Izmisljena bb", DateTime.Now.AddYears(-18), "11882233ab", "1111001170005"));
-            glasaci.Add(new Glasac("Ena", "Enic", "Gradacacka bb", DateTime.Now.AddYears(-25), "1234ab445vh", "1345567895"));
+            glasaci.Add(new Glasac("Neko", "Nekic", "Izmisljena bb", DateTime.Now.AddYears(-18), "11882233ab", "1803001170103"));
+            glasaci.Add(new Glasac("Ena", "Enic", "Gradacacka bb", DateTime.Now.AddYears(-25), "1234ab445vh", "2007000170005"));
 
             Izbori izbori = new Izbori(stranke, kandidati, glasaci);
 
