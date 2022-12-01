@@ -28,7 +28,7 @@ namespace Zadaca1
                 Console.WriteLine("Nije ti dobar datum!");
             }*/
 
-            //HARUN KOD: HaCeOv20sl20
+            //HARUN KOD: HaCeOv202020
 
             Kandidat k1 = new Kandidat("Nezir Nezirovic", "NP");
             Kandidat k2 = new Kandidat("Hamid Hamidovic", "NP");
@@ -42,10 +42,10 @@ namespace Zadaca1
             string datum = "7/20/2000";
             DateTime dt;
             var jel_ok = DateTime.TryParse(datum, out dt);
-            Glasac glasac = new Glasac("Harun", "Cehaljic", "Ovdje moze sta hoces jer je adresa", dt, "slova1br0j3v1", "2308001170009");
+            Glasac glasac = new Glasac("Harun", "Cehaljic", "Ovdje moze sta hoces jer je adresa", dt, "2034K5678", "2007000170009");
             glasaci.Add(glasac);
-            glasaci.Add(new Glasac("Neko", "Nekic", "Izmisljena bb", DateTime.Now.AddYears(-18), "11882233ab", "1803001170103"));
-            glasaci.Add(new Glasac("Ena", "Enic", "Gradacacka bb", DateTime.Now.AddYears(-25), "1234ab445vh", "2007000170005"));
+            glasaci.Add(new Glasac("Neko", "Nekic", "Izmisljena bb", DateTime.Now.AddYears(-19), "1234K5678", "2007000170009"));
+            glasaci.Add(new Glasac("Ena", "Enic", "Gradacacka bb", DateTime.Now.AddYears(-25), "1234K5678", "2007000170009"));
 
             Izbori izbori = new Izbori(stranke, kandidati, glasaci);
 
