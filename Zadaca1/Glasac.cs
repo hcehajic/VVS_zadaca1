@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Zadaca1
 {
@@ -24,6 +25,17 @@ namespace Zadaca1
         private string broj_licne;
         private string jmbg;
         private string kod;
+
+        public string Ime  
+        {
+            get { return ime; }   
+            set {
+                if (ValidirajIme(value))
+                    ime = value;
+                else throw new ArgumentException("Neispravno ime");
+
+            }  
+        }
 
         public bool birao { get; set; }
 
@@ -166,9 +178,9 @@ namespace Zadaca1
             return true;
         }
 
-        bool ValidirajIme(string naziv)
+      public static bool ValidirajIme(string naziv)
         {
-            if (naziv.Length == 0)
+            if (naziv.Length == 0 || naziv==null)
                 return false;
             //string velikaSlovaIme = naziv.ToUpper();
             //if (velikaSlovaIme.Any(char.IsDigit)) return false;
@@ -180,7 +192,8 @@ namespace Zadaca1
                 //Konvertujem char u string pa string pretvaram u veliak slova pa onda string prebacujem u niz charova sto je u stvari
                 //niz sa samo jednim elementom uvijek i pristupam mu onda pomocu indeksa 0 i tako dobijam uvijek veliko slovo
 
-                if (c.ToString().ToUpper().ToCharArray()[0] <= 'Z' || c.ToString().ToUpper().ToCharArray()[0] >= 'A' || c == '-')
+                 
+                if (Char.ToUpper(c) <= 'Z' && Char.ToUpper(c) >= 'A' || c == '-')
                     vratiVrijednost = true;
                 else
                     return false;
