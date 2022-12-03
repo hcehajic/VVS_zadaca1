@@ -49,6 +49,17 @@ namespace Zadaca1
 
         }
 
+        public string Adresa
+        {
+            get { return adresa; }
+            set
+            {
+                if (!ValidirajAdresu(value))
+                    throw new ArgumentException("Neispravna adresa");
+                else adresa = value;
+            }
+        }
+
 
         public bool birao { get; set; }
 
@@ -163,7 +174,7 @@ namespace Zadaca1
                 return true;
             return false;
         }
-    bool ValidirajAdresu(string adresa)
+    public static bool ValidirajAdresu(string adresa)
         {
             if (adresa.Length == 0)
                 return false;

@@ -6,10 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Zadaca1;
 /*
-Ime i prezime smiju sadržavati samo
-slova i crticu, a ostale vrste karaktera nisu dozvoljene. Ime se sastoji od minimalno 2, a
-maksimalno 40 slova, dok se prezime sastoji od minimalno 3, a maksimalno 50 slova. Ime,
-prezime i adresa ne smiju biti prazni. Svaki glasač mora biti punoljetan i njegov datum rođenja
+adresa ne smije biti prazna. Svaki glasač mora biti punoljetan i njegov datum rođenja
 ne može biti u budućnosti. Broj lične karte uvijek se sastoji od tačno 7 karaktera u formatu
 999A999, pri čemu 9 može biti bilo koji broj, a A bilo koje slovo iz skupa (E, J, K, M, T). Matični
 broj se mora sastojati od 13 brojeva, pri čemu prva dva broja odgovaraju danu, sljedeća dva
@@ -160,6 +157,33 @@ namespace TestProject
         {
             //sam konstruktor poziva metodu ValidirajIme koja baca izuzetak
             Glasac glasac2 = new Glasac("Hasan", prezime, "Nepoznata bb", new DateTime(2001, 12, 1), "1234K5678", "0112001175555");
+        }
+
+        [TestMethod]
+        public void TestiranjeValidnostiAdrese()
+        {
+            Glasac glasac2 = new Glasac("Hasan", "Hasanovic", "Nepoznata bb", new DateTime(2001, 12, 1), "1234K5678", "0112001175555");
+            bool ispravnaAdresa = Glasac.ValidirajAdresu(glasac2.Adresa);
+            Assert.IsTrue(ispravnaAdresa);
+
+            glasac2.Adresa = "Nove adrese bb";
+            Assert.IsTrue(Glasac.ValidirajAdresu(glasac2.Adresa));
+
+            bool bacenIzuzetak = false;
+            try
+            {
+                //ovdje ce biti bacen izuzetak
+                
+                glasac2.Adresa = "";
+            }
+            catch(ArgumentException e)
+            {
+                Assert.IsTrue(true);
+                bacenIzuzetak = true;
+            }
+
+            if(bacenIzuzetak==false)
+                Assert.IsTrue(false);
         }
 
     }
