@@ -37,6 +37,19 @@ namespace Zadaca1
             }  
         }
 
+        public string Prezime
+        {
+            get { return prezime; }
+            set
+            {
+                if (ValidirajPrezime(value))
+                    prezime = value;
+                else throw new ArgumentException("Neispravno prezime");
+            }
+
+        }
+
+
         public bool birao { get; set; }
 
         public Glasac() { }
@@ -81,9 +94,9 @@ namespace Zadaca1
             {
                 throw new ArgumentException("Neispravno ime!");
             }
-            if (!ValidirajPrezime(ime))
+            if (!ValidirajPrezime(prezime))
             {
-                throw new ArgumentException("Neispravno ime!");
+                throw new ArgumentException("Neispravno prezime!");
             }
       
             if (!ValidirajBrojLicneKarte(broj_licne))
@@ -180,7 +193,7 @@ namespace Zadaca1
 
       public static bool ValidirajIme(string naziv)
         {
-            if (naziv.Length == 0 || naziv==null)
+            if (naziv.Length == 0)
                 return false;
             //string velikaSlovaIme = naziv.ToUpper();
             //if (velikaSlovaIme.Any(char.IsDigit)) return false;
@@ -205,7 +218,7 @@ namespace Zadaca1
             return vratiVrijednost;
         }
 
-        bool ValidirajPrezime(string naziv)
+        public static bool  ValidirajPrezime(string naziv)
         {
             if (naziv.Length == 0)
                 return false;
@@ -219,7 +232,7 @@ namespace Zadaca1
                 //Konvertujem char u string pa string pretvaram u veliak slova pa onda string prebacujem u niz charova sto je u stvari
                 //niz sa samo jednim elementom uvijek i pristupam mu onda pomocu indeksa 0 i tako dobijam uvijek veliko slovo
 
-                if (c.ToString().ToUpper().ToCharArray()[0] <= 'Z' || c.ToString().ToUpper().ToCharArray()[0] >= 'A' || c == '-')
+                if (c.ToString().ToUpper().ToCharArray()[0] <= 'Z' && c.ToString().ToUpper().ToCharArray()[0] >= 'A' || c == '-')
                         vratiVrijednost = true;
                 else
                     return false;

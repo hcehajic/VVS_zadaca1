@@ -38,7 +38,7 @@ namespace TestProject
                     new object[]
                     {
                         "!@#$$Hasan"
-                    }, 
+                    },
                     new object[]
                     {
                         "Hasan_Hasan "
@@ -59,29 +59,108 @@ namespace TestProject
             }
         }
 
+        static IEnumerable<object[]> podaciZaTestiranjePrezimenaGlasaca
+        {
+            get
+            {
+                return new[]
+                {
+                    new object[]
+                    {
+                       "Haskovic123",
+                    },
+                    new object[]
+                    {
+                        "Hask0v1c"
+                    },
+                    new object[]
+                    {
+                        "Haskov!c"
+                    },
+                    new object[]
+                    {
+                        "Haskovic Hadan1"
+                    },
+                    new object[]
+                    {
+                        "Ha"
+                    },
+                    new object[]
+                    {
+                        "ovajobjekatimaprekopedesetzarakterazaprezimeglasaaatonijedozvoljenozatotrebadabaciizuzetaksvudagdjesetoprobauraditi.bacitceseizuzetak"
+                    },
+                    new object[]
+                    {
+                        ""
+                    }
+                };
+            }
+        }
+
         [TestMethod]
-        //Ime smije sadrzavati samo slova i crticu
+        //IME smije sadrzavati samo slova i crticu, duzina je na segmentu [2, 40] i ne smije biti prazno - ispravni slucajevi
         public void TestiranjeValidnostiZnakovaImena1()
         {
             Glasac glasac1 = new Glasac("Hasan", "Haskovic", "Nepoznata bb", new DateTime(2001, 12, 1), "1234K5678", "0112001175555");
             Glasac glasac3 = new Glasac("Hasan-Haskovic", "Haskovic", "Nepoznata bb", new DateTime(2001, 12, 1), "1234K5678", "0112001175555");
-
+            Glasac glasac4 = new Glasac();
             bool tacnoJe1 = Glasac.ValidirajIme(glasac1.Ime);
             bool tacnoJe2 = Glasac.ValidirajIme(glasac3.Ime);
 
+
            Assert.IsTrue(tacnoJe1);
            Assert.IsTrue(tacnoJe2);
+
+            glasac1.Ime = "NovoIspravno-ime";
+            Assert.IsTrue(Glasac.ValidirajIme(glasac1.Ime));
+
+            Assert.ThrowsException<ArgumentException>(() => glasac4.Ime="Ne1sprav0 !me!");
+
+
         }
 
         [TestMethod]
+        //IME smije sadrzavati samo slova i crticu, duzina je na segmentu [2, 40] i ne smije biti prazno - neispravni slucajevi
         [DynamicData("podaciZaTestiranjeImenaGlasaca")]
-        [ExpectedException(typeof (ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void TestiranjeValidnostiZnakovaImena2(string ime)
         {
+            //sam konstruktor poziva metodu ValidirajIme koja baca izuzetak
             Glasac glasac2 = new Glasac(ime, "Haskovic", "Nepoznata bb", new DateTime(2001, 12, 1), "1234K5678", "0112001175555");
+           
         }
 
 
+
+
+        [TestMethod]
+        //PREZIME smije sadrzavati samo slova i crticu, duzina je na segmentu [3, 50] i ne smije biti prazno - ispravni slucajevi
+        public void TestiranjeValidnostiZnakovaPrezimena1()
+        {
+            Glasac glasac1 = new Glasac("Hasan", "Haskovic", "Nepoznata bb", new DateTime(2001, 12, 1), "1234K5678", "0112001175555");
+            Glasac glasac3 = new Glasac("Hasan-Haskovic", "Haskovic", "Nepoznata bb", new DateTime(2001, 12, 1), "1234K5678", "0112001175555");
+            Glasac glasac4 = new Glasac();
+            bool tacnoJe1 = Glasac.ValidirajPrezime(glasac1.Prezime);
+            bool tacnoJe2 = Glasac.ValidirajPrezime(glasac3.Prezime);
+
+            Assert.IsTrue(tacnoJe1);
+            Assert.IsTrue(tacnoJe2);
+
+            glasac1.Prezime = "Hasanovic";
+            Assert.IsTrue(Glasac.ValidirajPrezime(glasac1.Prezime));
+
+            Assert.ThrowsException<ArgumentException>(() => glasac4.Prezime = "Ne1sprav0 pr3z1me!");
+        }
+
+        [TestMethod]
+        //PREZIME smije sadrzavati samo slova i crticu, duzina je na segmentu [3, 50] i ne smije biti prazno - neispravni slucajevi
+        [DynamicData("podaciZaTestiranjePrezimenaGlasaca")]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestiranjeValidnostiZnakovaPrezimena2(string prezime)
+        {
+            //sam konstruktor poziva metodu ValidirajIme koja baca izuzetak
+            Glasac glasac2 = new Glasac("Hasan", prezime, "Nepoznata bb", new DateTime(2001, 12, 1), "1234K5678", "0112001175555");
+        }
 
     }
 }
