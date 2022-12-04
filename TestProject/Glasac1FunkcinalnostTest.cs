@@ -1,17 +1,24 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using CsvHelper;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Formats.Asn1;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zadaca1;
 /*
-adresa ne smije biti prazna. Svaki glasač mora biti punoljetan i njegov datum rođenja
-ne može biti u budućnosti. Broj lične karte uvijek se sastoji od tačno 7 karaktera u formatu
-999A999, pri čemu 9 može biti bilo koji broj, a A bilo koje slovo iz skupa (E, J, K, M, T). Matični
-broj se mora sastojati od 13 brojeva, pri čemu prva dva broja odgovaraju danu, sljedeća dva
-broja mjesecu, a sljedeća tri broja godini rođenja glasača. Validacijom se treba pokriti i
-jedinstveni identifikacioni broj glasača.
+*Svaki glasač mora biti punoljetan i njegov datum rođenja ne može biti u budućnosti.
+
+*Broj lične karte uvijek se sastoji od tačno 7 karaktera u formatu
+999A999, pri čemu 9 može biti bilo koji broj, a A bilo koje slovo iz skupa (E, J, K, M, T).
+
+*Matični broj se mora sastojati od 13 brojeva, pri čemu prva dva broja odgovaraju danu, sljedeća dva
+broja mjesecu, a sljedeća tri broja godini rođenja glasača. 
+
+*Validacijom se treba pokriti i jedinstveni identifikacioni broj glasača.
 */
 namespace TestProject
 {
@@ -94,6 +101,14 @@ namespace TestProject
             }
         }
 
+        static IEnumerable<object[]> podaciZaTestiranjeMaticnogBroja
+        {
+            get
+            {
+                return UcitajPodatkeCSV();
+            }
+        }
+
         [TestMethod]
         //IME smije sadrzavati samo slova i crticu, duzina je na segmentu [2, 40] i ne smije biti prazno - ispravni slucajevi
         public void TestiranjeValidnostiZnakovaImena1()
@@ -173,7 +188,6 @@ namespace TestProject
             try
             {
                 //ovdje ce biti bacen izuzetak
-                
                 glasac2.Adresa = "";
             }
             catch(ArgumentException e)
@@ -185,6 +199,33 @@ namespace TestProject
             if(bacenIzuzetak==false)
                 Assert.IsTrue(false);
         }
+
+        public static IEnumerable<object[]> UcitajPodatkeCSV()
+        {
+            using (var reader = new StreamReader("podaciZaTestiranjeValidnostiMaticnogBroja.csv"))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                var rows = csv.GetRecords<dynamic>();
+                foreach (var row in rows)
+                {
+                    var values = ((IDictionary<String, Object>)row).Values;
+                    var elements = values.Select(elem => elem.ToString()).ToList();
+                    yield return new object[] { elements[0], elements[1], elements[2], DateTime.Parse(elements[3]), elements[4], elements[5]};
+                }
+            }
+        }
+
+
+        [TestMethod]
+        [DynamicData("podaciZaTestiranjeMaticnogBroja")]
+        [ExpectedException(typeof(ArgumentException))]
+
+        public void TestiranjeMaticnogBroja(string ime, string prezime, string adresa, DateTime datumRodjenja, string brojLicne, string jmbg)
+        {
+            Glasac glasac = new Glasac(ime, prezime, adresa, datumRodjenja, brojLicne, jmbg);
+        }
+
+
 
     }
 }

@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "jpHs2GfqqLa9KIMBVKojv8jhpk3hd7YOwMdm+RMuQ/gH7lfXRvrjRTx+0Xt7Wu1b9/HqiaIhFQDbZgp8aqPziQ==",
+  "dgSpecHash": "l408ABrdWaPLQFwx629YmgmxJau6lduVe/Fbu7VYWqT6hz6WPm6ou0LgRU8Zy13GRWH8wHWbGGzzCCjVh/CWJw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Almina\\Desktop\\VVS_zadaca1\\TestProject\\TestProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Almina\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
+    "C:\\Users\\Almina\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
     "C:\\Users\\Almina\\.nuget\\packages\\microsoft.codecoverage\\17.3.2\\microsoft.codecoverage.17.3.2.nupkg.sha512",
     "C:\\Users\\Almina\\.nuget\\packages\\microsoft.csharp\\4.3.0\\microsoft.csharp.4.3.0.nupkg.sha512",
     "C:\\Users\\Almina\\.nuget\\packages\\microsoft.net.test.sdk\\17.3.2\\microsoft.net.test.sdk.17.3.2.nupkg.sha512",
