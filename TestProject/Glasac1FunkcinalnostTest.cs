@@ -8,12 +8,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using Zadaca1;
 /*
-
-*Broj lične karte uvijek se sastoji od tačno 7 karaktera u formatu
-999A999, pri čemu 9 može biti bilo koji broj, a A bilo koje slovo iz skupa (E, J, K, M, T).
-
 *Validacijom se treba pokriti i jedinstveni identifikacioni broj glasača.
 */
 namespace TestProject
@@ -113,6 +110,14 @@ namespace TestProject
             }
         }
 
+        static IEnumerable<object[]> podaciZaTestiranjeBrojaLicneKarte
+        {
+            get
+            {
+                return UcitajPodatkeXML();
+            }
+        }
+
         [TestMethod]
         //IME smije sadrzavati samo slova i crticu, duzina je na segmentu [2, 40] i ne smije biti prazno - ispravni slucajevi
         public void TestiranjeValidnostiZnakovaImena1()
@@ -143,7 +148,6 @@ namespace TestProject
         {
             //sam konstruktor poziva metodu ValidirajIme koja baca izuzetak
             Glasac glasac2 = new Glasac(ime, "Haskovic", "Nepoznata bb", new DateTime(2001, 12, 1), "1234K5678", "0112001175555");
-           
         }
 
 
@@ -249,8 +253,6 @@ namespace TestProject
         public void TestiranjeDatumaRodjenja(DateTime datumRodjenja, string jmbg)
         {
             //problem moze biti kada se ovaj program pokrene za par godina, a neki od datuma ce biti validan za ovaj slucaj te samo za takav slucaj staviti da test ipak prodje tj. da se ipak baci izuzetak
-
-          
                 Glasac glasac = new Glasac("Neko", "Nekic", "Nepoznate bb", datumRodjenja, "1111K2222", jmbg);
 
                 if (Glasac.ValidirajDatumRodjenja(datumRodjenja) == true)
@@ -258,10 +260,35 @@ namespace TestProject
             
         }
 
-        
 
 
-        
+        public static IEnumerable<object[]> UcitajPodatkeXML()
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load("podaciZaTestiranjeBrojaLicneKarte.xml");
+            foreach (XmlNode node in doc.DocumentElement.ChildNodes)
+            {
+                List<string> elements = new List<string>();
+                foreach (XmlNode innerNode in node)
+                {
+                    elements.Add(innerNode.InnerText);
+                }
+                yield return new object[] { elements[0], elements[1], elements[2], DateTime.Parse(elements[3]), elements[4], elements[5]};
+            }
+        }
+
+
+
+        [TestMethod]
+        [DynamicData("podaciZaTestiranjeBrojaLicneKarte")]
+        [ExpectedException(typeof(ArgumentException))]
+
+        public void TestiranjeBrojaLicneKarte(string ime, string prezime, string adresa, DateTime datumRodjenja, string brojLicne, string jmbg)
+        {
+            Glasac glasac = new Glasac(ime, prezime, adresa, datumRodjenja, brojLicne, jmbg);
+        }
+
+
 
 
 

@@ -19,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="podaciZaTestiranjeBrojaLicneKarte.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="podaciZaTestiranjeDatumaRodjenja.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

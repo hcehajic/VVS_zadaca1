@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Glasaci>
+	<Glasac>
+		<Ime>Hasan</Ime>
+		<Prezime>Haskovic</Prezime>
+		<Adresa>Nepoznate bb</Adresa>
+		<DatumRodjenja>01/01/1996</DatumRodjenja>
+		<BrojLicne>1234b4555</BrojLicne>
+		<JMBG>0101996170001</JMBG>
+	</Glasac>
+	<Glasac>
+		<Ime>Imenko</Ime>
+		<Prezime>Prezimenovic</Prezime>
+		<Adresa>Gradacacka bb</Adresa>
+		<DatumRodjenja>01/01/1996</DatumRodjenja>
+		<BrojLicne>1234Ma342</BrojLicne>
+		<JMBG>0101996170001</JMBG>
+	</Glasac>
+	<Glasac>
+		<Ime>Hasan</Ime>
+		<Prezime>Haskovic</Prezime>
+		<Adresa>Nepoznate bb</Adresa>
+		<DatumRodjenja>01/01/1996</DatumRodjenja>
+		<BrojLicne>1234M455</BrojLicne>
+		<JMBG>0101996170001</JMBG>
+	</Glasac>
+	<Glasac>
+		<Ime>Imenko</Ime>
+		<Prezime>Prezimenovic</Prezime>
+		<Adresa>Gradacacka bb</Adresa>
+		<DatumRodjenja>01/01/1996</DatumRodjenja>
+		<BrojLicne>12345678T</BrojLicne>
+		<JMBG>0101996170001</JMBG>
+	</Glasac>
+</Glasaci>
