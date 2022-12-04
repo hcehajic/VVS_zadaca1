@@ -19,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="podaciZaTestiranjeDatumaRodjenja.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="podaciZaTestiranjeValidnostiMaticnogBroja.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

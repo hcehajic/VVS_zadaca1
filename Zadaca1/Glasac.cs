@@ -158,8 +158,9 @@ namespace Zadaca1
             }
             return true;
         }
-        bool ValidirajDatumRodjenja(DateTime datum_rodjenja)
+      public static  bool ValidirajDatumRodjenja(DateTime datum_rodjenja)
         {
+            //glasac mora biti punoljetan, zbog toga smo stavili da ovdje ide i ta validacija. U suprotnom, nije glasac
             if (datum_rodjenja > DateTime.Now)
                 return false;
 
@@ -168,9 +169,9 @@ namespace Zadaca1
             int days = DateTime.Now.Day - datum_rodjenja.Day;
             if (years > 18)
                 return true;
-            else if (years == 18 && months > 0)
+            if (years == 18 && months > 0)
                 return true;
-            else if (years == 18 && months == 0 && days > 0)
+            if (years == 18 && months == 0 && days > 0)
                 return true;
             return false;
         }

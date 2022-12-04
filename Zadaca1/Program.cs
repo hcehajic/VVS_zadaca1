@@ -30,7 +30,7 @@ namespace Zadaca1
 
             //HARUN KOD: HaCeOv202020
 
-             Kandidat k1 = new Kandidat("Nezir Nezirovic", "NP");
+            /* Kandidat k1 = new Kandidat("Nezir Nezirovic", "NP");
              Kandidat k2 = new Kandidat("Hamid Hamidovic", "NP");
              Kandidat k3 = new Kandidat("Pero Peric", "Nasa stranka");
              Kandidat k4 = new Kandidat("Ana Anic", "Nasa stranka");
@@ -143,7 +143,8 @@ namespace Zadaca1
                      izbori.GlasaciKojiNisuGlasali();
                  }
 
-             }
+             }*/
+            Glasac glasac = new Glasac("Neko", "Nekic", "Nepoznate bb", new DateTime(2004, 12, 12), "1111K2222", "1212004333333");
         }
     }
 }

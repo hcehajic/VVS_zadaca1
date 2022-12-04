@@ -10,13 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Zadaca1;
 /*
-*Svaki glasač mora biti punoljetan i njegov datum rođenja ne može biti u budućnosti.
 
 *Broj lične karte uvijek se sastoji od tačno 7 karaktera u formatu
 999A999, pri čemu 9 može biti bilo koji broj, a A bilo koje slovo iz skupa (E, J, K, M, T).
-
-*Matični broj se mora sastojati od 13 brojeva, pri čemu prva dva broja odgovaraju danu, sljedeća dva
-broja mjesecu, a sljedeća tri broja godini rođenja glasača. 
 
 *Validacijom se treba pokriti i jedinstveni identifikacioni broj glasača.
 */
@@ -105,7 +101,15 @@ namespace TestProject
         {
             get
             {
-                return UcitajPodatkeCSV();
+                return UcitajPodatkeMaticniBrojCSV();
+            }
+        }
+
+        static IEnumerable<object[]> podaciZaTestiranjeDatumaRodjenja
+        {
+            get
+            {
+                return UcitajPodatkeDatumRodjenjaCSV();
             }
         }
 
@@ -200,7 +204,7 @@ namespace TestProject
                 Assert.IsTrue(false);
         }
 
-        public static IEnumerable<object[]> UcitajPodatkeCSV()
+        public static IEnumerable<object[]> UcitajPodatkeMaticniBrojCSV()
         {
             using (var reader = new StreamReader("podaciZaTestiranjeValidnostiMaticnogBroja.csv"))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
@@ -215,7 +219,6 @@ namespace TestProject
             }
         }
 
-
         [TestMethod]
         [DynamicData("podaciZaTestiranjeMaticnogBroja")]
         [ExpectedException(typeof(ArgumentException))]
@@ -224,6 +227,41 @@ namespace TestProject
         {
             Glasac glasac = new Glasac(ime, prezime, adresa, datumRodjenja, brojLicne, jmbg);
         }
+
+        public static IEnumerable<object[]> UcitajPodatkeDatumRodjenjaCSV()
+        {
+            using (var reader = new StreamReader("podaciZaTestiranjeDatumaRodjenja.csv"))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                var rows = csv.GetRecords<dynamic>();
+                foreach (var row in rows)
+                {
+                    var values = ((IDictionary<String, Object>)row).Values;
+                    var elements = values.Select(elem => elem.ToString()).ToList();
+                    yield return new object[] {DateTime.Parse(elements[0]), elements[1] };
+                }
+            }
+        }
+        [TestMethod]
+        [DynamicData("podaciZaTestiranjeDatumaRodjenja")]
+        [ExpectedException(typeof(ArgumentException))]
+
+        public void TestiranjeDatumaRodjenja(DateTime datumRodjenja, string jmbg)
+        {
+            //problem moze biti kada se ovaj program pokrene za par godina, a neki od datuma ce biti validan za ovaj slucaj te samo za takav slucaj staviti da test ipak prodje tj. da se ipak baci izuzetak
+
+          
+                Glasac glasac = new Glasac("Neko", "Nekic", "Nepoznate bb", datumRodjenja, "1111K2222", jmbg);
+
+                if (Glasac.ValidirajDatumRodjenja(datumRodjenja) == true)
+                    throw new ArgumentException("Glasac je sada punoljetan, ali za vrijeme kreiranja CSV dokumenta nije bio");
+            
+        }
+
+        
+
+
+        
 
 
 
