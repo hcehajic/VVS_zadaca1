@@ -7,26 +7,26 @@ namespace Zadaca1
     {
         static void Main(string[] args)
         {
-           /* string datum = "7/20/2000";
-            DateTime dt;
-            var jel_ok = DateTime.TryParse(datum, out dt);
-            Glasac glasac = new Glasac();
-            if (jel_ok)
-            {
-                try
-                {
-                    glasac = new Glasac("Harun", "Cehaljic", "Ovdje moze sta hoces jer je adresa", dt, "slova1br0j3v1", "2007000170005");
-                    Console.WriteLine("Jedinstveni kod test: " + glasac.ToString());
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Aplikacija terminirala. Uzrok: " + ex.Message);
-                }
-            }
-            else
-            {
-                Console.WriteLine("Nije ti dobar datum!");
-            }*/
+            /* string datum = "7/20/2000";
+             DateTime dt;
+             var jel_ok = DateTime.TryParse(datum, out dt);
+             Glasac glasac = new Glasac();
+             if (jel_ok)
+             {
+                 try
+                 {
+                     glasac = new Glasac("Harun", "Cehaljic", "Ovdje moze sta hoces jer je adresa", dt, "slova1br0j3v1", "2007000170005");
+                     Console.WriteLine("Jedinstveni kod test: " + glasac.ToString());
+                 }
+                 catch (Exception ex)
+                 {
+                     Console.WriteLine("Aplikacija terminirala. Uzrok: " + ex.Message);
+                 }
+             }
+             else
+             {
+                 Console.WriteLine("Nije ti dobar datum!");
+             }*/
 
             //HARUN KOD: HaCeOv202020
 

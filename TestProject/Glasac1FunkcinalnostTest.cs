@@ -227,7 +227,7 @@ namespace TestProject
         [DynamicData("podaciZaTestiranjeMaticnogBroja")]
         [ExpectedException(typeof(ArgumentException))]
 
-        public void TestiranjeMaticnogBroja(string ime, string prezime, string adresa, DateTime datumRodjenja, string brojLicne, string jmbg)
+        public void TestiranjeMaticnogBroja1(string ime, string prezime, string adresa, DateTime datumRodjenja, string brojLicne, string jmbg)
         {
             Glasac glasac = new Glasac(ime, prezime, adresa, datumRodjenja, brojLicne, jmbg);
         }
@@ -257,7 +257,36 @@ namespace TestProject
 
                 if (Glasac.ValidirajDatumRodjenja(datumRodjenja) == true)
                     throw new ArgumentException("Glasac je sada punoljetan, ali za vrijeme kreiranja CSV dokumenta nije bio");
-            
+        }
+
+        [TestMethod]
+        public void TestiranjeMaticnogBroja2()
+        {
+            Glasac glasac1 = new Glasac("Neko", "Nekic", "Nepoznate bb", new DateTime(2001, 8, 13), "1111K2222", "1308001111111");
+            Glasac glasac2 = new Glasac("Huso", "Hasic", "Gradacacka bb", new DateTime(1997, 12, 5), "1234T5555", "0512997111222");
+            string dan1 = glasac1.DatumRodjenja.Day.ToString();
+            if (glasac1.DatumRodjenja.Day < 10) dan1 = "0" + dan1;
+            string dan2 = glasac2.DatumRodjenja.Day.ToString();
+            if (glasac2.DatumRodjenja.Day < 10) dan2 = "0" + dan2;
+            string mjesec1 = glasac1.DatumRodjenja.Month.ToString();
+            if (glasac1.DatumRodjenja.Month < 10) mjesec1 = "0" + mjesec1;
+            string mjesec2 = glasac2.DatumRodjenja.Month.ToString();
+            if (glasac2.DatumRodjenja.Month < 10) mjesec2 = "0" + mjesec2;
+            string godina1 = glasac1.DatumRodjenja.Year.ToString();
+            godina1 = godina1.Substring(1, 3);
+            string godina2 = glasac2.DatumRodjenja.Year.ToString();
+            godina2 = godina2.Substring(1, 3);
+
+
+            StringAssert.StartsWith(glasac1.JMBG, dan1+mjesec1+godina1, "JMBG je: " + glasac1.JMBG + ", a datum rodjenja je: " + glasac1.DatumRodjenja);
+            StringAssert.StartsWith(glasac2.JMBG, dan2+mjesec2+godina2, "JMBG je: " + glasac2.JMBG + ", a datum rodjenja je: " + glasac2.DatumRodjenja);
+
+            glasac1.DatumRodjenja = new DateTime(1995, 12, 14);
+            glasac1.JMBG = "1411001123123";
+            Assert.ThrowsException<ArgumentException>(()=>Glasac.ValidirajJMBG(glasac1.JMBG, glasac1.DatumRodjenja), "Neispravan JMBG");
+
+            glasac1.JMBG = "1412995122334";
+            Assert.AreEqual(glasac1.JMBG.Substring(0, 6), glasac1.DatumRodjenja.Day.ToString() + glasac1.DatumRodjenja.Month.ToString() + glasac1.DatumRodjenja.AddYears(-1000).Year.ToString());
         }
 
 

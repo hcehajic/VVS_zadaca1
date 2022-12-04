@@ -10,14 +10,7 @@ namespace Zadaca1
 {
     public class Glasac
     {
-        /*
-        (ime i prezime, adresa, datum rođenja), broj lične karte, matični broj
-        Potrebno je onemogućiti pristup svim
-        informacijama osobama koje vrše identifikaciju glasača, osim jedinstvenom
-        identifikacionom kodu.
-        */
-        
-
+        #region Atributes
         private string ime;
         private string prezime;
         private string adresa;
@@ -25,7 +18,9 @@ namespace Zadaca1
         private string broj_licne;
         private string jmbg;
         private string kod;
+        #endregion
 
+        #region Properties
         public string Ime  
         {
             get { return ime; }   
@@ -60,9 +55,45 @@ namespace Zadaca1
             }
         }
 
+        public DateTime DatumRodjenja
+        {
+            get { return datum_rodjenja; }
+            set
+            {
+                if (ValidirajDatumRodjenja(value))
+                    DatumRodjenja = value;
+                else throw new ArgumentException("Neispravan datum rodjenja");
+            }
+        }
 
+        public string BrojLicneKarte
+        {
+            get
+            {
+                return broj_licne;
+            }
+            set
+            {
+                if (ValidirajBrojLicneKarte(value))
+                    broj_licne = value;
+                else throw new ArgumentException("Neispravan broj licne karte");
+            }
+        }
+
+        public string JMBG
+        {
+            get { return jmbg; }
+            set
+            {
+                if(ValidirajJMBG(value, datum_rodjenja))
+                    jmbg = value;
+                else throw new ArgumentException("Neispravan JMBG");
+            }
+        }
         public bool birao { get; set; }
+        #endregion
 
+        #region Constructors
         public Glasac() { }
 
         public Glasac(string ime, string prezime, string adresa, DateTime datum_rodjenja, string broj_licne, string jmbg)
@@ -77,12 +108,10 @@ namespace Zadaca1
             birao = false;
             KreirajJedinstveniKod();
         }
+        #endregion
 
-        /* 
-                jedinstveni identifikacijski kod koji predstavlja kombinaciju prva dva
-                karaktera svih informacija o glasaču
-        */
-        void KreirajJedinstveniKod()
+        #region Methods
+        private void KreirajJedinstveniKod()
         {
             kod = "";
             kod = kod + ime[0] + ime[1];
@@ -98,7 +127,6 @@ namespace Zadaca1
             kod = kod + jmbg[0] + jmbg[1];
         }
 
-    
         void ValidirajUnos(string ime, string prezime, string broj_licne, string jmbg, string adresa, DateTime datum_rodjenja)
         {
             if (!ValidirajIme(ime))
@@ -126,7 +154,7 @@ namespace Zadaca1
             }
         }
 
-        bool ValidirajJedinstveniKod(string kod)
+        public bool ValidirajJedinstveniKod(string kod)
         {
             if (kod.Length != 12) return false;
             int dan = int.Parse(jmbg.Substring(0, 2));
@@ -138,7 +166,7 @@ namespace Zadaca1
            return true;
         }
 
-        bool ValidirajBrojLicneKarte(string broj_licne)
+        public bool ValidirajBrojLicneKarte(string broj_licne)
         {
             if (broj_licne.Length != 9) return false;
             int i = 0;
@@ -158,7 +186,7 @@ namespace Zadaca1
             }
             return true;
         }
-      public static  bool ValidirajDatumRodjenja(DateTime datum_rodjenja)
+        public static  bool ValidirajDatumRodjenja(DateTime datum_rodjenja)
         {
             //glasac mora biti punoljetan, zbog toga smo stavili da ovdje ide i ta validacija. U suprotnom, nije glasac
             if (datum_rodjenja > DateTime.Now)
@@ -175,54 +203,24 @@ namespace Zadaca1
                 return true;
             return false;
         }
-    public static bool ValidirajAdresu(string adresa)
+        public static bool ValidirajAdresu(string adresa)
         {
             if (adresa.Length == 0)
                 return false;
             return true;
         }
 
-
-        bool ValidirajSlova(string naziv)
-        {
-            //string velikaSlovaIme = naziv.ToUpper();
-            //if (velikaSlovaIme.Any(char.IsDigit)) return false;
-            //da se provjeri i jesu li i neki spec simboli ..... 
-
-            foreach (char c in naziv)
-            {
-
-                //Konvertujem char u string pa string pretvaram u veliak slova pa onda string prebacujem u niz charova sto je u stvari
-                //niz sa samo jednim elementom uvijek i pristupam mu onda pomocu indeksa 0 i tako dobijam uvijek veliko slovo
-
-                if (c.ToString().ToUpper().ToCharArray()[0] > 'Z' || c.ToString().ToUpper().ToCharArray()[0] < 'A')
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-      public static bool ValidirajIme(string naziv)
+        public static bool ValidirajIme(string naziv)
         {
             if (naziv.Length == 0)
                 return false;
-            //string velikaSlovaIme = naziv.ToUpper();
-            //if (velikaSlovaIme.Any(char.IsDigit)) return false;
-            //da se provjeri i jesu li i neki spec simboli ..... 
             bool vratiVrijednost = false;
             foreach (char c in naziv)
             {
-
-                //Konvertujem char u string pa string pretvaram u veliak slova pa onda string prebacujem u niz charova sto je u stvari
-                //niz sa samo jednim elementom uvijek i pristupam mu onda pomocu indeksa 0 i tako dobijam uvijek veliko slovo
-
-                 
                 if (Char.ToUpper(c) <= 'Z' && Char.ToUpper(c) >= 'A' || c == '-')
                     vratiVrijednost = true;
                 else
                     return false;
-
             }
             if (naziv.Length < 2 || naziv.Length > 40)
                 vratiVrijednost = false;
@@ -234,52 +232,18 @@ namespace Zadaca1
         {
             if (naziv.Length == 0)
                 return false;
-            //string velikaSlovaIme = naziv.ToUpper();
-            //if (velikaSlovaIme.Any(char.IsDigit)) return false;
-            //da se provjeri i jesu li i neki spec simboli ..... 
             bool vratiVrijednost = false;
             foreach (char c in naziv)
             {
-
-                //Konvertujem char u string pa string pretvaram u veliak slova pa onda string prebacujem u niz charova sto je u stvari
-                //niz sa samo jednim elementom uvijek i pristupam mu onda pomocu indeksa 0 i tako dobijam uvijek veliko slovo
-
                 if (c.ToString().ToUpper().ToCharArray()[0] <= 'Z' && c.ToString().ToUpper().ToCharArray()[0] >= 'A' || c == '-')
                         vratiVrijednost = true;
                 else
                     return false;
-                
             }
             if (naziv.Length < 3 || naziv.Length > 50)
                 vratiVrijednost = false;
 
             return vratiVrijednost;
-        }
-
-
-        bool ValidirajBrojeve(string naziv)
-        {
-            foreach (char c in naziv)
-            {
-                if (c > '9' || c < '0')
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        bool ValidirajSlovaBrojeve(string licna)
-        {
-            foreach (char c in licna)
-            {
-                /* Nije ok ako nije ni slovo ni broj */
-                if (!ValidirajSlova(c.ToString()) && !ValidirajBrojeve(c.ToString()))
-                {
-                    return false;
-                }
-            }
-            return true;
         }
 
        public static bool ValidirajJMBG(string jmbg, DateTime datum_rodjenja)
@@ -310,5 +274,6 @@ namespace Zadaca1
         {
             return kod;
         }
+        #endregion
     }
 }
