@@ -7,6 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Zadaca1;
@@ -129,13 +130,13 @@ namespace TestProject
             bool tacnoJe2 = Glasac.ValidirajIme(glasac3.Ime);
 
 
-           Assert.IsTrue(tacnoJe1);
-           Assert.IsTrue(tacnoJe2);
+            Assert.IsTrue(tacnoJe1);
+            Assert.IsTrue(tacnoJe2);
 
             glasac1.Ime = "NovoIspravno-ime";
             Assert.IsTrue(Glasac.ValidirajIme(glasac1.Ime));
 
-            Assert.ThrowsException<ArgumentException>(() => glasac4.Ime="Ne1sprav0 !me!");
+            Assert.ThrowsException<ArgumentException>(() => glasac4.Ime = "Ne1sprav0 !me!");
 
 
         }
@@ -198,14 +199,15 @@ namespace TestProject
                 //ovdje ce biti bacen izuzetak
                 glasac2.Adresa = "";
             }
-            catch(ArgumentException e)
+            catch (ArgumentException e)
             {
                 Assert.IsTrue(true);
                 bacenIzuzetak = true;
             }
 
-            if(bacenIzuzetak==false)
+            if (bacenIzuzetak == false)
                 Assert.IsTrue(false);
+
         }
 
         public static IEnumerable<object[]> UcitajPodatkeMaticniBrojCSV()
@@ -218,7 +220,7 @@ namespace TestProject
                 {
                     var values = ((IDictionary<String, Object>)row).Values;
                     var elements = values.Select(elem => elem.ToString()).ToList();
-                    yield return new object[] { elements[0], elements[1], elements[2], DateTime.Parse(elements[3]), elements[4], elements[5]};
+                    yield return new object[] { elements[0], elements[1], elements[2], DateTime.Parse(elements[3]), elements[4], elements[5] };
                 }
             }
         }
@@ -242,7 +244,7 @@ namespace TestProject
                 {
                     var values = ((IDictionary<String, Object>)row).Values;
                     var elements = values.Select(elem => elem.ToString()).ToList();
-                    yield return new object[] {DateTime.Parse(elements[0]), elements[1] };
+                    yield return new object[] { DateTime.Parse(elements[0]), elements[1] };
                 }
             }
         }
@@ -252,51 +254,59 @@ namespace TestProject
 
         public void TestiranjeDatumaRodjenja(DateTime datumRodjenja, string jmbg)
         {
+            Glasac glasac = new Glasac();
             //problem moze biti kada se ovaj program pokrene za par godina, a neki od datuma ce biti validan za ovaj slucaj te samo za takav slucaj staviti da test ipak prodje tj. da se ipak baci izuzetak
-                Glasac glasac = new Glasac("Neko", "Nekic", "Nepoznate bb", datumRodjenja, "1111K2222", jmbg);
-
-                if (Glasac.ValidirajDatumRodjenja(datumRodjenja) == true)
-                    throw new ArgumentException("Glasac je sada punoljetan, ali za vrijeme kreiranja CSV dokumenta nije bio");
+            try
+            {
+                glasac = new Glasac("Neko", "Nekic", "Nepoznate bb", datumRodjenja, "1111K2222", jmbg);
+            }
+            catch (ArgumentException ex)
+            {
+                //bacit ce se izuzetak uvijek, i sad cemo ovdje i seter testirati sa neispravnim vrijednostima
+                glasac.DatumRodjenja = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            }
+            if (Glasac.ValidirajDatumRodjenja(datumRodjenja) == true)
+                throw new ArgumentException("Glasac je sada punoljetan, ali za vrijeme kreiranja CSV dokumenta nije bio");
         }
 
         [TestMethod]
-     /*   public void TestiranjeMaticnogBroja2()
-        {
-            Glasac glasac1 = new Glasac("Neko", "Nekic", "Nepoznate bb", new DateTime(2001, 8, 13), "1111K2222", "1308001111111");
-            Glasac glasac2 = new Glasac("Huso", "Hasic", "Gradacacka bb", new DateTime(1997, 12, 5), "1234T5555", "0512997111222");
-            string dan1 = glasac1.DatumRodjenja.Day.ToString();
-            if (glasac1.DatumRodjenja.Day < 10) dan1 = "0" + dan1;
-            string dan2 = glasac2.DatumRodjenja.Day.ToString();
-            if (glasac2.DatumRodjenja.Day < 10) dan2 = "0" + dan2;
-            string mjesec1 = glasac1.DatumRodjenja.Month.ToString();
-            if (glasac1.DatumRodjenja.Month < 10) mjesec1 = "0" + mjesec1;
-            string mjesec2 = glasac2.DatumRodjenja.Month.ToString();
-            if (glasac2.DatumRodjenja.Month < 10) mjesec2 = "0" + mjesec2;
-            string godina1 = glasac1.DatumRodjenja.Year.ToString();
-            godina1 = godina1.Substring(1, 3);
-            string godina2 = glasac2.DatumRodjenja.Year.ToString();
-            godina2 = godina2.Substring(1, 3);
+        /*   public void TestiranjeMaticnogBroja2()
+           {
+               Glasac glasac1 = new Glasac("Neko", "Nekic", "Nepoznate bb", new DateTime(2001, 8, 13), "1111K2222", "1308001111111");
+               Glasac glasac2 = new Glasac("Huso", "Hasic", "Gradacacka bb", new DateTime(1997, 12, 5), "1234T5555", "0512997111222");
+               string dan1 = glasac1.DatumRodjenja.Day.ToString();
+               if (glasac1.DatumRodjenja.Day < 10) dan1 = "0" + dan1;
+               string dan2 = glasac2.DatumRodjenja.Day.ToString();
+               if (glasac2.DatumRodjenja.Day < 10) dan2 = "0" + dan2;
+               string mjesec1 = glasac1.DatumRodjenja.Month.ToString();
+               if (glasac1.DatumRodjenja.Month < 10) mjesec1 = "0" + mjesec1;
+               string mjesec2 = glasac2.DatumRodjenja.Month.ToString();
+               if (glasac2.DatumRodjenja.Month < 10) mjesec2 = "0" + mjesec2;
+               string godina1 = glasac1.DatumRodjenja.Year.ToString();
+               godina1 = godina1.Substring(1, 3);
+               string godina2 = glasac2.DatumRodjenja.Year.ToString();
+               godina2 = godina2.Substring(1, 3);
 
 
-            StringAssert.StartsWith(glasac1.JMBG, dan1+mjesec1+godina1, "JMBG je: " + glasac1.JMBG + ", a datum rodjenja je: " + glasac1.DatumRodjenja);
-            StringAssert.StartsWith(glasac2.JMBG, dan2+mjesec2+godina2, "JMBG je: " + glasac2.JMBG + ", a datum rodjenja je: " + glasac2.DatumRodjenja);
+               StringAssert.StartsWith(glasac1.JMBG, dan1+mjesec1+godina1, "JMBG je: " + glasac1.JMBG + ", a datum rodjenja je: " + glasac1.DatumRodjenja);
+               StringAssert.StartsWith(glasac2.JMBG, dan2+mjesec2+godina2, "JMBG je: " + glasac2.JMBG + ", a datum rodjenja je: " + glasac2.DatumRodjenja);
 
-            glasac1.DatumRodjenja = new DateTime(1995, 12, 14);
-           try
-            {
-                glasac1.JMBG = "1411001123123";
-            }
-            catch(ArgumentException e)
-            {
-                Assert.ThrowsException<ArgumentException>(() => Glasac.ValidirajJMBG(glasac1.JMBG, glasac1.DatumRodjenja), "Neispravan JMBG");
-            }
-          
+               glasac1.DatumRodjenja = new DateTime(1995, 12, 14);
+              try
+               {
+                   glasac1.JMBG = "1411001123123";
+               }
+               catch(ArgumentException e)
+               {
+                   Assert.ThrowsException<ArgumentException>(() => Glasac.ValidirajJMBG(glasac1.JMBG, glasac1.DatumRodjenja), "Neispravan JMBG");
+               }
 
-            glasac1.JMBG = "1412995122334";
-          Assert.AreEqual(glasac1.JMBG.Substring(1, 6), glasac1.DatumRodjenja.Day.ToString() + glasac1.DatumRodjenja.Month.ToString() + glasac1.DatumRodjenja.AddYears(-1000).Year.ToString());
-        }
-      
-        */
+
+               glasac1.JMBG = "1412995122334";
+             Assert.AreEqual(glasac1.JMBG.Substring(1, 6), glasac1.DatumRodjenja.Day.ToString() + glasac1.DatumRodjenja.Month.ToString() + glasac1.DatumRodjenja.AddYears(-1000).Year.ToString());
+           }
+
+           */
 
         public static IEnumerable<object[]> UcitajPodatkeXML()
         {
@@ -309,10 +319,9 @@ namespace TestProject
                 {
                     elements.Add(innerNode.InnerText);
                 }
-                yield return new object[] { elements[0], elements[1], elements[2], DateTime.Parse(elements[3]), elements[4], elements[5]};
+                yield return new object[] { elements[0], elements[1], elements[2], DateTime.Parse(elements[3]), elements[4], elements[5] };
             }
         }
-
 
 
         [TestMethod]
@@ -324,9 +333,57 @@ namespace TestProject
             Glasac glasac = new Glasac(ime, prezime, adresa, datumRodjenja, brojLicne, jmbg);
         }
 
+        [TestMethod]
+        public void TestiranjeSeteraBrojaLicneKarte()
+        {
+            Glasac glasac = new Glasac("Neko", "Nekic", "Nepoznata bb", new DateTime(2001, 12, 12), "1234M5678", "1212001111111");
 
+            Assert.ThrowsException<ArgumentException>(() => glasac.BrojLicneKarte = "1234AB5678");
 
+            glasac.BrojLicneKarte = "1122T4455";
+            Assert.IsTrue(Glasac.ValidirajBrojLicneKarte(glasac.BrojLicneKarte));
 
+        }
 
-    }
+        [TestMethod]
+        public void TestirajSetterDatumaRodjenja()
+        {
+            Glasac glasac = new Glasac("Hasan", "Hasic", "Nepoznate bb", new DateTime(2001, 11, 11), "1111M2222", "1111001123456");
+            // Assert.ThrowsException<ArgumentException>(()=> glasac.DatumRodjenja = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day));
+
+            Assert.IsTrue(Glasac.ValidirajDatumRodjenja(glasac.DatumRodjenja));
+            Assert.ThrowsException<ArgumentException>(() => glasac.DatumRodjenja = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day));
+            glasac.DatumRodjenja = new DateTime(2001, 1, 1);
+            Assert.IsFalse(!Glasac.ValidirajDatumRodjenja(glasac.DatumRodjenja));
+            glasac.DatumRodjenja = new DateTime(DateTime.Now.AddYears(-18).Year, DateTime.Now.Month, 1);
+            Assert.IsFalse(!Glasac.ValidirajDatumRodjenja(glasac.DatumRodjenja));
+            Assert.ThrowsException<ArgumentException>(() => glasac.DatumRodjenja = new DateTime(DateTime.Now.AddYears(+18).Year, DateTime.Now.Month, 1));
+            int mjesec = DateTime.Now.Month;
+            if (DateTime.Now.AddMonths(-1).Month > 0)
+                mjesec = DateTime.Now.AddMonths(-1).Month;
+            glasac.DatumRodjenja = new DateTime(DateTime.Now.AddYears(-18).Year, mjesec, DateTime.Now.Day);
+            Assert.IsTrue(Glasac.ValidirajDatumRodjenja(glasac.DatumRodjenja));
+
+        }
+    
+
+        [TestMethod]
+        public void TestiranjeSetteraZaJMBG()
+        {
+            Glasac glasac = new Glasac("Hasan", "Haskovic", "NeekaAdresa bb" , new DateTime(2001, 11, 11), "1111M2222", "1111001123456");
+            Assert.ThrowsException<ArgumentException>(() => glasac.JMBG = "1111002123456");
+            try
+            {
+                glasac.JMBG = "1111001123456";
+            }
+            catch(ArgumentException ex)
+            {
+                throw ex;
+            }
+            Assert.IsTrue(Glasac.ValidirajJMBG(glasac.JMBG, glasac.DatumRodjenja));
+        }
+  
 }
+}
+
+

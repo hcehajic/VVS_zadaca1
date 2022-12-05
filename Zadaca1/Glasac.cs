@@ -60,9 +60,9 @@ namespace Zadaca1
             get { return datum_rodjenja; }
             set
             {
-                if (ValidirajDatumRodjenja(value))
-                    DatumRodjenja = value;
-                else throw new ArgumentException("Neispravan datum rodjenja");
+                if (!ValidirajDatumRodjenja(value))
+                   throw new ArgumentException("Neispravan datum rodjenja");
+                else datum_rodjenja = value;
             }
         }
 
@@ -166,7 +166,7 @@ namespace Zadaca1
            return true;
         }
 
-        public bool ValidirajBrojLicneKarte(string broj_licne)
+        public static bool ValidirajBrojLicneKarte(string broj_licne)
         {
             if (broj_licne.Length != 9) return false;
             int i = 0;
