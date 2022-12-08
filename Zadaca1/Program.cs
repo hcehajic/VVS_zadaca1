@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Zadaca1
 {
@@ -7,7 +8,7 @@ namespace Zadaca1
     {
         static void Main(string[] args)
         {
-            Boolean glasanjeUToku = true;
+            bool glasanjeUToku = true;
             /* string datum = "7/20/2000";
              DateTime dt;
              var jel_ok = DateTime.TryParse(datum, out dt);
@@ -16,7 +17,7 @@ namespace Zadaca1
              {
                  try
                  {
-                     glasac = new Glasac("Harun", "Cehaljic", "Ovdje moze sta hoces jer je adresa", dt, "slova1br0j3v1", "2007000170005");
+                     glasac = new Glasac("Harun", "Cehajic", "Ovdje moze sta hoces jer je adresa", dt, "slova1br0j3v1", "2007000170005");
                      Console.WriteLine("Jedinstveni kod test: " + glasac.ToString());
                  }
                  catch (Exception ex)
@@ -48,6 +49,7 @@ namespace Zadaca1
              glasaci.Add(new Glasac("Neko", "Nekic", "Izmisljena bb", dt, "1234K5678", "2007000170009"));
              glasaci.Add(new Glasac("Ena", "Enic", "Gradacacka bb", dt, "1234K5678", "2007000170009"));
 
+         
              Izbori izbori = new Izbori(stranke, kandidati, glasaci);
 
              bool unesen = false;
@@ -70,7 +72,9 @@ namespace Zadaca1
                  Console.WriteLine("9) Prikazi rukovodstvo stranke");
                  Console.WriteLine("10) Ponistavanje glasova za glasaca");
 
-                 int opcija = Convert.ToInt32(Console.ReadLine().Trim());
+                int opcija = Convert.ToInt32(Console.ReadLine().Trim());
+
+                if (opcija < 1 || opcija > 10) continue;
 
                 if (opcija == 6)
                     break;
@@ -165,52 +169,48 @@ namespace Zadaca1
                 {
                     int brojac = 3;
                     bool tacanUnos = false;
+                    bool naso = false;
 
                     Glasac trenutni = null;
-                    while (brojac != 0 && !tacanUnos)
+                    while (brojac != 0 && tacanUnos == false)
                     {
                         Console.WriteLine("Unesite  vas jedinstveni identifikacijski kod:");
-                        var sifraGlasaca = Console.ReadLine();
-                        var naso = false;
+                        var sifraGlasaca = Console.ReadLine().Trim();
+                        naso = false;
                         foreach (Glasac g in glasaci)
                         {
                             if (g.ToString().Equals(sifraGlasaca))
                             {
                                 naso = true;
-                                kod = sifraGlasaca;
-                                sifraGlasaca = "";
                                 trenutni = g;
                                 break;
                             }
                         }
 
-                        if (!naso)
+                        if (naso == false)
                         {
                             Console.WriteLine("Pogresan unos! Pokusajte ponovo");
                             brojac--;
                         }
-                        else
-                        {
-                            tacanUnos = !tacanUnos;
-                            break;
-                        }
+                        else tacanUnos = true; 
                     }
 
-
-                    if (!tacanUnos)
+                    if (naso == false)
                     {
                         Console.WriteLine("Pogresan unos 3 puta. Program se zavrsava.");
                         break;
                     }
 
+                    brojac = 3;
+                    tacanUnos = false;
 
-                    while (brojac != 0 && !tacanUnos)
+                    while (brojac != 0 && tacanUnos == false)
                     {
                         Console.WriteLine("Za pristup ovoj mogucnosti morate unijeti tajnu sifru za brisanje glasova:");
                         var sifra = Console.ReadLine();
                         if (sifra == "VVS20222023")
                         {
-                            tacanUnos = !tacanUnos;
+                            tacanUnos = false;
                             break;
                         }
                         else
@@ -221,7 +221,7 @@ namespace Zadaca1
                     }
 
 
-                    if (!tacanUnos)
+                    if (brojac == 0)
                     {
                         Console.WriteLine("Pogresan unos 3 puta. Program se zavrsava.");
                         break;

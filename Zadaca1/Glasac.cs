@@ -110,7 +110,7 @@ namespace Zadaca1
         #endregion
 
         #region Constructors
-        public Glasac() { }
+        public Glasac() { glaso = new List<int>(); }
 
         public Glasac(string ime, string prezime, string adresa, DateTime datum_rodjenja, string broj_licne, string jmbg)
         {
