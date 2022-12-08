@@ -15,6 +15,12 @@ namespace Zadaca1
         private int ukupno_glasova_na_izborima = 0;
         private Boolean glasanjeUToku = false;
 
+        public Boolean GlasanjeUToku
+        {
+            get { return GlasanjeUToku; }
+            set { GlasanjeUToku = value; }
+        }
+
         public List<Stranka> Stranke { get => stranke; set => stranke = value; }
         public List<Kandidat> Kandidati { get => kandidati; set => kandidati = value; }
         public List<Glasac> Glasaci { get => glasaci; set => glasaci = value; }
@@ -133,7 +139,7 @@ namespace Zadaca1
                     if (postotak > 20 && k.Stranka.Equals(s.naziv))
                     {
                         brojac_ukupni++;
-                        Console.WriteLine("Stranka: " + s.naziv + " Kandidat: " + k.ime_prezime);
+                        Console.WriteLine("Stranka: " + s.naziv + " Kandidat: " + k.Ime_prezime);
                     }
                    
                 }
