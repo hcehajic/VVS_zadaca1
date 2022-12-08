@@ -19,6 +19,13 @@ namespace Zadaca1
          *
          */
         private int identifikacioniBroj { get; set; }
+        /**
+         * author: enuhanovic1
+         * funkcionalnost: 2.
+         * atribut koji cuva listu clanstava kandidata u proslosti
+         * Dodatno: napisati testove!!!
+         */
+        public List<Clanstvo> clanstva { get; set; }
         public Kandidat() { }
         public Kandidat(string ime_prezime, string stranka)
         {
