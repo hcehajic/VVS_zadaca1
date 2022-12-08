@@ -28,7 +28,7 @@ namespace Zadaca1
         }
 
         /**
-         * author: ahajro2
+         * author: akulaglic3
          * param: none
          * funkcionalnost: 4. 
          * Dodane dvije metode: 
