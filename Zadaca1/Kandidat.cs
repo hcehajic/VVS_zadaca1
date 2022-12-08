@@ -9,14 +9,57 @@ namespace Zadaca1
     public class Kandidat
     {
         
-        public string ime_prezime { get; set; }
-        public int brojGlasova { get; set; }
-        public string stranka { get; set; }
+        private string ime_prezime { get; set; }
+        private int brojGlasova { get; set; }
+        private string stranka { get; set; }
+        /**
+         * author: ahajro2
+         * funkcionalnost: 4. 
+         * Dodan identifikacioniBroj za kandidata jer je on ujedno i glasac
+         *
+         */
+        private int identifikacioniBroj { get; set; }
         public Kandidat() { }
         public Kandidat(string ime_prezime, string stranka)
         {
             this.ime_prezime = ime_prezime;
             this.stranka = stranka;
+        }
+
+        public string Ime_prezime
+        {
+            get { return ime_prezime; }
+            set
+            {
+                ime_prezime = value;
+            }
+        }
+
+        public string Stranka
+        {
+            get { return stranka;  }
+            set
+            {
+                stranka = value;
+            }
+        }
+
+        public int IdentifikacioniBroj
+        {
+            get { return identifikacioniBroj; }
+            set
+            {
+                identifikacioniBroj = value;
+            }
+        }
+
+        public int BrojGlasova
+        {
+            get { return brojGlasova; }
+            set
+            {
+                brojGlasova = value;
+            }
         }
     }
 }
