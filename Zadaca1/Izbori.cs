@@ -253,7 +253,6 @@ namespace Zadaca1
                 if(!glasanjeUToku)
                 {
                     int brojOsvojenihMandata = 0;
-
                     rezultatIzbora += "Kandidati koji su osvojili mandate: \n"
                     //dodajemo i clanove  i rukovodstvo jer se cuvaju u zasebnim listama
                     List<Kandidat> kandidati = stranka.clanovi;
