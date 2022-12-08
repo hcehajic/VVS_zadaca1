@@ -43,7 +43,7 @@ namespace Zadaca1
              string datum = "7/20/2000";
              DateTime dt;
              var jel_ok = DateTime.TryParse(datum, out dt);
-             Glasac glasac = new Glasac("Harun", "Cehaljic", "Ovdje moze sta hoces jer je adresa", dt, "2034K5678", "2007000170009");
+             Glasac glasac = new Glasac("Harun", "Cehajic", "Ovdje moze sta hoces jer je adresa", dt, "2034K5678", "2007000170009");
              glasaci.Add(glasac);
              glasaci.Add(new Glasac("Neko", "Nekic", "Izmisljena bb", dt, "1234K5678", "2007000170009"));
              glasaci.Add(new Glasac("Ena", "Enic", "Gradacacka bb", dt, "1234K5678", "2007000170009"));
@@ -68,6 +68,7 @@ namespace Zadaca1
                  Console.WriteLine("7) Prikazi rezultate glasanja za stranke");
                  Console.WriteLine("8) Proglasi glasanje gotovim");
                  Console.WriteLine("9) Prikazi rukovodstvo stranke");
+                 Console.WriteLine("10) Ponistavanje glasova za glasaca");
 
                  int opcija = Convert.ToInt32(Console.ReadLine().Trim());
 
@@ -149,14 +150,84 @@ namespace Zadaca1
                 }
                 else if (opcija == 7)
                 {
-                    izbori.GlasanjeUToku = glasanjeUToku;
                     izbori.prikazRezultataIzbora();
                 }
                 else if (opcija == 8)
+                {
+                    izbori.GlasanjeUToku = false;
                     glasanjeUToku = false;
+                }
                 else if (opcija == 9)
                 {
                     stranke.ForEach(stranka => Console.WriteLine(stranka.prikazInformacijaORukovodstvu()));
+                }
+                else if (opcija == 10)
+                {
+                    int brojac = 3;
+                    bool tacanUnos = false;
+
+                    Glasac trenutni = null;
+                    while (brojac != 0 && !tacanUnos)
+                    {
+                        Console.WriteLine("Unesite  vas jedinstveni identifikacijski kod:");
+                        var sifraGlasaca = Console.ReadLine();
+                        var naso = false;
+                        foreach (Glasac g in glasaci)
+                        {
+                            if (g.ToString().Equals(sifraGlasaca))
+                            {
+                                naso = true;
+                                kod = sifraGlasaca;
+                                sifraGlasaca = "";
+                                trenutni = g;
+                                break;
+                            }
+                        }
+
+                        if (!naso)
+                        {
+                            Console.WriteLine("Pogresan unos! Pokusajte ponovo");
+                            brojac--;
+                        }
+                        else
+                        {
+                            tacanUnos = !tacanUnos;
+                            break;
+                        }
+                    }
+
+
+                    if (!tacanUnos)
+                    {
+                        Console.WriteLine("Pogresan unos 3 puta. Program se zavrsava.");
+                        break;
+                    }
+
+
+                    while (brojac != 0 && !tacanUnos)
+                    {
+                        Console.WriteLine("Za pristup ovoj mogucnosti morate unijeti tajnu sifru za brisanje glasova:");
+                        var sifra = Console.ReadLine();
+                        if (sifra == "VVS20222023")
+                        {
+                            tacanUnos = !tacanUnos;
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Pogresan unos! Pokusajte ponovo");
+                            brojac--;
+                        }
+                    }
+
+
+                    if (!tacanUnos)
+                    {
+                        Console.WriteLine("Pogresan unos 3 puta. Program se zavrsava.");
+                        break;
+                    }
+
+                    izbori.IzbrisiGlasoveZaGlasaca(trenutni);
                 }
             }
         }

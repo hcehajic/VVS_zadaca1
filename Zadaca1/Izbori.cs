@@ -13,12 +13,12 @@ namespace Zadaca1
         private List<Kandidat> kandidati;
         private List<Glasac> glasaci;
         private int ukupno_glasova_na_izborima = 0;
-        private Boolean glasanjeUToku = false;
+        private bool glasanjeUToku = false;
 
-        public Boolean GlasanjeUToku
+        public bool GlasanjeUToku
         {
-            get { return GlasanjeUToku; }
-            set { GlasanjeUToku = value; }
+            get => glasanjeUToku; 
+            set => glasanjeUToku = value; 
         }
 
         public List<Stranka> Stranke { get => stranke; set => stranke = value; }
@@ -51,7 +51,10 @@ namespace Zadaca1
         
             int izbor_kandidata = Convert.ToInt32(Console.ReadLine());
             if (izbor_kandidata != 0)
+            {
                 kandidati[izbor_kandidata - 1].BrojGlasova++;
+                trenutni_glasac.Glaso.Add(izbor_kandidata);
+            }
 
             Console.WriteLine("\nSTRANKE");
             Console.WriteLine("Unesite redni broj stranke ili redni broj stranke i njene kandidate za koje glasate:");
@@ -70,6 +73,7 @@ namespace Zadaca1
 
             var izbor_stranka_clanovi = Console.ReadLine();
             string[] uneseno = izbor_stranka_clanovi.Split(' ', StringSplitOptions.None);
+
 
             brojac = 0;
             foreach (Stranka s in stranke)
@@ -246,21 +250,37 @@ namespace Zadaca1
             stranke.ForEach(stranka =>
             {
                 rezultatIzbora += "Broj glasova za stranku: " + stranka.sumarniBrojGlasovaStranke() + "\n";
-                rezultatIzbora += "Postotak od ukupnog broja glasova: " + 
-                (stranka.sumarniBrojGlasovaStranke() / ukupno_glasova_na_izborima) * 100 + "% \n";
+
+                if (ukupno_glasova_na_izborima != 0)
+                {
+                    rezultatIzbora += "Postotak od ukupnog broja glasova: " +
+                                    (stranka.sumarniBrojGlasovaStranke() / ukupno_glasova_na_izborima) * 100 + "% \n";
+                }
+                else
+                {
+                    rezultatIzbora += "Postotak od ukupnog broja glasova: 0";
+                }
+                
+                
 
                 //dodati uslov ukoliko je kraj glasanja a pozove se ova metoda da se ispise broj mandata za svaku stranku
                 if(!glasanjeUToku)
                 {
                     int brojOsvojenihMandata = 0;
 
-                    rezultatIzbora += "Kandidati koji su osvojili mandate: \n"
+                    rezultatIzbora += "Kandidati koji su osvojili mandate: \n";
                     //dodajemo i clanove  i rukovodstvo jer se cuvaju u zasebnim listama
                     List<Kandidat> kandidati = stranka.clanovi;
-                    kandidati.AddRange(stranka.rukovodstvoStranke);
+
+                    // zakomentarisano jer baca gresku a ne znam jestel zavrsili funkcionalnost
+                    // comm: hcehajic2
+                    // kandidati.AddRange(stranka.rukovodstvoStranke);
+
                     kandidati.ForEach(kandidat =>
                     {
-                        double postotak = (kandidat.BrojGlasova / stranka.sumarniBrojGlasovaStranke()) * 100;
+                        double postotak;
+                        if (stranka.sumarniBrojGlasovaStranke() == 0) postotak = 0;
+                        else postotak = (kandidat.BrojGlasova / stranka.sumarniBrojGlasovaStranke()) * 100;
                         if(postotak > 20)
                         {
                             brojOsvojenihMandata++;
@@ -273,6 +293,20 @@ namespace Zadaca1
             });
 
             return "";
+        }
+
+        public void IzbrisiGlasoveZaGlasaca(Glasac g)
+        {
+            // prvo provjeravamo da li je glasac uopste glasao
+            bool glaso = false;
+            foreach (Glasac gl in glasaci)
+            {
+                if (gl.JMBG.Equals(g.JMBG))
+                {
+                    glaso = true;
+                    break;
+                }
+            }
         }
     }
 }

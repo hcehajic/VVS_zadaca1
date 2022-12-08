@@ -20,11 +20,12 @@ namespace Zadaca1
          */
         public List<Kandidat> rukovodstvoStranke { get; set; }
 
-        public Stranka() { }
+        public Stranka() { rukovodstvoStranke = new List<Kandidat>(); }
         public Stranka(string naziv, List<Kandidat> clanovi)
         {
             this.naziv = naziv;
             this.clanovi = clanovi;
+            new List<Kandidat>();
         }
 
         /**
@@ -40,7 +41,11 @@ namespace Zadaca1
         public int sumarniBrojGlasovaStranke()
         {
             int sumaGlasova = 0;
-            rukovodstvoStranke.ForEach((k) => { sumaGlasova += k.BrojGlasova; });
+            // rukovodstvoStranke.ForEach((k) => { sumaGlasova += k.BrojGlasova; });
+            foreach(Kandidat k in clanovi)
+            {
+                sumaGlasova += k.BrojGlasova;
+            }
             return 0;
         }
 
