@@ -7,6 +7,7 @@ namespace Zadaca1
     {
         static void Main(string[] args)
         {
+            Boolean glasanjeUToku = true;
             /* string datum = "7/20/2000";
              DateTime dt;
              var jel_ok = DateTime.TryParse(datum, out dt);
@@ -64,86 +65,100 @@ namespace Zadaca1
                  Console.WriteLine("4) Unos novog glasaca");
                  Console.WriteLine("5) Prikazi glasace koji nisu glasali");
                  Console.WriteLine("6) Zavrsi glasanje i zatvori aplikaciju");
+                 Console.WriteLine("7) Prikazi rezultate glasanja za stranke");
+                 Console.WriteLine("8) Proglasi glasanje gotovim");
+                 Console.WriteLine("9) Prikazi rukovodstvo stranke");
 
                  int opcija = Convert.ToInt32(Console.ReadLine().Trim());
 
-                 if (opcija == 6)
-                     break;
+                if (opcija == 6)
+                    break;
 
-                 else if (opcija == 1) {
+                else if (opcija == 1)
+                {
 
-                     while (true)
-                     {
-                         Console.WriteLine("Da biste pristupili izborima molimo unesite Vas jedinstveni kod(Unesite -1 za prekid): ");
-                         var unos = Console.ReadLine();
-                         var pkod = unos.Split()[0];
-                         if (unos.Equals("-1"))
-                         {
-                             pronadjen = false;
-                             break;
-                         }
-                         foreach (Glasac g in glasaci)
-                         {
-                             if (g.ToString().Equals(pkod))
-                             {
-                                 pronadjen = true;
-                                 kod = pkod;
-                                 unesen = true;
-                                 pkod = "";
-                                 trenutniGlasac = g;
-                                 break;
-                             }
-                         }
-                         if (unesen)
-                         {
-                             Console.WriteLine("Prijavljen glasac: " + trenutniGlasac.ToString());
-                             izbori.Glasaj(trenutniGlasac);
-                             break;
-                         }
-                         if (!pronadjen)
-                         {
-                             Console.WriteLine("Neispravan jedinstveni kod!");
-                         }
-                     }
-                     if (pronadjen)
-                         izbori.Glasaj(trenutniGlasac);
-                 }
-                 else if (opcija == 2)
-                     izbori.TrenutnoStanje();
+                    while (true)
+                    {
+                        Console.WriteLine("Da biste pristupili izborima molimo unesite Vas jedinstveni kod(Unesite -1 za prekid): ");
+                        var unos = Console.ReadLine();
+                        var pkod = unos.Split()[0];
+                        if (unos.Equals("-1"))
+                        {
+                            pronadjen = false;
+                            break;
+                        }
+                        foreach (Glasac g in glasaci)
+                        {
+                            if (g.ToString().Equals(pkod))
+                            {
+                                pronadjen = true;
+                                kod = pkod;
+                                unesen = true;
+                                pkod = "";
+                                trenutniGlasac = g;
+                                break;
+                            }
+                        }
+                        if (unesen)
+                        {
+                            Console.WriteLine("Prijavljen glasac: " + trenutniGlasac.ToString());
+                            izbori.Glasaj(trenutniGlasac);
+                            break;
+                        }
+                        if (!pronadjen)
+                        {
+                            Console.WriteLine("Neispravan jedinstveni kod!");
+                        }
+                    }
+                    if (pronadjen)
+                        izbori.Glasaj(trenutniGlasac);
+                }
+                else if (opcija == 2)
+                    izbori.TrenutnoStanje();
 
-                 else if (opcija == 3)
-                     izbori.GlasaciNaIzborima();
+                else if (opcija == 3)
+                    izbori.GlasaciNaIzborima();
 
-                 else if (opcija == 4)
-                 {
-                     Console.WriteLine("Unos novih glasaca mora biti obavljen od strane sluzbene komisije. " +
-                         "Unesite identifikacioni broj vase komisije: ");
-                     string idBroj = Console.ReadLine();
-                     if (idBroj.Equals("CIK"))
-                     {
-                         Glasac gl = izbori.DodajGlasaca();
-                         if (gl != null)
-                         {
-                             glasaci.Add(gl);
-                             Console.WriteLine("Uspjesan unos novog glasaca! Sada Vas odjavljujemo sa sistema.");
-                             kod = "";
-                             pronadjen = false;
-                             unesen = false;
-                             trenutniGlasac = null;
-                             Console.WriteLine("ENTER za nastavak...");
-                             Console.ReadLine();
-                         }
-                         else
-                             Console.WriteLine("Nemoguce dodati glasaca.");
-                     }
-                 }
+                else if (opcija == 4)
+                {
+                    Console.WriteLine("Unos novih glasaca mora biti obavljen od strane sluzbene komisije. " +
+                        "Unesite identifikacioni broj vase komisije: ");
+                    string idBroj = Console.ReadLine();
+                    if (idBroj.Equals("CIK"))
+                    {
+                        Glasac gl = izbori.DodajGlasaca();
+                        if (gl != null)
+                        {
+                            glasaci.Add(gl);
+                            Console.WriteLine("Uspjesan unos novog glasaca! Sada Vas odjavljujemo sa sistema.");
+                            kod = "";
+                            pronadjen = false;
+                            unesen = false;
+                            trenutniGlasac = null;
+                            Console.WriteLine("ENTER za nastavak...");
+                            Console.ReadLine();
+                        }
+                        else
+                            Console.WriteLine("Nemoguce dodati glasaca.");
+                    }
+                }
 
-                 else if (opcija == 5)
-                 {
-                     izbori.GlasaciKojiNisuGlasali();
-                 }
-
-             }
+                else if (opcija == 5)
+                {
+                    izbori.GlasaciKojiNisuGlasali();
+                }
+                else if (opcija == 7)
+                {
+                    izbori.GlasanjeUToku = glasanjeUToku;
+                    izbori.prikazRezultataIzbora();
+                }
+                else if (opcija == 8)
+                    glasanjeUToku = false;
+                else if (opcija == 9)
+                {
+                    stranke.ForEach(stranka => Console.WriteLine(stranka.prikazInformacijaORukovodstvu()));
+                }
+            }
         }
     }
 }
