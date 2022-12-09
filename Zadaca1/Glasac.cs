@@ -18,9 +18,25 @@ namespace Zadaca1
         private string broj_licne;
         private string jmbg;
         private string kod;
+        private List<int> glaso;
         #endregion
 
         #region Properties
+
+
+        public List<int> Glaso
+        {
+            get
+            {
+                return glaso;
+            }
+
+            set
+            {
+                glaso = value;
+            }
+        }
+
         public string Ime  
         {
             get { return ime; }   
@@ -94,7 +110,7 @@ namespace Zadaca1
         #endregion
 
         #region Constructors
-        public Glasac() { }
+        public Glasac() { glaso = new List<int>(); }
 
         public Glasac(string ime, string prezime, string adresa, DateTime datum_rodjenja, string broj_licne, string jmbg)
         {
@@ -107,6 +123,7 @@ namespace Zadaca1
             this.jmbg = jmbg;
             birao = false;
             KreirajJedinstveniKod();
+            glaso = new List<int>();
         }
         #endregion
 
