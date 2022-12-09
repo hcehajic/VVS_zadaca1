@@ -226,8 +226,8 @@ namespace Zadaca1
                         Console.WriteLine("Pogresan unos 3 puta. Program se zavrsava.");
                         break;
                     }
-
-                    izbori.IzbrisiGlasoveZaGlasaca(trenutni);
+                    //mescini nije implementirana metoda
+                    //izbori.IzbrisiGlasoveZaGlasaca(trenutni);
                 }
             }
         }
