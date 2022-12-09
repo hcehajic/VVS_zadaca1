@@ -297,5 +297,69 @@ namespace Zadaca1
 
             return rezultatIzbora;
         }
+        
+        public void IzbrisiGlasoveZaGlasaca(Glasac g)
+        {
+
+            if (!g.birao)
+            {
+                Console.WriteLine("Glasac nije glasao!");
+                return;
+            }
+
+            // smanjenje broja glasova za nezavisne kandidate
+            int brojac = 0;
+            foreach(Kandidat k in kandidati)
+            {
+                if (k.Stranka == null)
+                {
+                    if (brojac == g.Glaso[0])
+                    {
+                        Console.WriteLine("Brisem glasove kandidatu: " + k.Ime_prezime);
+                        k.BrojGlasova--;
+                        break;
+                    }
+                    brojac++;
+                }
+            }
+
+            // ukoliko je glasao samo za stranku
+            if (g.Glaso.Count < 3)
+            {
+                // smanjivanje broja glasova za stranku i sve njene clanove
+                for (int i = 0; i < kandidati.Count; i++)
+                {
+                    if (kandidati[i].Stranka == stranke[g.Glaso[1] - 1].naziv)
+                    {
+                        Console.WriteLine("Brisem glasove za kandidata: " + kandidati[i].Ime_prezime);
+                        Console.WriteLine("Brisem glasove stranki: " + stranke[g.Glaso[1] - 1].naziv);
+                        kandidati[i].BrojGlasova--;
+                        stranke[g.Glaso[1] - 1].brojGlasova--;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = g.Glaso[2]; i < g.Glaso.Count; i++)
+                {
+                    int broj = 1;
+                    for (int j = 0; j < kandidati.Count; j++)
+                    {
+                        if (kandidati[j].Stranka == stranke[g.Glaso[1] - 1].naziv)
+                        {
+                            if (broj == g.Glaso[i])
+                            {
+                                kandidati[j].BrojGlasova--;
+                                stranke[g.Glaso[1] - 1].brojGlasova--;
+                            }
+                            broj++;
+                        }
+                    }
+                }          
+            }
+               
+            g.birao = false;
+            Console.WriteLine("Uspjesno obrisani glasovi glasacu!");
+        }
     }
 }
