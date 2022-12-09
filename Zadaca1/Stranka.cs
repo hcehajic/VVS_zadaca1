@@ -60,7 +60,7 @@ namespace Zadaca1
         public string prikazInformacijaORukovodstvu()
         {
             string formatIspisa = "Ukupan broj glasova: ";
-            formatIspisa += sumarniBrojGlasovaStranke() + "; Kandidati: ";
+            formatIspisa += sumarniBrojGlasovaStranke() + ";\nKandidati: ";
             rukovodstvoStranke.ForEach(kandidat => {
                 formatIspisa += "Identifikacioni broj: " + kandidat.IdentifikacioniBroj + "\n";
             });

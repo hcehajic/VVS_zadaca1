@@ -250,8 +250,9 @@ namespace Zadaca1
         {
             if (ukupno_glasova_na_izborima == 0) return "Nema glasova još uvijek";
             string rezultatIzbora = "";
+            
             stranke.ForEach(stranka =>
-            {
+            {       
                 rezultatIzbora += "Broj glasova za stranku: " + stranka.brojGlasova + "\n";
                 rezultatIzbora += "Postotak od ukupnog broja glasova: " + 
                 Math.Round((stranka.brojGlasova / (double)ukupno_glasova_na_izborima) * 100) + "% \n";

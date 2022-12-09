@@ -154,7 +154,7 @@ namespace Zadaca1
                 }
                 else if (opcija == 7)
                 {
-                    izbori.prikazRezultataIzbora();
+                    Console.WriteLine(izbori.prikazRezultataIzbora());
                 }
                 else if (opcija == 8)
                 {
