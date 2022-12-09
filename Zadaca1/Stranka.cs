@@ -26,6 +26,19 @@ namespace Zadaca1
             this.naziv = naziv;
             this.clanovi = clanovi;
         }
+        public Stranka(string naziv, int brojGlasova)
+        {
+            this.naziv = naziv;
+            this.brojGlasova= brojGlasova;
+        }
+
+        public Stranka(string naziv, List<Kandidat> clanovi, int brojGlasova)
+        {
+            this.naziv = naziv;
+            this.clanovi = clanovi;
+            this.brojGlasova = brojGlasova;
+        }
+
 
         /**
          * author: akulaglic3
@@ -41,7 +54,7 @@ namespace Zadaca1
         {
             int sumaGlasova = 0;
             rukovodstvoStranke.ForEach((k) => { sumaGlasova += k.BrojGlasova; });
-            return 0;
+            return sumaGlasova;
         }
 
         public string prikazInformacijaORukovodstvu()

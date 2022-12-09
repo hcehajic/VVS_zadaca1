@@ -13,12 +13,18 @@ namespace Zadaca1
         private List<Kandidat> kandidati;
         private List<Glasac> glasaci;
         private int ukupno_glasova_na_izborima = 0;
-        private Boolean glasanjeUToku = false;
+        private Boolean glasanjeUToku;
 
         public Boolean GlasanjeUToku
         {
-            get { return GlasanjeUToku; }
-            set { GlasanjeUToku = value; }
+            get { return glasanjeUToku; }
+            set { glasanjeUToku = value; }
+        }
+
+        public int Ukupno_glasova_na_izborima
+        {
+            get { return ukupno_glasova_na_izborima; }
+            set { ukupno_glasova_na_izborima = value; }
         }
 
         public List<Stranka> Stranke { get => stranke; set => stranke = value; }
@@ -245,21 +251,24 @@ namespace Zadaca1
             string rezultatIzbora = "";
             stranke.ForEach(stranka =>
             {
-                rezultatIzbora += "Broj glasova za stranku: " + stranka.sumarniBrojGlasovaStranke() + "\n";
+                rezultatIzbora += "Broj glasova za stranku: " + stranka.brojGlasova + "\n";
                 rezultatIzbora += "Postotak od ukupnog broja glasova: " + 
-                (stranka.sumarniBrojGlasovaStranke() / ukupno_glasova_na_izborima) * 100 + "% \n";
+                Math.Round((stranka.brojGlasova / (double)ukupno_glasova_na_izborima) * 100) + "% \n";
 
                 //dodati uslov ukoliko je kraj glasanja a pozove se ova metoda da se ispise broj mandata za svaku stranku
-                if(!glasanjeUToku)
+                if(!GlasanjeUToku)
                 {
                     int brojOsvojenihMandata = 0;
-                    rezultatIzbora += "Kandidati koji su osvojili mandate: \n"
+                    rezultatIzbora += "Kandidati koji su osvojili mandate: \n";
                     //dodajemo i clanove  i rukovodstvo jer se cuvaju u zasebnim listama
-                    List<Kandidat> kandidati = stranka.clanovi;
-                    kandidati.AddRange(stranka.rukovodstvoStranke);
-                    kandidati.ForEach(kandidat =>
+
+                    List<Kandidat> listaKandidata = stranka.clanovi;
+                    List<Kandidat> listaKandidataRukovodstva = stranka.rukovodstvoStranke;
+
+                    //moralo se odvojiti u 2 forEach jer nije radilo drugacije
+                    listaKandidata.ForEach(kandidat =>
                     {
-                        double postotak = (kandidat.BrojGlasova / stranka.sumarniBrojGlasovaStranke()) * 100;
+                        double postotak = Math.Round((kandidat.BrojGlasova / (double)stranka.brojGlasova) * 100);
                         if(postotak > 20)
                         {
                             brojOsvojenihMandata++;
@@ -267,11 +276,25 @@ namespace Zadaca1
                         }
                     });
 
+                    listaKandidataRukovodstva.ForEach(kandidat =>
+                    {
+                        double postotak = Math.Round((kandidat.BrojGlasova / (double)stranka.brojGlasova) * 100);
+                        if (postotak > 20)
+                        {
+                            brojOsvojenihMandata++;
+                            rezultatIzbora += kandidat.Ime_prezime + " osvojio je: " + postotak + "% glasova\n";
+                        }
+                    });
+
                     rezultatIzbora += "Ukupan broj osvojenih mandata stranke " + stranka.naziv + " je " + brojOsvojenihMandata;
+                } 
+                else
+                {
+                    rezultatIzbora += "GLASANJE JE JOŠ UVIJEK U TOKU!";
                 }
             });
 
-            return "";
+            return rezultatIzbora;
         }
     }
 }

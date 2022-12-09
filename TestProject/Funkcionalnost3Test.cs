@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -14,6 +15,26 @@ namespace TestProject
     [TestClass]
     public class Funkcionalnost3Test
     {
+
+
+
+
+        static IEnumerable<object[]> Stranke
+        {
+            get
+            {
+                return new[]
+                {
+                    new object[] {"NES", 2000},
+                    new object[] {"SDA", 4000},
+                    new object[] {"NIP", 3500},
+                    new object[] {"BHIF", 20000},
+                    new object[] {"SDP", 20200},
+                };
+            }
+        }
+
+
         static IEnumerable<object[]> PodaciZaTestiranjeKandidata
         {
             get
@@ -23,19 +44,9 @@ namespace TestProject
         }
 
 
-        static IEnumerable<object[]> PodaciZaTestiranjeKandidata
-        {
-            get
-            {
-                return UcitajKandidateCSV();
-            }
-        }
-
-
-
         public static IEnumerable<object[]> UcitajKandidateCSV()
         {
-            using (var reader = new StreamReader("PodaciZaFunkcionalnost3Kandidati.csv"))
+            using (var reader = new StreamReader("C:\\Users\\Adnan\\source\\repos\\VVS_zadaca1\\TestProject\\PodaciZaFunkcionalnost3Kandidati.csv"))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
                 var rows = csv.GetRecords<dynamic>();
@@ -43,26 +54,105 @@ namespace TestProject
                 {
                     var values = ((IDictionary<String, Object>)row).Values;
                     var elements = values.Select(elem => elem.ToString()).ToList();
-                    yield return new object[] { elements[0], elements[1], elements[2], DateTime.Parse(elements[3]), elements[4], elements[5] };
+                    yield return new object[] { elements[0], elements[1], elements[2], elements[3] };
                 }
             }
         }
 
-        public static IEnumerable<object[]> UcitajKandidateCSV()
+        /*
+         * param: nazivStranke, brojGlasova
+         * author: ahajro2
+         * Funkcionalnost testa: Provjera ispisa sa inline podacima stranke i 
+         * razlicitim brojem glasova svake od tih predefinisanih stranaka.
+         * 
+         */
+
+        [TestMethod]
+        [DynamicData("Stranke")]
+        public void TestIspisaRezultataIzbora(string nazivStranke, int brojGlasova)
         {
-            using (var reader = new StreamReader("PodaciZaFunkcionalnost3Kandidati.csv"))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-            {
-                var rows = csv.GetRecords<dynamic>();
-                foreach (var row in rows)
-                {
-                    var values = ((IDictionary<String, Object>)row).Values;
-                    var elements = values.Select(elem => elem.ToString()).ToList();
-                    yield return new object[] { elements[0], elements[1], elements[2], DateTime.Parse(elements[3]), elements[4], elements[5] };
-                }
-            }
+
+            List<Kandidat> lista = new List<Kandidat>();
+            lista.Add(new Kandidat("Adnan Hajro", 750, nazivStranke, "1803001170103"));
+            lista.Add(new Kandidat("Almina Brulić", 550, nazivStranke, "1803001170103"));
+            lista.Add(new Kandidat("Aldin Kulaglic", 1100, nazivStranke, "1803001170103"));
+            lista.Add(new Kandidat("Harun Cehajic", 122, nazivStranke, "1803001170103"));
+            lista.Add(new Kandidat("Elma Nuhanovic", 132, nazivStranke, "1803001170103"));
+
+
+            List<Kandidat> rukovodstvo = new List<Kandidat>();
+            rukovodstvo.Add(new Kandidat("Neko Nekic", 750, nazivStranke, "1803001170103"));
+            rukovodstvo.Add(new Kandidat("Taj Taglic", 550, nazivStranke, "1803001170103"));
+            rukovodstvo.Add(new Kandidat("Ova Ovic", 1100, nazivStranke, "1803001170103"));
+            rukovodstvo.Add(new Kandidat("Ti Tihic", 122, nazivStranke, "1803001170103"));
+            rukovodstvo.Add(new Kandidat("Ono Onic", 132, nazivStranke, "1803001170103"));
+
+
+            Izbori izbori = new Izbori();
+            izbori.GlasanjeUToku = false;
+            izbori.Ukupno_glasova_na_izborima = 30000;
+            Stranka stranka = new Stranka(nazivStranke, brojGlasova);
+            stranka.clanovi = lista;
+            stranka.rukovodstvoStranke = rukovodstvo;
+            List<Stranka> listaStranaka = new List<Stranka>();
+            listaStranaka.Add(stranka);
+            izbori.Stranke = listaStranaka;
+            Console.Write(izbori.prikazRezultataIzbora());
+            //ubaciti neki uslov provjere za prolazak testa
+            //totalno nebitno da se radi data-driven nad ovim testom... 
+            Assert.AreEqual("asdasd", izbori.prikazRezultataIzbora());
+        }
+
+        /*
+         * param: nazivStranke, brojGlasova
+         * author: ahajro2
+         * Funkcionalnost testa: Validiranje identifikacionog broja kandidata na izborima!
+         * Kao identifikacioni kod kandidata predvidjeno je da to bude broj licne karte
+         */
+
+        [TestMethod]
+        [DynamicData("PodaciZaTestiranjeKandidata")]
+        public void testKandidata(string ime_prezime, string stranka, string identifikacioniBroj, string brojGlasova)
+        {
+            Kandidat k = new Kandidat(ime_prezime, Int32.Parse(brojGlasova), stranka, identifikacioniBroj);
+            Assert.IsFalse(Kandidat.ValidirajBrojLicneKarte(k.IdentifikacioniBroj));
+        }
+
+        [TestMethod]
+        public void testNezavrsetkaIzbora()
+        {
+            List<Kandidat> lista = new List<Kandidat>();
+            lista.Add(new Kandidat("Adnan Hajro", 750, "Nebitno", "1803001170103"));
+            lista.Add(new Kandidat("Almina Brulić", 550, "Nebitno", "1803001170103"));
+            lista.Add(new Kandidat("Aldin Kulaglic", 1100, "Nebitno", "1803001170103"));
+            lista.Add(new Kandidat("Harun Cehajic", 122, "Nebitno", "1803001170103"));
+            lista.Add(new Kandidat("Elma Nuhanovic", 132, "Nebitno", "1803001170103"));
+
+
+            List<Kandidat> rukovodstvo = new List<Kandidat>();
+            rukovodstvo.Add(new Kandidat("Neko Nekic", 750, "Nebitno", "1803001170103"));
+            rukovodstvo.Add(new Kandidat("Taj Taglic", 550, "Nebitno", "1803001170103"));
+            rukovodstvo.Add(new Kandidat("Ova Ovic", 1100, "Nebitno", "1803001170103"));
+            rukovodstvo.Add(new Kandidat("Ti Tihic", 122, "Nebitno", "1803001170103"));
+            rukovodstvo.Add(new Kandidat("Ono Onic", 132, "Nebitno", "1803001170103"));
+
+
+            Izbori izbori = new Izbori();
+            izbori.GlasanjeUToku = true;
+            izbori.Ukupno_glasova_na_izborima = 30000;
+            Stranka stranka = new Stranka("Nebitno", 123);
+            stranka.clanovi = lista;
+            stranka.rukovodstvoStranke = rukovodstvo;
+            List<Stranka> listaStranaka = new List<Stranka>();
+            listaStranaka.Add(stranka);
+            izbori.Stranke = listaStranaka;
+            //ubaciti neki uslov provjere za prolazak testa
+            //totalno nebitno da se radi data-driven nad ovim testom... 
+            Assert.AreEqual("asdasd", izbori.prikazRezultataIzbora());
         }
     }
+
+        
 
 
 

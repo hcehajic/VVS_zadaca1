@@ -18,12 +18,41 @@ namespace Zadaca1
          * Dodan identifikacioniBroj za kandidata jer je on ujedno i glasac
          *
          */
-        private int identifikacioniBroj { get; set; }
+        private string identifikacioniBroj { get; set; }
         public Kandidat() { }
         public Kandidat(string ime_prezime, string stranka)
         {
             this.ime_prezime = ime_prezime;
             this.stranka = stranka;
+        }
+
+        public Kandidat(string ime_prezime, int brojGlasova, string stranka, string identifikacioniBroj)
+        {
+            Ime_prezime = ime_prezime;
+            BrojGlasova = brojGlasova;
+            Stranka = stranka;
+            IdentifikacioniBroj = identifikacioniBroj;        
+        }
+
+        public static bool ValidirajBrojLicneKarte(string broj_licne)
+        {
+            if (broj_licne.Length != 9) return false;
+            int i = 0;
+            foreach (char c in broj_licne)
+            {
+                if (i != 4)
+                {
+                    if (c < '0' || c > '9')
+                        return false;
+                }
+
+                else if (i == 4 && (c != 'E' && c != 'K' && c != 'J' && c != 'M' && c != 'T'))
+                    return false;
+
+                i++;
+
+            }
+            return true;
         }
 
         public string Ime_prezime
@@ -44,7 +73,7 @@ namespace Zadaca1
             }
         }
 
-        public int IdentifikacioniBroj
+        public string IdentifikacioniBroj
         {
             get { return identifikacioniBroj; }
             set
@@ -61,5 +90,7 @@ namespace Zadaca1
                 brojGlasova = value;
             }
         }
+
+
     }
 }
