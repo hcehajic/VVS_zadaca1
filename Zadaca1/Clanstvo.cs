@@ -21,5 +21,10 @@ namespace Zadaca1
 			this.pocetak = pocetak;
 			this.kraj = kraj;
 		}
+		public string prikaziClanstvo()
+		{
+			return "Stranka: " + stranka + ", Clanstvo od: " + pocetak.Day + "." + pocetak.Month + "." + pocetak.Year +
+				", Clanstvo do: " + kraj.Day + "." + kraj.Month + "." + kraj.Year + "\n";
+		}
 	}
 }
