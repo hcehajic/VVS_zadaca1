@@ -64,10 +64,7 @@ namespace TestProject
         {
                           
             Izbori izbori = new Izbori();
-
-            bool value = izbori.ProvjeriUnesenuTajnuSifru("VVS20222022");
-
-            Assert.IsFalse(condition: value);
+            Assert.IsFalse(izbori.ProvjeriUnesenuTajnuSifru("VVS20222022");
         }
 
         [TestMethod]
