@@ -43,6 +43,16 @@ namespace Zadaca1
             this.identifikacioniBroj = identifikacioniBroj;
         }
 
+        public string prikaziClanstva()
+        {
+            string rezultat = "";
+            foreach (Clanstvo clanstvo in clanstva)
+            {
+                rezultat += clanstvo.prikaziClanstvo();
+            }
+            return rezultat;
+        }
+
         public static bool ValidirajBrojLicneKarte(string broj_licne)
         {
             if (broj_licne.Length != 9) return false;
