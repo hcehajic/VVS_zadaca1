@@ -13,7 +13,8 @@ using Zadaca1;
 
 namespace TestProject
 {
-    internal class Funkcionalnost5Test
+    [TestClass]
+    public class Funkcionalnost5Test
     {
         /*  
          *  Testovi za funkcionalnost 5 brisanja glasova od glasaca
@@ -66,7 +67,7 @@ namespace TestProject
 
             bool value = izbori.ProvjeriUnesenuTajnuSifru("VVS20222022");
 
-            Assert.IsFalse(value);
+            Assert.IsFalse(condition: value);
         }
 
         [TestMethod]

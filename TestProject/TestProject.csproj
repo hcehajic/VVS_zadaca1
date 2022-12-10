@@ -19,6 +19,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Funkcionalnost5Test.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="PodaciZaGlasanje.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="podaciZaTestiranjeBrojaLicneKarte.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
