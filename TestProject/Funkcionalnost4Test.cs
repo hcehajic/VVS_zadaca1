@@ -43,7 +43,7 @@ namespace TestProject
 
         public static IEnumerable<object[]> UcitajKandidateCSV()
         {
-            using (var reader = new StreamReader("C:\\Users\\Adnan\\source\\repos\\VVS_zadaca1\\TestProject\\PodaciZaFunkcionalnost3Kandidati.csv"))
+            using (var reader = new StreamReader("PodaciZaFunkcionalnost3Kandidati.csv"))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
                 var rows = csv.GetRecords<dynamic>();

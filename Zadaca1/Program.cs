@@ -44,7 +44,7 @@ namespace Zadaca1
              string datum = "7/20/2000";
              DateTime dt;
              var jel_ok = DateTime.TryParse(datum, out dt);
-             Glasac glasac = new Glasac("Harun", "Cehajic", "Ovdje moze sta hoces jer je adresa", dt, "2034K5678", "2007000170009");
+             Glasac glasac = new Glasac("Harun", "Cehajic", "Ovdje moze sta hoces jer je adresa", dt, "2034K5678", "2007000170005");
              glasaci.Add(glasac);
              glasaci.Add(new Glasac("Neko", "Nekic", "Izmisljena bb", dt, "1234K5678", "2007000170009"));
              glasaci.Add(new Glasac("Ena", "Enic", "Gradacacka bb", dt, "1234K5678", "2007000170009"));
@@ -201,25 +201,15 @@ namespace Zadaca1
                         break;
                     }
 
-                    brojac = 3;
-                    tacanUnos = false;
+                    brojac = 2;
 
-                    while (brojac != 0 && tacanUnos == false)
+                    Console.WriteLine("Za pristup ovoj mogucnosti morate unijeti tajnu sifru za brisanje glasova:");
+                    var sifra = Console.ReadLine();
+                    while (brojac != 0 && izbori.ProvjeriUnesenuTajnuSifru(sifra) == false)
                     {
-                        Console.WriteLine("Za pristup ovoj mogucnosti morate unijeti tajnu sifru za brisanje glasova:");
-                        var sifra = Console.ReadLine();
-                        if (sifra == "VVS20222023")
-                        {
-                            tacanUnos = false;
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Pogresan unos! Pokusajte ponovo");
-                            brojac--;
-                        }
+                        Console.WriteLine("Za pristup ovoj mogucnosti morate unijeti tajnu administratorsku sifru za brisanje glasova:");
+                        sifra = Console.ReadLine();
                     }
-
 
                     if (brojac == 0)
                     {

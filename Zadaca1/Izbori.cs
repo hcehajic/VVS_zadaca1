@@ -56,6 +56,7 @@ namespace Zadaca1
                     Console.WriteLine(brojac++ + ") " + k.Ime_prezime);
         
             int izbor_kandidata = Convert.ToInt32(Console.ReadLine());
+            trenutni_glasac.Glaso.Add(izbor_kandidata);
             if (izbor_kandidata != 0)
                 kandidati[izbor_kandidata - 1].BrojGlasova++;
 
@@ -76,6 +77,11 @@ namespace Zadaca1
 
             var izbor_stranka_clanovi = Console.ReadLine();
             string[] uneseno = izbor_stranka_clanovi.Split(' ', StringSplitOptions.None);
+
+            for (int i = 0; i < uneseno.Length; i++)
+            {
+                trenutni_glasac.Glaso.Add(Convert.ToInt32(uneseno[i]));
+            }
 
             brojac = 0;
             foreach (Stranka s in stranke)
@@ -298,7 +304,12 @@ namespace Zadaca1
 
             return rezultatIzbora;
         }
-        
+
+        /*
+         * 
+         * Autor: Harun Cehajic
+         * 
+         */
         public void IzbrisiGlasoveZaGlasaca(Glasac g)
         {
 
@@ -361,6 +372,23 @@ namespace Zadaca1
                
             g.birao = false;
             Console.WriteLine("Uspjesno obrisani glasovi glasacu!");
+        }
+
+        /*
+         * 
+         * Autor: Harun Cehajic
+         * 
+         */
+        public bool ProvjeriUnesenuTajnuSifru(string sifra)
+        {
+            string tajniKod = "VVS20222023";
+
+            if (sifra != tajniKod)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
