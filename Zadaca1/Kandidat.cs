@@ -43,6 +43,12 @@ namespace Zadaca1
             this.identifikacioniBroj = identifikacioniBroj;
         }
 
+        /**
+         * author: enuhanovic1
+         * funkcionalnost: 2.
+         * metoda koja prikazuje clanstva kandidata u proslosti
+         * Dodatno: napisati testove!!!
+         */
         public string prikaziClanstva()
         {
             string rezultat = "";
@@ -107,6 +113,15 @@ namespace Zadaca1
             set
             {
                 brojGlasova = value;
+            }
+        }
+
+        public List<Clanstvo> Clanstva
+        {
+            get { return clanstva; }
+            set
+            {
+                clanstva = value;   
             }
         }
     }

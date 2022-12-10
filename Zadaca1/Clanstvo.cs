@@ -26,5 +26,29 @@ namespace Zadaca1
 			return "Stranka: " + stranka + ", Clanstvo od: " + pocetak.Day + "." + pocetak.Month + "." + pocetak.Year +
 				", Clanstvo do: " + kraj.Day + "." + kraj.Month + "." + kraj.Year + "\n";
 		}
+		public string Stranka
+        {
+            get { return stranka; }
+            set
+            {
+                stranka = value;
+            }
+        }
+		public DateTime Pocetak
+        {
+            get { return pocetak; }
+            set
+            {
+                pocetak = value;
+            }
+        }
+		public DateTime Kraj
+        {
+            get { return kraj; }
+            set
+            {
+                kraj = value;
+            }
+        }
 	}
 }
