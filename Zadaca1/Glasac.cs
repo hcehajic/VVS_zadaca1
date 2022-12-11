@@ -37,15 +37,16 @@ namespace Zadaca1
             }
         }
 
-        public string Ime  
+        public string Ime
         {
-            get { return ime; }   
-            set {
+            get { return ime; }
+            set
+            {
                 if (ValidirajIme(value))
                     ime = value;
                 else throw new ArgumentException("Neispravno ime");
 
-            }  
+            }
         }
 
         public string Prezime
@@ -77,7 +78,7 @@ namespace Zadaca1
             set
             {
                 if (!ValidirajDatumRodjenja(value))
-                   throw new ArgumentException("Neispravan datum rodjenja");
+                    throw new ArgumentException("Neispravan datum rodjenja");
                 else datum_rodjenja = value;
             }
         }
@@ -101,7 +102,7 @@ namespace Zadaca1
             get { return jmbg; }
             set
             {
-                if(ValidirajJMBG(value, datum_rodjenja))
+                if (ValidirajJMBG(value, datum_rodjenja))
                     jmbg = value;
                 else throw new ArgumentException("Neispravan JMBG");
             }
@@ -154,7 +155,7 @@ namespace Zadaca1
             {
                 throw new ArgumentException("Neispravno prezime!");
             }
-      
+
             if (!ValidirajBrojLicneKarte(broj_licne))
             {
                 throw new ArgumentException("Neispravan broj licne!");
@@ -171,6 +172,7 @@ namespace Zadaca1
             }
         }
 
+        /*
         public bool ValidirajJedinstveniKod(string kod)
         {
             if (kod.Length != 12) return false;
@@ -181,15 +183,29 @@ namespace Zadaca1
             return false;
           
            return true;
+        }*/
+
+        public bool ValidirajJedinstveniKod(string kod)
+        {
+            if (kod.Length != 12) return false;
+            if (kod.Substring(0, 2) != this.Ime.Substring(0, 2) || kod.Substring(2, 2) != this.Prezime.Substring(0, 2) || this.Adresa.Substring(0, 2) != kod.Substring(4, 2)) return false;
+            string dan = "";
+            if (datum_rodjenja.Day < 10)
+            {
+                dan = "0";
+            }
+            dan = dan + datum_rodjenja.Day.ToString();
+            if (dan != kod.Substring(6, 2) || kod.Substring(8, 2) != this.JMBG.Substring(0, 2) || kod.Substring(10, 2) != this.BrojLicneKarte.Substring(0, 2)) return false;
+            return true;
         }
 
         public static bool ValidirajBrojLicneKarte(string broj_licne)
         {
             if (broj_licne.Length != 9) return false;
             int i = 0;
-            foreach(char c in broj_licne)
+            foreach (char c in broj_licne)
             {
-                if (i!=4)
+                if (i != 4)
                 {
                     if (c < '0' || c > '9')
                         return false;
@@ -199,11 +215,11 @@ namespace Zadaca1
                     return false;
 
                 i++;
-                
+
             }
             return true;
         }
-        public static  bool ValidirajDatumRodjenja(DateTime datum_rodjenja)
+        public static bool ValidirajDatumRodjenja(DateTime datum_rodjenja)
         {
             //glasac mora biti punoljetan, zbog toga smo stavili da ovdje ide i ta validacija. U suprotnom, nije glasac
             if (datum_rodjenja > DateTime.Now)
@@ -245,7 +261,7 @@ namespace Zadaca1
             return vratiVrijednost;
         }
 
-        public static bool  ValidirajPrezime(string naziv)
+        public static bool ValidirajPrezime(string naziv)
         {
             if (naziv.Length == 0)
                 return false;
@@ -253,7 +269,7 @@ namespace Zadaca1
             foreach (char c in naziv)
             {
                 if (c.ToString().ToUpper().ToCharArray()[0] <= 'Z' && c.ToString().ToUpper().ToCharArray()[0] >= 'A' || c == '-')
-                        vratiVrijednost = true;
+                    vratiVrijednost = true;
                 else
                     return false;
             }
@@ -263,7 +279,7 @@ namespace Zadaca1
             return vratiVrijednost;
         }
 
-       public static bool ValidirajJMBG(string jmbg, DateTime datum_rodjenja)
+        public static bool ValidirajJMBG(string jmbg, DateTime datum_rodjenja)
         {
             if (jmbg.Length != 13)
             {

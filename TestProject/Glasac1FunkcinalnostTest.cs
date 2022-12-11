@@ -269,45 +269,6 @@ namespace TestProject
                 throw new ArgumentException("Glasac je sada punoljetan, ali za vrijeme kreiranja CSV dokumenta nije bio");
         }
 
-        [TestMethod]
-        /*   public void TestiranjeMaticnogBroja2()
-           {
-               Glasac glasac1 = new Glasac("Neko", "Nekic", "Nepoznate bb", new DateTime(2001, 8, 13), "1111K2222", "1308001111111");
-               Glasac glasac2 = new Glasac("Huso", "Hasic", "Gradacacka bb", new DateTime(1997, 12, 5), "1234T5555", "0512997111222");
-               string dan1 = glasac1.DatumRodjenja.Day.ToString();
-               if (glasac1.DatumRodjenja.Day < 10) dan1 = "0" + dan1;
-               string dan2 = glasac2.DatumRodjenja.Day.ToString();
-               if (glasac2.DatumRodjenja.Day < 10) dan2 = "0" + dan2;
-               string mjesec1 = glasac1.DatumRodjenja.Month.ToString();
-               if (glasac1.DatumRodjenja.Month < 10) mjesec1 = "0" + mjesec1;
-               string mjesec2 = glasac2.DatumRodjenja.Month.ToString();
-               if (glasac2.DatumRodjenja.Month < 10) mjesec2 = "0" + mjesec2;
-               string godina1 = glasac1.DatumRodjenja.Year.ToString();
-               godina1 = godina1.Substring(1, 3);
-               string godina2 = glasac2.DatumRodjenja.Year.ToString();
-               godina2 = godina2.Substring(1, 3);
-
-
-               StringAssert.StartsWith(glasac1.JMBG, dan1+mjesec1+godina1, "JMBG je: " + glasac1.JMBG + ", a datum rodjenja je: " + glasac1.DatumRodjenja);
-               StringAssert.StartsWith(glasac2.JMBG, dan2+mjesec2+godina2, "JMBG je: " + glasac2.JMBG + ", a datum rodjenja je: " + glasac2.DatumRodjenja);
-
-               glasac1.DatumRodjenja = new DateTime(1995, 12, 14);
-              try
-               {
-                   glasac1.JMBG = "1411001123123";
-               }
-               catch(ArgumentException e)
-               {
-                   Assert.ThrowsException<ArgumentException>(() => Glasac.ValidirajJMBG(glasac1.JMBG, glasac1.DatumRodjenja), "Neispravan JMBG");
-               }
-
-
-               glasac1.JMBG = "1412995122334";
-             Assert.AreEqual(glasac1.JMBG.Substring(1, 6), glasac1.DatumRodjenja.Day.ToString() + glasac1.DatumRodjenja.Month.ToString() + glasac1.DatumRodjenja.AddYears(-1000).Year.ToString());
-           }
-
-           */
-
         public static IEnumerable<object[]> UcitajPodatkeXML()
         {
             XmlDocument doc = new XmlDocument();
@@ -365,25 +326,44 @@ namespace TestProject
             Assert.IsTrue(Glasac.ValidirajDatumRodjenja(glasac.DatumRodjenja));
 
         }
-    
+
 
         [TestMethod]
         public void TestiranjeSetteraZaJMBG()
         {
-            Glasac glasac = new Glasac("Hasan", "Haskovic", "NeekaAdresa bb" , new DateTime(2001, 11, 11), "1111M2222", "1111001123456");
+            Glasac glasac = new Glasac("Hasan", "Haskovic", "NeekaAdresa bb", new DateTime(2001, 11, 11), "1111M2222", "1111001123456");
             Assert.ThrowsException<ArgumentException>(() => glasac.JMBG = "1111002123456");
             try
             {
                 glasac.JMBG = "1111001123456";
             }
-            catch(ArgumentException ex)
+            catch (ArgumentException ex)
             {
                 throw ex;
             }
             Assert.IsTrue(Glasac.ValidirajJMBG(glasac.JMBG, glasac.DatumRodjenja));
         }
-  
-}
+
+        [TestMethod]
+        public void TestiranjeKoda()
+        {
+            Glasac glasac = new Glasac("Hasan", "Haskovic", "NeekaAdresa bb", new DateTime(2001, 11, 11), "1111M2222", "1111001123456");
+            String kod = "HaHaNe111111";
+            Assert.IsTrue(glasac.ValidirajJedinstveniKod(kod));
+            glasac.Ime = "Neko";
+            glasac.Prezime = "Novi";
+            Assert.IsFalse(glasac.ValidirajJedinstveniKod(kod));
+            glasac.Adresa = "Nova Adresa";
+            Assert.IsFalse(glasac.ValidirajJedinstveniKod(kod));
+            glasac.DatumRodjenja = new DateTime(2000, 11, 11);
+            glasac.JMBG = "1111000111111";
+            glasac.BrojLicneKarte = "2222M4444";
+            Assert.IsTrue(!glasac.ValidirajJedinstveniKod(kod));
+            kod = kod.Substring(0, 10);
+            Assert.IsFalse(glasac.ValidirajJedinstveniKod(kod));
+        }
+
+    }
 }
 
 
