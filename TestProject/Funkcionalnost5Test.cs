@@ -46,7 +46,7 @@ namespace TestProject
 
         public static IEnumerable<object[]> UcitajGlasoveNezavisnogKandidataIKandidataStrankeCSV()
         {
-            using (var reader = new StreamReader("C:\\Users\\harun\\Desktop\\New folder (2)\\TestProject\\PodaciZaGlasanje.csv"))
+            using (var reader = new StreamReader("PodaciZaGlasanje.csv"))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
                 var rows = csv.GetRecords<dynamic>();

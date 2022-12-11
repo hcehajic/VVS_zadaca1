@@ -11,7 +11,7 @@ using Zadaca1;
 
 namespace TestProject
 {
-    [TestClass] 
+    [TestClass]
     public class Funkcionalnost4Test
     {
 
@@ -76,7 +76,7 @@ namespace TestProject
 
             Stranka stranka = new Stranka(nazivStranke, brojGlasova);
             stranka.rukovodstvoStranke = lista;
-            string rezultatPovratkaFunkcije = 
+            string rezultatPovratkaFunkcije =
                 "Ukupan broj glasova: 2654;\n" +
                 "Kandidati: Identifikacioni broj: 18030011123\n" +
                 "Identifikacioni broj: 18127398172\n" +
