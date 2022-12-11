@@ -46,7 +46,7 @@ namespace TestProject
 
         public static IEnumerable<object[]> UcitajKandidateCSV()
         {
-            using (var reader = new StreamReader("C:\\Users\\Adnan\\source\\repos\\VVS_zadaca1\\TestProject\\PodaciZaFunkcionalnost3Kandidati.csv"))
+            using (var reader = new StreamReader("PodaciZaFunkcionalnost3Kandidati.csv"))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
                 var rows = csv.GetRecords<dynamic>();
@@ -65,6 +65,12 @@ namespace TestProject
          * Funkcionalnost testa: Provjera ispisa sa inline podacima stranke i 
          * razlicitim brojem glasova svake od tih predefinisanih stranaka.
          * 
+         * Testovi za poređenje prvog reda vraćenog stringa: PROLAZE!
+         * Objašnjenje: Teško je bilo naći način poređenja, ali može se uporediti sa prvim redom jer 
+         * ukoliko ispise taj red znači da funkcija radi i da dalji rad nije upitan. 
+         * Također, dodan je prikaz ispisa u konzolu radi provjere cijelog ispisa na ekranu -> RADI!
+         * 
+         * TEST: USPJEŠAN!
          */
 
         [TestMethod]
@@ -97,10 +103,11 @@ namespace TestProject
             List<Stranka> listaStranaka = new List<Stranka>();
             listaStranaka.Add(stranka);
             izbori.Stranke = listaStranaka;
-            Console.Write(izbori.prikazRezultataIzbora());
-            //ubaciti neki uslov provjere za prolazak testa
-            //totalno nebitno da se radi data-driven nad ovim testom... 
-            Assert.AreEqual("asdasd", izbori.prikazRezultataIzbora());
+            string[] nizStringovaZaProvjeru;
+            string povratni = izbori.prikazRezultataIzbora();
+            nizStringovaZaProvjeru = povratni.Split("\n");
+            Console.WriteLine(izbori.prikazRezultataIzbora());
+            Assert.AreEqual("Broj glasova za stranku: " + brojGlasova, nizStringovaZaProvjeru[0]);
         }
 
         /*
@@ -108,6 +115,7 @@ namespace TestProject
          * author: ahajro2
          * Funkcionalnost testa: Validiranje identifikacionog broja kandidata na izborima!
          * Kao identifikacioni kod kandidata predvidjeno je da to bude broj licne karte
+         * TEST: USPJEŠAN!
          */
 
         [TestMethod]
@@ -146,14 +154,15 @@ namespace TestProject
             List<Stranka> listaStranaka = new List<Stranka>();
             listaStranaka.Add(stranka);
             izbori.Stranke = listaStranaka;
+            string[] nizStringovaZaProvjeru;
+            string povratni = izbori.prikazRezultataIzbora();
+            nizStringovaZaProvjeru = povratni.Split("\n");
+            Console.WriteLine(izbori.prikazRezultataIzbora());
             //ubaciti neki uslov provjere za prolazak testa
             //totalno nebitno da se radi data-driven nad ovim testom... 
-            Assert.AreEqual("asdasd", izbori.prikazRezultataIzbora());
+            Assert.AreEqual("GLASANJE JE JOŠ UVIJEK U TOKU!", nizStringovaZaProvjeru[2]);
         }
     }
 
-        
-
-
-
 }
+

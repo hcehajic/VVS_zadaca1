@@ -25,6 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="PodaciZaFunkcionalnost3Kandidati.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="PodaciZaGlasanje.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
