@@ -1,4 +1,4 @@
-﻿using CsvHelper;
+using CsvHelper;
 using CsvHelper.Configuration.Attributes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -21,7 +21,7 @@ namespace TestProject
          *  
          *  Autor klase Funkcionalnost5Test: Harun Cehajic
          *     
-         *  Prosli testovi: brojKojiSuProsli/ukupniBrojTestova = 
+         *  Prosli testovi iz klase: brojKojiSuProsli/ukupniBrojTestova = 4 / 4
          */
 
         static IEnumerable<object[]> GlasoviStranka
@@ -44,9 +44,9 @@ namespace TestProject
             }
         }
 
-        private static IEnumerable<object[]> UcitajGlasoveNezavisnogKandidataIKandidataStrankeCSV()
+        public static IEnumerable<object[]> UcitajGlasoveNezavisnogKandidataIKandidataStrankeCSV()
         {
-            using (var reader = new StreamReader("PodaciZaFunkcionalnost3Kandidati.csv"))
+            using (var reader = new StreamReader("C:\\Users\\harun\\Desktop\\New folder (2)\\TestProject\\PodaciZaGlasanje.csv"))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
                 var rows = csv.GetRecords<dynamic>();
@@ -64,7 +64,21 @@ namespace TestProject
         {
                           
             Izbori izbori = new Izbori();
-            Assert.IsFalse(izbori.ProvjeriUnesenuTajnuSifru("VVS20222022");
+
+            Assert.IsFalse(izbori.ProvjeriUnesenuTajnuSifru("VVS20222022"));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception), "Glasac nije glasao!")]
+        public void TestNijeGlasaoNeMozeBrisati()
+        {
+            Izbori izbori = new Izbori();
+            List<Glasac> glasaci = new List<Glasac>();
+            Glasac g = new Glasac();
+            g.birao = false;
+            glasaci.Add(g);
+            izbori.Glasaci = glasaci;
+            izbori.IzbrisiGlasoveZaGlasaca(g);
         }
 
         [TestMethod]
@@ -98,18 +112,19 @@ namespace TestProject
             izbori.GlasanjeUToku = true;
             izbori.Kandidati = kandidati;
             izbori.Glasaci = glasaci;
+            izbori.Stranke = stranke;
 
             // postavljam glasove prema zadanim parametrima iz dinamickih podataka
 
             // prvo postavljam za nezavisnog kandidata
             int counter = 1;
-            List<int> listaIndeksaKandidataSaGlasovima = new List<int>();
+            int indeksNezavisni = 0;
             for (int i = 0; i < izbori.Kandidati.Count; i++)
             {
                 if (kandidati[i].Stranka == null && counter == nezavisniKandidat)
                 {
                     kandidati[i].BrojGlasova++;
-                    listaIndeksaKandidataSaGlasovima.Add(i);    // sa indeksom 0 je nezavisni kandidat
+                    indeksNezavisni = i;
                     break;
                 }
                 else if (kandidati[i].Stranka == null)
@@ -125,21 +140,25 @@ namespace TestProject
                 {
                     izbori.Stranke[stranka - 1].brojGlasova++;
                     kandidati[i].BrojGlasova++;
-                    listaIndeksaKandidataSaGlasovima.Add(i); // svaki naredni indeks je indeks od clana stranke koji je dobio glas
                 }
             }
 
             // brisem glasove
             izbori.IzbrisiGlasoveZaGlasaca(izbori.Glasaci.Find(g => g.JMBG == "2007000170005"));
 
-            // provjeravam da li su se obrisali glasovi
-            Assert.AreEqual(izbori.Kandidati[listaIndeksaKandidataSaGlasovima[0]].BrojGlasova, 0); // nezavisni clan, broj glasova mora biti 0
-            Assert.AreEqual(izbori.Stranke[stranka - 1].brojGlasova, 0); // takodjer i broj glasova stranke za koju se glasalo mora biti 0
+            
+            Assert.AreEqual(0, kandidati[indeksNezavisni].BrojGlasova);
+                   
 
-            for (int i = 1; i < listaIndeksaKandidataSaGlasovima.Count; i++)
+            for (int i = 0; i < izbori.Kandidati.Count; i++)
             {
-                Assert.AreEqual(izbori.Kandidati[listaIndeksaKandidataSaGlasovima[i]].BrojGlasova, 0); // broj glasova svakog pojedinacnog kandidata stranke mora biti 0
+                if (kandidati[i].Stranka == izbori.Stranke[stranka - 1].naziv)
+                {
+                    Assert.AreEqual(0, kandidati[i].BrojGlasova);
+                }
             }
+
+            Assert.AreEqual(0, izbori.Stranke[stranka - 1].brojGlasova);
         }
 
         [TestMethod]
@@ -174,6 +193,7 @@ namespace TestProject
             izbori.GlasanjeUToku = true;
             izbori.Kandidati = kandidati;
             izbori.Glasaci = glasaci;
+            izbori.Stranke = stranke;
 
             // prvo postavljam za nezavisnog kandidata
             int counter = 1;
@@ -208,13 +228,23 @@ namespace TestProject
                 }
             }
 
+            Console.WriteLine("Prije brisanja:");
+            Console.WriteLine(izbori.Kandidati[listaIndeksaKandidataSaGlasovima[0]].BrojGlasova);
+            Console.WriteLine(izbori.Kandidati[listaIndeksaKandidataSaGlasovima[1]].BrojGlasova);
+            Console.WriteLine(izbori.Stranke[stranka - 1].brojGlasova);
+
             // brisem glasove
             izbori.IzbrisiGlasoveZaGlasaca(izbori.Glasaci.Find(g => g.JMBG == "2007000170005"));
 
+            Console.WriteLine("Poslije brisanja:");
+            Console.WriteLine(izbori.Kandidati[listaIndeksaKandidataSaGlasovima[0]].BrojGlasova);
+            Console.WriteLine(izbori.Kandidati[listaIndeksaKandidataSaGlasovima[1]].BrojGlasova);
+            Console.WriteLine(izbori.Stranke[stranka - 1].brojGlasova);
+
             // provjeravam da li su se obrisali glasovi
-            Assert.AreEqual(izbori.Kandidati[listaIndeksaKandidataSaGlasovima[0]].BrojGlasova, 0); // nezavisni clan, broj glasova mora biti 0
-            Assert.AreEqual(izbori.Kandidati[listaIndeksaKandidataSaGlasovima[1]].BrojGlasova, 0); // broj glasova kandidata iz stranke mora biti 0
-            Assert.AreEqual(izbori.Stranke[stranka - 1].brojGlasova, 0); // takodjer i broj glasova stranke iz koje je kandidat mora biti 0
+            Assert.AreEqual(0, izbori.Kandidati[listaIndeksaKandidataSaGlasovima[0]].BrojGlasova); // nezavisni clan, broj glasova mora biti 0
+            Assert.AreEqual(0, izbori.Kandidati[listaIndeksaKandidataSaGlasovima[1]].BrojGlasova); // broj glasova kandidata iz stranke mora biti 0
+            Assert.AreEqual(0, izbori.Stranke[stranka - 1].brojGlasova); // takodjer i broj glasova stranke iz koje je kandidat mora biti 0
         }
 
     }
