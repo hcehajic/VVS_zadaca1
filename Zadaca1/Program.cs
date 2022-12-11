@@ -72,8 +72,15 @@ namespace Zadaca1
                  Console.WriteLine("9) Prikazi rukovodstvo stranke");
                  Console.WriteLine("10) Ponistavanje glasova za glasaca");
 
-                int opcija = Convert.ToInt32(Console.ReadLine().Trim());
-
+                int opcija = 10000;
+                try
+                {
+                    opcija = Convert.ToInt32(Console.ReadLine().Trim());
+                }
+                catch {
+                    Console.WriteLine("Nevalidna opcija!");
+                    opcija = 1000;
+                }
                 if (opcija < 1 || opcija > 10) continue;
 
                 if (opcija == 6)
@@ -135,7 +142,6 @@ namespace Zadaca1
                         if (gl != null)
                         {
                             glasaci.Add(gl);
-                            Console.WriteLine("Uspjesan unos novog glasaca! Sada Vas odjavljujemo sa sistema.");
                             kod = "";
                             pronadjen = false;
                             unesen = false;

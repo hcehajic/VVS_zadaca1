@@ -47,7 +47,6 @@ namespace Zadaca1
          * Dodane dvije metode: 
          * 1. sumira broj glasova stranke 
          * 2. prikazuje informacije o rukovodstvu u formatiranom stringu
-         * Dodatno: napisati testove!!!
          */
 
         public int sumarniBrojGlasovaStranke()

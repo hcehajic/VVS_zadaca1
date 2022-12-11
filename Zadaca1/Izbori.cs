@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -214,7 +215,7 @@ namespace Zadaca1
             Console.WriteLine("Unesi adresu: ");
             string adresa = Console.ReadLine().Trim();
 
-            Console.WriteLine("Unesi datum rodjenja u formatu mjesec/dan/godina : ");
+            Console.WriteLine("Unesi datum rodjenja u formatu dd/mm/yyyy : ");
             string datum = Console.ReadLine().Trim(); ;
 
             Console.WriteLine("Unesi broj licne: ");
@@ -223,26 +224,20 @@ namespace Zadaca1
             Console.WriteLine("Unesi JMBG: ");
             string jmbg = Console.ReadLine();
 
-            DateTime dt;
-            var jel_ok = DateTime.TryParse(datum, out dt);
+            DateTime dt = DateTime.ParseExact(datum, "dd/MM/yyyy", CultureInfo.CurrentCulture);
             Glasac glasac = new Glasac();
-            if (jel_ok)
-            {
+            
                 try
                 {
+
                     glasac = new Glasac(ime, prezime, adresa, dt, brojLicne, jmbg);
-                    Console.WriteLine("Vas jedinstveni kod je: " + glasac.ToString());
+                Console.WriteLine("Uspjesan unos novog glasaca! Sada Vas odjavljujemo sa sistema.");
+                Console.WriteLine("Vas jedinstveni kod je: " + glasac.ToString());
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Aplikacija terminirala. Uzrok: " + ex.Message);
                 }
-            }
-            else
-            {
-                Console.WriteLine("Neispravan datum!");
-            }
-
             return glasac;
         }
         /**
