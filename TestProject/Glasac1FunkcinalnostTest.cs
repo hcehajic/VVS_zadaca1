@@ -357,7 +357,7 @@ namespace TestProject
             Assert.IsFalse(glasac.ValidirajJedinstveniKod(kod));
             glasac.DatumRodjenja = new DateTime(2000, 11, 11);
             glasac.JMBG = "1111000111111";
-            glasac.BrojLicneKarte = "2222M44444";
+            glasac.BrojLicneKarte = "2222M4444";
             Assert.IsTrue(!glasac.ValidirajJedinstveniKod(kod));
             kod = kod.Substring(0, 10);
             Assert.IsFalse(glasac.ValidirajJedinstveniKod(kod));
