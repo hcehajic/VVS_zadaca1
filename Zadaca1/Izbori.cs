@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -315,13 +315,12 @@ namespace Zadaca1
 
             if (!g.birao)
             {
-                Console.WriteLine("Glasac nije glasao!");
-                return;
+                throw new Exception("Glasac nije glasao!");
             }
 
             // smanjenje broja glasova za nezavisne kandidate
-            int brojac = 0;
-            foreach(Kandidat k in kandidati)
+            int brojac = 1;
+            foreach(Kandidat k in Kandidati)
             {
                 if (k.Stranka == null)
                 {
@@ -339,30 +338,33 @@ namespace Zadaca1
             if (g.Glaso.Count < 3)
             {
                 // smanjivanje broja glasova za stranku i sve njene clanove
-                for (int i = 0; i < kandidati.Count; i++)
+                for (int i = 0; i < Kandidati.Count; i++)
                 {
-                    if (kandidati[i].Stranka == stranke[g.Glaso[1] - 1].naziv)
+                    if (Kandidati[i].Stranka == Stranke[g.Glaso[1] - 1].naziv && Kandidati[i].Stranka != null)
                     {
-                        Console.WriteLine("Brisem glasove za kandidata: " + kandidati[i].Ime_prezime);
-                        Console.WriteLine("Brisem glasove stranki: " + stranke[g.Glaso[1] - 1].naziv);
-                        kandidati[i].BrojGlasova--;
-                        stranke[g.Glaso[1] - 1].brojGlasova--;
+                        Console.WriteLine("Brisem glasove za kandidata: " + Kandidati[i].Ime_prezime);
+                        Console.WriteLine("Brisem glasove stranki: " + Stranke[g.Glaso[1] - 1].naziv);
+                        Kandidati[i].BrojGlasova--;
+                        Stranke[g.Glaso[1] - 1].brojGlasova--;
                     }
                 }
             }
             else
             {
+                List<Kandidat> obrisano = new List<Kandidat>();
                 for (int i = g.Glaso[2]; i < g.Glaso.Count; i++)
                 {
                     int broj = 1;
-                    for (int j = 0; j < kandidati.Count; j++)
+                    for (int j = 0; j < Kandidati.Count; j++)
                     {
-                        if (kandidati[j].Stranka == stranke[g.Glaso[1] - 1].naziv)
+                        var kan = obrisano.Find(k => k.Ime_prezime.Equals(kandidati[j].Ime_prezime));
+                        if (kandidati[j].Stranka == stranke[g.Glaso[1] - 1].naziv && Kandidati[j].Stranka != null && kan == null)
                         {
                             if (broj == g.Glaso[i])
                             {
-                                kandidati[j].BrojGlasova--;
-                                stranke[g.Glaso[1] - 1].brojGlasova--;
+                                obrisano.Add(kandidati[j]);
+                                Kandidati[j].BrojGlasova--;
+                                Stranke[g.Glaso[1] - 1].brojGlasova--;
                             }
                             broj++;
                         }
