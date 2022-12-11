@@ -19,6 +19,15 @@ namespace TestProject
     [TestClass]
     public class Glasac1FunkcionalnostTest
     {
+
+        /*
+         * 
+         * Autor: Almina Brulic
+         * 
+         * Testna klasa za funkcionalnost 1 iz postavke za zadacu 2
+         * 
+         */
+
         static IEnumerable<object[]> podaciZaTestiranjeImenaGlasaca
         {
             get

@@ -10,6 +10,15 @@ namespace Zadaca1
 {
     public class Glasac
     {
+        /*
+         * 
+         * Rijeseni geteri, seteri, validacije i dodani regioni
+         * Funkcionalnost 1
+         * 
+         * Autor promjena: Almina Brulic
+         * 
+         */
+
         #region Atributes
         private string ime;
         private string prezime;
