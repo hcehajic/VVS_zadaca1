@@ -110,3 +110,19 @@ C:\Users\harun\Desktop\New folder (2)\Zadaca1\obj\Debug\net5.0\refint\Zadaca1.dl
 C:\Users\harun\Desktop\New folder (2)\Zadaca1\obj\Debug\net5.0\Zadaca1.pdb
 C:\Users\harun\Desktop\New folder (2)\Zadaca1\obj\Debug\net5.0\Zadaca1.genruntimeconfig.cache
 C:\Users\harun\Desktop\New folder (2)\Zadaca1\obj\Debug\net5.0\ref\Zadaca1.dll
+C:\Users\samirak\Source\Repos\VVS_zadaca2Pokusaj2\Zadaca1\bin\Debug\net5.0\Zadaca1.exe
+C:\Users\samirak\Source\Repos\VVS_zadaca2Pokusaj2\Zadaca1\bin\Debug\net5.0\Zadaca1.deps.json
+C:\Users\samirak\Source\Repos\VVS_zadaca2Pokusaj2\Zadaca1\bin\Debug\net5.0\Zadaca1.runtimeconfig.json
+C:\Users\samirak\Source\Repos\VVS_zadaca2Pokusaj2\Zadaca1\bin\Debug\net5.0\Zadaca1.runtimeconfig.dev.json
+C:\Users\samirak\Source\Repos\VVS_zadaca2Pokusaj2\Zadaca1\bin\Debug\net5.0\Zadaca1.dll
+C:\Users\samirak\Source\Repos\VVS_zadaca2Pokusaj2\Zadaca1\bin\Debug\net5.0\Zadaca1.pdb
+C:\Users\samirak\Source\Repos\VVS_zadaca2Pokusaj2\Zadaca1\obj\Debug\net5.0\Zadaca1.csproj.AssemblyReference.cache
+C:\Users\samirak\Source\Repos\VVS_zadaca2Pokusaj2\Zadaca1\obj\Debug\net5.0\Zadaca1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\samirak\Source\Repos\VVS_zadaca2Pokusaj2\Zadaca1\obj\Debug\net5.0\Zadaca1.AssemblyInfoInputs.cache
+C:\Users\samirak\Source\Repos\VVS_zadaca2Pokusaj2\Zadaca1\obj\Debug\net5.0\Zadaca1.AssemblyInfo.cs
+C:\Users\samirak\Source\Repos\VVS_zadaca2Pokusaj2\Zadaca1\obj\Debug\net5.0\Zadaca1.csproj.CoreCompileInputs.cache
+C:\Users\samirak\Source\Repos\VVS_zadaca2Pokusaj2\Zadaca1\obj\Debug\net5.0\Zadaca1.dll
+C:\Users\samirak\Source\Repos\VVS_zadaca2Pokusaj2\Zadaca1\obj\Debug\net5.0\refint\Zadaca1.dll
+C:\Users\samirak\Source\Repos\VVS_zadaca2Pokusaj2\Zadaca1\obj\Debug\net5.0\Zadaca1.pdb
+C:\Users\samirak\Source\Repos\VVS_zadaca2Pokusaj2\Zadaca1\obj\Debug\net5.0\Zadaca1.genruntimeconfig.cache
+C:\Users\samirak\Source\Repos\VVS_zadaca2Pokusaj2\Zadaca1\obj\Debug\net5.0\ref\Zadaca1.dll
