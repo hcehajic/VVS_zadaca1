@@ -41,9 +41,9 @@ namespace Zadaca1
              List<Kandidat> kandidati = new List<Kandidat> { k1, k2, k3, k4, new Kandidat("Nezavisni Kandidat", null), new Kandidat("Nezavisni Kandidatopet", null) };
 
              List<Glasac> glasaci = new List<Glasac>();
-             string datum = "7/20/2000";
+             string datum = "07.20.2000.00:00:00";
              DateTime dt;
-             var jel_ok = DateTime.TryParse(datum, out dt);
+             dt = new DateTime(2000, 7, 20, 0, 0, 0);
              Glasac glasac = new Glasac("Harun", "Cehajic", "Ovdje moze sta hoces jer je adresa", dt, "2034K5678", "2007000170005");
              glasaci.Add(glasac);
              glasaci.Add(new Glasac("Neko", "Nekic", "Izmisljena bb", dt, "1234K5678", "2007000170009"));
