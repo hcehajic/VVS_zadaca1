@@ -15,10 +15,6 @@ namespace TestProject
     [TestClass]
     public class Funkcionalnost3Test
     {
-
-
-
-
         static IEnumerable<object[]> Stranke
         {
             get

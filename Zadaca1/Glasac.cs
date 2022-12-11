@@ -308,5 +308,15 @@ namespace Zadaca1
             return kod;
         }
         #endregion
+
+
+        public string IdentifikacijskiBroj { get; set; }
+        public bool VjerodostojnostGlasaca(IProvjera sigurnosnaProvjera)
+        {
+            if (sigurnosnaProvjera.DaLiJeVecGlasao(IdentifikacijskiBroj))
+                throw new Exception("Glasač je već izvršio glasanje!");
+            return true;
+        }
+
     }
 }

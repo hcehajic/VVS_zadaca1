@@ -56,10 +56,10 @@ namespace TestProject
             }
         }
         /**
-         * author: ahajro2
+         * author: akulaglic3
          * params: nazivStranke, brojGlasova
          * Funkcionalnost: Provjeravanje ispisa vezanog za kandidate rukovodstva strane za FUNKCIONALNOST 4. 
-         * Rezultat: Dobar.
+         * Rezultat: Testovi prolaze.
          * Data-Driven: Nazivi stranke i njihovi ukupni glasovi
          */
 
