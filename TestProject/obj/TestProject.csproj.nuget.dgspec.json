@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\TestProject\\TestProject.csproj": {}
+    "C:\\Users\\Almina\\Desktop\\VVS_zadaca1\\TestProject\\TestProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\TestProject\\TestProject.csproj": {
+    "C:\\Users\\Almina\\Desktop\\VVS_zadaca1\\TestProject\\TestProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\TestProject\\TestProject.csproj",
+        "projectUniqueName": "C:\\Users\\Almina\\Desktop\\VVS_zadaca1\\TestProject\\TestProject.csproj",
         "projectName": "TestProject",
-        "projectPath": "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\TestProject\\TestProject.csproj",
-        "packagesPath": "C:\\Users\\Adnan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\TestProject\\obj\\",
+        "projectPath": "C:\\Users\\Almina\\Desktop\\VVS_zadaca1\\TestProject\\TestProject.csproj",
+        "packagesPath": "C:\\Users\\Almina\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Almina\\Desktop\\VVS_zadaca1\\TestProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Adnan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Almina\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj": {
-                "projectPath": "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj"
+              "C:\\Users\\Almina\\Desktop\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj": {
+                "projectPath": "C:\\Users\\Almina\\Desktop\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj"
               }
             }
           }
@@ -81,21 +81,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj": {
+    "C:\\Users\\Almina\\Desktop\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj",
+        "projectUniqueName": "C:\\Users\\Almina\\Desktop\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj",
         "projectName": "Zadaca1",
-        "projectPath": "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj",
-        "packagesPath": "C:\\Users\\Adnan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\Zadaca1\\obj\\",
+        "projectPath": "C:\\Users\\Almina\\Desktop\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj",
+        "packagesPath": "C:\\Users\\Almina\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Almina\\Desktop\\VVS_zadaca1\\Zadaca1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Adnan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Almina\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -136,7 +136,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
