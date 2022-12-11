@@ -33,6 +33,8 @@ namespace Zadaca1
         {
             this.ime_prezime = ime_prezime;
             this.stranka = stranka;
+            brojGlasova = 0;
+            identifikacioniBroj = ime_prezime + "/" +  stranka;
         }
 
         public Kandidat(string ime_prezime, int brojGlasova, string stranka, string identifikacioniBroj)

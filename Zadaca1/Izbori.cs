@@ -59,10 +59,10 @@ namespace Zadaca1
             int izbor_kandidata = Convert.ToInt32(Console.ReadLine());
             trenutni_glasac.Glaso.Add(izbor_kandidata);
             if (izbor_kandidata != 0)
-                kandidati[izbor_kandidata - 1].BrojGlasova++;
+                kandidati[izbor_kandidata - 1].BrojGlasova += 1;
 
             Console.WriteLine("\nSTRANKE");
-            Console.WriteLine("Unesite redni broj stranke ili redni broj stranke i njene kandidate za koje glasate:");
+            Console.WriteLine("Unesite redni broj stranke ili redni broj stranke i njene kandidate za koje glasate(Svaki broj razdvojite razmakom):");
             brojac = 1;
             int brojac_stranaka = 1;
             foreach (Stranka s in stranke)
@@ -93,8 +93,8 @@ namespace Zadaca1
                     foreach (Kandidat k in kandidati)
                         if (k.Stranka != null && k.Stranka.Equals(s.naziv))
                         {
-                            s.brojGlasova++;
-                            k.BrojGlasova++;
+                            s.brojGlasova+=1;
+                            k.BrojGlasova+=1;
                         }
                 }
 
@@ -107,8 +107,8 @@ namespace Zadaca1
                         brojac_kandidati++;
                         if (k.Stranka != null && k.Stranka.Equals(s.naziv) && brojac_kandidati == Convert.ToInt32(uneseno[brojac_niz_uneseni]) && brojac_niz_uneseni < uneseno.Length)
                         {
-                            k.BrojGlasova++;
-                            s.brojGlasova++;
+                            k.BrojGlasova+=1;
+                            s.brojGlasova+=1;
                             brojac_niz_uneseni++;
                         }
                     }

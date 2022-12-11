@@ -51,6 +51,16 @@ namespace Zadaca1
 
         public int sumarniBrojGlasovaStranke()
         {
+            foreach(Kandidat rs in rukovodstvoStranke){
+                foreach(Kandidat k in clanovi)
+                {
+                    if (k.Ime_prezime.Equals(rs.Ime_prezime))
+                    {
+                        rs.BrojGlasova = k.BrojGlasova;
+                    }
+                }
+            }
+            
             int sumaGlasova = 0;
             rukovodstvoStranke.ForEach((k) => { sumaGlasova += k.BrojGlasova; });
             return sumaGlasova;

@@ -36,11 +36,15 @@ namespace Zadaca1
              Kandidat k2 = new Kandidat("Hamid Hamidovic", "NP");
              Kandidat k3 = new Kandidat("Pero Peric", "Nasa stranka");
              Kandidat k4 = new Kandidat("Ana Anic", "Nasa stranka");
-             List<Stranka> stranke = new List<Stranka> { new Stranka("NP", new List<Kandidat> { k1, k2}),
-                                                         new Stranka("Nasa stranka", new List<Kandidat> { k3, k4})};
-             List<Kandidat> kandidati = new List<Kandidat> { k1, k2, k3, k4, new Kandidat("Nezavisni Kandidat", null), new Kandidat("Nezavisni Kandidatopet", null) };
+             Kandidat r1 = new Kandidat("Šefik Šefic", "Nasa stranka");
+             Kandidat r2 = new Kandidat("Šefi Šefi", "NP");
 
-             List<Glasac> glasaci = new List<Glasac>();
+            List<Stranka> stranke = new List<Stranka> { new Stranka("NP", new List<Kandidat> { k1, k2, r2}),
+                                                         new Stranka("Nasa stranka", new List<Kandidat> { k3, k4, r1})};
+             List<Kandidat> kandidati = new List<Kandidat> { k1, k2, k3, k4, r1, r2, new Kandidat("Nezavisni Kandidat", null), new Kandidat("Nezavisni Kandidatopet", null) };
+            stranke[0].rukovodstvoStranke = new List<Kandidat> { r2 };
+            stranke[1].rukovodstvoStranke = new List<Kandidat> { r1 };
+            List<Glasac> glasaci = new List<Glasac>();
              string datum = "07.20.2000.00:00:00";
              DateTime dt;
              dt = new DateTime(2000, 7, 20, 0, 0, 0);
@@ -88,42 +92,49 @@ namespace Zadaca1
 
                 else if (opcija == 1)
                 {
-
-                    while (true)
+                    if (glasanjeUToku)
                     {
-                        Console.WriteLine("Da biste pristupili izborima molimo unesite Vas jedinstveni kod(Unesite -1 za prekid): ");
-                        var unos = Console.ReadLine();
-                        var pkod = unos.Split()[0];
-                        if (unos.Equals("-1"))
+
+                        while (true)
                         {
-                            pronadjen = false;
-                            break;
-                        }
-                        foreach (Glasac g in glasaci)
-                        {
-                            if (g.ToString().Equals(pkod))
+                            Console.WriteLine("Da biste pristupili izborima molimo unesite Vas jedinstveni kod(Unesite -1 za prekid): ");
+                            var unos = Console.ReadLine();
+                            var pkod = unos.Split()[0];
+                            if (unos.Equals("-1"))
                             {
-                                pronadjen = true;
-                                kod = pkod;
-                                unesen = true;
-                                pkod = "";
-                                trenutniGlasac = g;
+                                pronadjen = false;
                                 break;
                             }
+                            foreach (Glasac g in glasaci)
+                            {
+                                if (g.ToString().Equals(pkod))
+                                {
+                                    pronadjen = true;
+                                    kod = pkod;
+                                    unesen = true;
+                                    pkod = "";
+                                    trenutniGlasac = g;
+                                    break;
+                                }
+                            }
+                            if (unesen)
+                            {
+                                Console.WriteLine("Prijavljen glasac: " + trenutniGlasac.ToString());
+                                izbori.Glasaj(trenutniGlasac);
+                                break;
+                            }
+                            if (!pronadjen)
+                            {
+                                Console.WriteLine("Neispravan jedinstveni kod!");
+                            }
                         }
-                        if (unesen)
-                        {
-                            Console.WriteLine("Prijavljen glasac: " + trenutniGlasac.ToString());
+                        if (pronadjen)
                             izbori.Glasaj(trenutniGlasac);
-                            break;
-                        }
-                        if (!pronadjen)
-                        {
-                            Console.WriteLine("Neispravan jedinstveni kod!");
-                        }
                     }
-                    if (pronadjen)
-                        izbori.Glasaj(trenutniGlasac);
+                    else
+                    {
+                        Console.WriteLine("Glasanje je gotovo!");
+                    }
                 }
                 else if (opcija == 2)
                     izbori.TrenutnoStanje();
@@ -164,8 +175,15 @@ namespace Zadaca1
                 }
                 else if (opcija == 8)
                 {
-                    izbori.GlasanjeUToku = false;
-                    glasanjeUToku = false;
+                    if (glasanjeUToku)
+                    {
+                        izbori.GlasanjeUToku = false;
+                        glasanjeUToku = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Glasanje je vec gotovo!");
+                    }
                 }
                 else if (opcija == 9)
                 {
@@ -198,7 +216,7 @@ namespace Zadaca1
                             Console.WriteLine("Pogresan unos! Pokusajte ponovo");
                             brojac--;
                         }
-                        else tacanUnos = true; 
+                        else tacanUnos = true;
                     }
 
                     if (naso == false)
@@ -222,7 +240,7 @@ namespace Zadaca1
                         Console.WriteLine("Pogresan unos 3 puta. Program se zavrsava.");
                         break;
                     }
-                    
+
                     izbori.IzbrisiGlasoveZaGlasaca(trenutni);
                 }
             }
