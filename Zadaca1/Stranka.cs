@@ -20,16 +20,19 @@ namespace Zadaca1
          */
         public List<Kandidat> rukovodstvoStranke { get; set; }
 
-        public Stranka() { }
+        public Stranka() { rukovodstvoStranke = new List<Kandidat>(); clanovi = new List<Kandidat>(); }
         public Stranka(string naziv, List<Kandidat> clanovi)
         {
             this.naziv = naziv;
             this.clanovi = clanovi;
+            rukovodstvoStranke = new List<Kandidat>();
         }
         public Stranka(string naziv, int brojGlasova)
         {
             this.naziv = naziv;
             this.brojGlasova= brojGlasova;
+            clanovi = new List<Kandidat>();
+            rukovodstvoStranke = new List<Kandidat>();
         }
 
         public Stranka(string naziv, List<Kandidat> clanovi, int brojGlasova)
@@ -37,6 +40,7 @@ namespace Zadaca1
             this.naziv = naziv;
             this.clanovi = clanovi;
             this.brojGlasova = brojGlasova;
+            rukovodstvoStranke = new List<Kandidat>();
         }
 
 
