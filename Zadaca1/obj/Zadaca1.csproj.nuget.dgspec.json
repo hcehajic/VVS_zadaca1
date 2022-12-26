@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\harun\\source\\repos\\VVS222222\\Zadaca1\\Zadaca1.csproj": {}
+    "C:\\Users\\malad\\source\\repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\harun\\source\\repos\\VVS222222\\Zadaca1\\Zadaca1.csproj": {
+    "C:\\Users\\malad\\source\\repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\harun\\source\\repos\\VVS222222\\Zadaca1\\Zadaca1.csproj",
+        "projectUniqueName": "C:\\Users\\malad\\source\\repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj",
         "projectName": "Zadaca1",
-        "projectPath": "C:\\Users\\harun\\source\\repos\\VVS222222\\Zadaca1\\Zadaca1.csproj",
-        "packagesPath": "C:\\Users\\harun\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\harun\\source\\repos\\VVS222222\\Zadaca1\\obj\\",
+        "projectPath": "C:\\Users\\malad\\source\\repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj",
+        "packagesPath": "C:\\Users\\malad\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\malad\\source\\repos\\VVS_zadaca1\\Zadaca1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\harun\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\malad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
