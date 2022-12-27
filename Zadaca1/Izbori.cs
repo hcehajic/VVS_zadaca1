@@ -119,7 +119,120 @@ namespace Zadaca1
             Console.WriteLine("ENTER za nastavak...");
             Console.ReadLine();
         }
-        
+
+        /*
+         * Metoda ispod ovog komentara je ista metoda kao i iznad komentara samo što su ispravljene foreach petlje 
+         * u obicne for petlje radi dobijanja kontrolnog grafa kompleksnosti na online alatu. 
+         * NAPOMENA: METODA ISPOD SE NEĆE KORISTITI U GLAVNOM PROGRAMU, ONA JE SAMO DA BI SE URADIO DIO ZADAĆE 4
+         * 
+         * 
+        //.h file code:
+
+        #include <string>
+        #include <vector>
+        #include <iostream>
+        #include <memory>
+
+
+        void Glasaj(std::shared_ptr<Glasac> trenutni_glasac){
+			if (trenutni_glasac->birao)
+			{
+				std::wcout << L"Vi ste vec glasali na izborima. Dovidjenja" << std::endl;
+				return;
+			}
+
+			std::wcout << L"\nNEZAVISNI KANDIDATI" << std::endl;
+			std::wcout << L"Unesite redni broj kandidata ili 0 ako ne zelite niti za jednog:" << std::endl;
+			int brojac = 1;
+			for (std::shared_ptr<Kandidat> k : kandidati)
+			{
+				if (k->Stranka == nullptr)
+				{
+					std::wcout << brojac++ << L") " << k->Ime_prezime << std::endl;
+				}
+			}
+
+			int izbor_kandidata = std::stoi(Console::ReadLine());
+			trenutni_glasac->Glaso->Add(izbor_kandidata);
+			if (izbor_kandidata != 0)
+			{
+				kandidati[izbor_kandidata - 1].BrojGlasova += 1;
+			}
+
+			std::wcout << L"\nSTRANKE" << std::endl;
+			std::wcout << L"Unesite redni broj stranke ili redni broj stranke i njene kandidate za koje glasate(Svaki broj razdvojite razmakom):" << std::endl;
+			brojac = 1;
+			int brojac_stranaka = 1;
+			
+			
+			
+			/*
+			for (std::shared_ptr<Stranka> s : stranke)
+			{
+				std::wcout << brojac_stranaka++ << L") " << s->naziv << std::endl;
+				std::wcout << L"Kandidati stranke:" << std::endl;
+				for (std::shared_ptr<Kandidat> k : s->clanovi)
+				{
+				std::wcout << brojac++ << L") " << k->Ime_prezime << std::endl;
+				}
+
+				brojac = 1;
+				std::wcout << L"\n" << std::endl;
+			}
+
+			std::wstring izbor_stranka_clanovi;
+			std::getline(std::wcin, izbor_stranka_clanovi);
+			std::vector<std::wstring> uneseno = izbor_stranka_clanovi.Split(L' ', StringSplitOptions::None);
+
+			for (int i = 0; i < uneseno.size(); i++)
+			{
+				trenutni_glasac->Glaso->Add(std::stoi(uneseno[i]));
+			}
+
+			brojac = 0;
+			for (std::shared_ptr<Stranka> s : stranke)
+			{
+				brojac++;
+				if (brojac == std::stoi(uneseno[0]) && uneseno.size() == 1)
+				{
+					for (std::shared_ptr<Kandidat> k : kandidati)
+					{
+						if (k->Stranka != nullptr && k->Stranka->Equals(s->naziv))
+						{
+							s->brojGlasova += 1;
+							k->BrojGlasova += 1;
+						}
+					}
+				}
+
+				else if (brojac == std::stoi(uneseno[0]) && uneseno.size() > 1)
+				{
+					int brojac_kandidati = 0;
+					int brojac_niz_uneseni = 1;
+					for (std::shared_ptr<Kandidat> k : kandidati)
+					{
+						brojac_kandidati++;
+						if (k->Stranka != nullptr && k->Stranka->Equals(s->naziv) && brojac_kandidati == std::stoi(uneseno[brojac_niz_uneseni]) && brojac_niz_uneseni < uneseno.size())
+						{
+							k->BrojGlasova += 1;
+							s->brojGlasova += 1;
+							brojac_niz_uneseni++;
+						}
+					}
+				}
+			}
+			trenutni_glasac->birao = true;
+
+			std::wcout << L"ENTER za nastavak..." << std::endl;
+			std::wstring tempVar;
+			std::getline(std::wcin, tempVar);
+			*/
+
+
+
+
+
+
 
         public void TrenutnoStanje()
         {

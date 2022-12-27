@@ -228,6 +228,15 @@ namespace Zadaca1
             }
             return true;
         }
+
+
+        /*
+         * Metoda za refaktoring validiranja licne ukoliko to bude dozvoljeno
+         */
+        public static bool ValidirajBrojLicneKarteRefactored(string broj_licne)
+        {
+            return true;
+        }
         public static bool ValidirajDatumRodjenja(DateTime datum_rodjenja)
         {
             //glasac mora biti punoljetan, zbog toga smo stavili da ovdje ide i ta validacija. U suprotnom, nije glasac
