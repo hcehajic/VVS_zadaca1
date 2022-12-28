@@ -40,6 +40,26 @@ namespace Zadaca1
             this.kandidati = kandidati;
         }
 
+        private void ispisiKandidate()
+        {
+            int brojac = 1;
+            foreach (Kandidat k in kandidati.FindAll(k => k.Stranka == null))
+                Console.WriteLine(brojac++ + ") " + k.Ime_prezime);
+        }
+
+        private void ispisiStranke()
+        {
+            int brojac = 1, brojac_stranaka = 1;
+            foreach (Stranka s in stranke)
+            {
+                Console.WriteLine(brojac_stranaka++ + ") " + s.naziv);
+                Console.WriteLine("Kandidati stranke:");
+                s.clanovi.ForEach(k => Console.WriteLine(brojac++ + ") " + k.Ime_prezime));
+                brojac = 1;
+                Console.WriteLine("\n");
+            }
+        }
+
 
         public void Glasaj(Glasac trenutni_glasac)
         {
@@ -49,76 +69,55 @@ namespace Zadaca1
                 return;
             }
 
-            Console.WriteLine("\nNEZAVISNI KANDIDATI");
-            Console.WriteLine("Unesite redni broj kandidata ili 0 ako ne zelite niti za jednog:");
-            int brojac = 1;
-            foreach (Kandidat k in kandidati)
-                if (k.Stranka == null)
-                    Console.WriteLine(brojac++ + ") " + k.Ime_prezime);
-        
+            Console.WriteLine("\nNEZAVISNI KANDIDATI \nUnesite redni broj kandidata ili 0 ako ne zelite niti za jednog:");
+            ispisiKandidate();
+
             int izbor_kandidata = Convert.ToInt32(Console.ReadLine());
             trenutni_glasac.Glaso.Add(izbor_kandidata);
             if (izbor_kandidata != 0)
                 kandidati[izbor_kandidata - 1].BrojGlasova += 1;
 
-            Console.WriteLine("\nSTRANKE");
-            Console.WriteLine("Unesite redni broj stranke ili redni broj stranke i njene kandidate za koje glasate(Svaki broj razdvojite razmakom):");
-            brojac = 1;
-            int brojac_stranaka = 1;
-            foreach (Stranka s in stranke)
-            {
-                Console.WriteLine(brojac_stranaka++ + ") " + s.naziv);
-                Console.WriteLine("Kandidati stranke:");
-                foreach (Kandidat k in s.clanovi)
-                Console.WriteLine(brojac++ + ") " + k.Ime_prezime);
-                 
-                brojac = 1;
-                Console.WriteLine("\n");
-            }
+            Console.WriteLine("\nSTRANKE \nUnesite redni broj stranke ili redni broj stranke i njene kandidate za koje glasate(Svaki broj razdvojite razmakom):");
+            ispisiStranke();
 
             var izbor_stranka_clanovi = Console.ReadLine();
             string[] uneseno = izbor_stranka_clanovi.Split(' ', StringSplitOptions.None);
 
             for (int i = 0; i < uneseno.Length; i++)
-            {
-                trenutni_glasac.Glaso.Add(Convert.ToInt32(uneseno[i]));
-            }
-
-            brojac = 0;
+              trenutni_glasac.Glaso.Add(Convert.ToInt32(uneseno[i]));
+            
+            
+            int brojac = 0;
             foreach (Stranka s in stranke)
             {
                 brojac++;
-                if (brojac == Convert.ToInt32(uneseno[0]) && uneseno.Length == 1)
+                if (brojac == Convert.ToInt32(uneseno[0]))
                 {
-                    foreach (Kandidat k in kandidati)
-                        if (k.Stranka != null && k.Stranka.Equals(s.naziv))
-                        {
-                            s.brojGlasova+=1;
-                            k.BrojGlasova+=1;
-                        }
-                }
-
-                else if (brojac == Convert.ToInt32(uneseno[0]) && uneseno.Length > 1)
-                {
-                    int brojac_kandidati = 0;
-                    int brojac_niz_uneseni = 1;
+                        int brojac_kandidati = 0;
+                        int brojac_niz_uneseni = 1;
+                    
                     foreach (Kandidat k in kandidati)
                     {
-                        brojac_kandidati++;
-                        if (k.Stranka != null && k.Stranka.Equals(s.naziv) && brojac_kandidati == Convert.ToInt32(uneseno[brojac_niz_uneseni]) && brojac_niz_uneseni < uneseno.Length)
+                        if (uneseno.Length > 1 && k.Stranka != null && k.Stranka.Equals(s.naziv) && brojac_kandidati == Convert.ToInt32(uneseno[brojac_niz_uneseni]) && brojac_niz_uneseni < uneseno.Length)
                         {
-                            k.BrojGlasova+=1;
-                            s.brojGlasova+=1;
                             brojac_niz_uneseni++;
+                            k.BrojGlasova += 1;
+                            s.brojGlasova += 1;
+                        }
+                        else if (uneseno.Length==1 && k.Stranka != null && k.Stranka.Equals(s.naziv))
+                        {
+                            k.BrojGlasova += 1;
+                            s.brojGlasova += 1;
                         }
                     }
                 }
             }
-            trenutni_glasac.birao = true;
 
+            trenutni_glasac.birao = true;
             Console.WriteLine("ENTER za nastavak...");
             Console.ReadLine();
         }
+
 
         /*
          * Metoda ispod ovog komentara je ista metoda kao i iznad komentara samo što su ispravljene foreach petlje 
