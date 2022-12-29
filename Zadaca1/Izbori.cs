@@ -60,7 +60,68 @@ namespace Zadaca1
             }
         }
 
+        private void projveriInformacijeZaKandidate(Stranka s ,ref string[] uneseno, ref int brojac_kandidati, ref int brojac_niz_uneseni, ref List<Kandidat> kandidati)
+        {
+            foreach (Kandidat k in kandidati)
+            {
+                if (uneseno.Length > 1 && k.Stranka != null && k.Stranka.Equals(s.naziv) && brojac_kandidati == Convert.ToInt32(uneseno[brojac_niz_uneseni]) && brojac_niz_uneseni < uneseno.Length)
+                {
+                    brojac_niz_uneseni++;
+                    k.BrojGlasova += 1;
+                    s.brojGlasova += 1;
+                }
+                else if (uneseno.Length == 1 && k.Stranka != null && k.Stranka.Equals(s.naziv))
+                {
+                    k.BrojGlasova += 1;
+                    s.brojGlasova += 1;
+                }
+            }
+        }
 
+        public void Glasaj(Glasac trenutni_glasac)
+        {
+            if (trenutni_glasac.birao)
+            {
+                Console.WriteLine("Vi ste vec glasali na izborima. Dovidjenja");
+                return;
+            }
+
+            Console.WriteLine("\nNEZAVISNI KANDIDATI \nUnesite redni broj kandidata ili 0 ako ne zelite niti za jednog:");
+            ispisiKandidate();
+
+            int izbor_kandidata = Convert.ToInt32(Console.ReadLine());
+            trenutni_glasac.Glaso.Add(izbor_kandidata);
+            if (izbor_kandidata != 0)
+                kandidati[izbor_kandidata - 1].BrojGlasova += 1;
+
+            Console.WriteLine("\nSTRANKE \nUnesite redni broj stranke ili redni broj stranke i njene kandidate za koje glasate(Svaki broj razdvojite razmakom):");
+            ispisiStranke();
+
+            var izbor_stranka_clanovi = Console.ReadLine();
+            string[] uneseno = izbor_stranka_clanovi.Split(' ', StringSplitOptions.None);
+
+            for (int i = 0; i < uneseno.Length; i++)
+                trenutni_glasac.Glaso.Add(Convert.ToInt32(uneseno[i]));
+
+
+            int brojac = 0;
+            foreach (Stranka s in stranke)
+            {
+                brojac++;
+                if (brojac == Convert.ToInt32(uneseno[0]))
+                {
+                    int brojac_kandidati = 0;
+                    int brojac_niz_uneseni = 1;
+                    projveriInformacijeZaKandidate(s, ref uneseno, ref brojac_kandidati, ref brojac_niz_uneseni, ref kandidati);
+                }
+            }
+
+            trenutni_glasac.birao = true;
+            Console.WriteLine("ENTER za nastavak...");
+            Console.ReadLine();
+        }
+
+        /*
         public void Glasaj(Glasac trenutni_glasac)
         {
             if (trenutni_glasac.birao)
@@ -117,6 +178,7 @@ namespace Zadaca1
             Console.WriteLine("ENTER za nastavak...");
             Console.ReadLine();
         }
+        */
 
 
         /*
@@ -125,31 +187,25 @@ namespace Zadaca1
          * NAPOMENA: METODA ISPOD SE NEĆE KORISTITI U GLAVNOM PROGRAMU, ONA JE SAMO DA BI SE URADIO DIO ZADAĆE 4
          * 
          * 
-        //.h file code:
+        
 
-        #include <string>
-        #include <vector>
-        #include <iostream>
-        #include <memory>
+#include <string>
+#include <vector>
+#include <iostream>
+#include <memory>
 
 
-        void Glasaj(std::shared_ptr<Glasac> trenutni_glasac){
+
+void Glasaj(std::shared_ptr<Glasac> trenutni_glasac)
+{
 			if (trenutni_glasac->birao)
 			{
 				std::wcout << L"Vi ste vec glasali na izborima. Dovidjenja" << std::endl;
 				return;
 			}
 
-			std::wcout << L"\nNEZAVISNI KANDIDATI" << std::endl;
-			std::wcout << L"Unesite redni broj kandidata ili 0 ako ne zelite niti za jednog:" << std::endl;
-			int brojac = 1;
-			for (std::shared_ptr<Kandidat> k : kandidati)
-			{
-				if (k->Stranka == nullptr)
-				{
-					std::wcout << brojac++ << L") " << k->Ime_prezime << std::endl;
-				}
-			}
+			std::wcout << L"\nNEZAVISNI KANDIDATI \nUnesite redni broj kandidata ili 0 ako ne zelite niti za jednog:" << std::endl;
+			ispisiKandidate();
 
 			int izbor_kandidata = std::stoi(Console::ReadLine());
 			trenutni_glasac->Glaso->Add(izbor_kandidata);
@@ -158,26 +214,8 @@ namespace Zadaca1
 				kandidati[izbor_kandidata - 1].BrojGlasova += 1;
 			}
 
-			std::wcout << L"\nSTRANKE" << std::endl;
-			std::wcout << L"Unesite redni broj stranke ili redni broj stranke i njene kandidate za koje glasate(Svaki broj razdvojite razmakom):" << std::endl;
-			brojac = 1;
-			int brojac_stranaka = 1;
-			
-			
-			
-			/*
-			for (std::shared_ptr<Stranka> s : stranke)
-			{
-				std::wcout << brojac_stranaka++ << L") " << s->naziv << std::endl;
-				std::wcout << L"Kandidati stranke:" << std::endl;
-				for (std::shared_ptr<Kandidat> k : s->clanovi)
-				{
-				std::wcout << brojac++ << L") " << k->Ime_prezime << std::endl;
-				}
-
-				brojac = 1;
-				std::wcout << L"\n" << std::endl;
-			}
+			std::wcout << L"\nSTRANKE \nUnesite redni broj stranke ili redni broj stranke i njene kandidate za koje glasate(Svaki broj razdvojite razmakom):" << std::endl;
+			ispisiStranke();
 
 			std::wstring izbor_stranka_clanovi;
 			std::getline(std::wcin, izbor_stranka_clanovi);
@@ -188,43 +226,25 @@ namespace Zadaca1
 				trenutni_glasac->Glaso->Add(std::stoi(uneseno[i]));
 			}
 
-			brojac = 0;
+
+			int brojac = 0;
 			for (std::shared_ptr<Stranka> s : stranke)
 			{
 				brojac++;
-				if (brojac == std::stoi(uneseno[0]) && uneseno.size() == 1)
-				{
-					for (std::shared_ptr<Kandidat> k : kandidati)
-					{
-						if (k->Stranka != nullptr && k->Stranka->Equals(s->naziv))
-						{
-							s->brojGlasova += 1;
-							k->BrojGlasova += 1;
-						}
-					}
-				}
-
-				else if (brojac == std::stoi(uneseno[0]) && uneseno.size() > 1)
+				if (brojac == std::stoi(uneseno[0]))
 				{
 					int brojac_kandidati = 0;
 					int brojac_niz_uneseni = 1;
-					for (std::shared_ptr<Kandidat> k : kandidati)
-					{
-						brojac_kandidati++;
-						if (k->Stranka != nullptr && k->Stranka->Equals(s->naziv) && brojac_kandidati == std::stoi(uneseno[brojac_niz_uneseni]) && brojac_niz_uneseni < uneseno.size())
-						{
-							k->BrojGlasova += 1;
-							s->brojGlasova += 1;
-							brojac_niz_uneseni++;
-						}
-					}
+					projveriInformacijeZaKandidate(s, uneseno, brojac_kandidati, brojac_niz_uneseni, kandidati);
 				}
 			}
-			trenutni_glasac->birao = true;
 
+			trenutni_glasac->birao = true;
 			std::wcout << L"ENTER za nastavak..." << std::endl;
 			std::wstring tempVar;
 			std::getline(std::wcin, tempVar);
+}
+
 			*/
 
 
