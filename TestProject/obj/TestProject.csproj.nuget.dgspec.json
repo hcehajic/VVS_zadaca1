@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\TestProject\\TestProject.csproj": {}
+    "C:\\Users\\Adnan\\source\\repos\\VVS_zadaca1\\TestProject\\TestProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\TestProject\\TestProject.csproj": {
+    "C:\\Users\\Adnan\\source\\repos\\VVS_zadaca1\\TestProject\\TestProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\TestProject\\TestProject.csproj",
+        "projectUniqueName": "C:\\Users\\Adnan\\source\\repos\\VVS_zadaca1\\TestProject\\TestProject.csproj",
         "projectName": "TestProject",
-        "projectPath": "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\TestProject\\TestProject.csproj",
+        "projectPath": "C:\\Users\\Adnan\\source\\repos\\VVS_zadaca1\\TestProject\\TestProject.csproj",
         "packagesPath": "C:\\Users\\Adnan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\TestProject\\obj\\",
+        "outputPath": "C:\\Users\\Adnan\\source\\repos\\VVS_zadaca1\\TestProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Adnan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj": {
-                "projectPath": "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj"
+              "C:\\Users\\Adnan\\source\\repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj": {
+                "projectPath": "C:\\Users\\Adnan\\source\\repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj"
               }
             }
           }
@@ -85,14 +85,14 @@
         }
       }
     },
-    "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj": {
+    "C:\\Users\\Adnan\\source\\repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj",
+        "projectUniqueName": "C:\\Users\\Adnan\\source\\repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj",
         "projectName": "Zadaca1",
-        "projectPath": "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj",
+        "projectPath": "C:\\Users\\Adnan\\source\\repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj",
         "packagesPath": "C:\\Users\\Adnan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Adnan\\Source\\Repos\\VVS_zadaca1\\Zadaca1\\obj\\",
+        "outputPath": "C:\\Users\\Adnan\\source\\repos\\VVS_zadaca1\\Zadaca1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Adnan\\AppData\\Roaming\\NuGet\\NuGet.Config",

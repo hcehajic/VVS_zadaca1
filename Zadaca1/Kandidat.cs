@@ -61,18 +61,7 @@ namespace Zadaca1
             return rezultat;
         }
 
-        /**
-         * Metoda ispod "ValidirajBrojLicneKarte" je poslije prvog zadatka metoda sa najvećom ciklomatskom kompleksnošću
-         * zato ćemo nju koristiti za tuning. Ona svakako ne radi sa konzolom tako da neće biti problema.
-         * 
-         * POČETNA CIKLOMATSKA KOMPLEKSNOST: 12 
-         * Iteracija 1: ahajro2
-         * Iteracija 2: ...
-         * Iteracija 3: ...
-         * Iteracija 4: ...
-         * Iteracija 5: ...
-         * 
-         */
+        
 
         public static bool ValidirajBrojLicneKarte(string broj_licne)
         {
@@ -95,22 +84,52 @@ namespace Zadaca1
             return true;
         }
 
-        public static bool ValidirajBrojLicneKarteRefactoring(string broj_licne)
-        {
-            char cetvrti = broj_licne[4];
+        /**
+         * Metoda ispod "ValidirajBrojLicneKarte" je poslije prvog zadatka metoda sa najvećom ciklomatskom kompleksnošću
+         * zato ćemo nju koristiti za tuning. Ona svakako ne radi sa konzolom tako da neće biti problema.
+         * 
+         * POČETNA CIKLOMATSKA KOMPLEKSNOST: 12 
+         * Iteracija 1: [ahajro2] 25-26 sekundi izvršavanje u odnosu na 31 sekundu prije refactoringa
+         *              Metoda ima veću ciklomatsku kompleksnost, ali brže se izvršava
+         * Iteracija 2: ...
+         * Iteracija 3: ...
+         * Iteracija 4: ...
+         * Iteracija 5: ...
+         * 
+         */
 
-            if (broj_licne.Length != 9 || cetvrti != 'E' && cetvrti != 'K' &&
+        public static bool ValidirajBrojLicneKarteRefactoring1(string broj_licne)
+        {
+            if(broj_licne.Length != 9) return false;
+            char cetvrti = broj_licne[4];
+            if (cetvrti != 'E' && cetvrti != 'K' &&
                     cetvrti != 'J' && cetvrti != 'M' && cetvrti != 'T')
             {
                 return false;
             }
+            
+            int provjera = 0;
+            
             int duzina = broj_licne.Length;
-            for (int i = 0; i <  duzina && i != 4; i += 2)
+            for (int i = 0; i <  duzina - 1; i += 2)
             {
-                if (broj_licne[i] < '0' || broj_licne[i] > '9' || broj_licne[i + 1] < '0' || broj_licne[i + 1] > '9')
+                if (i == 4) i--;
+
+                else if (broj_licne[i] < '0' || broj_licne[i] > '9' || broj_licne[i + 1] < '0' || broj_licne[i + 1] > '9')
                     return false;
 
             }
+            /*
+            foreach (char c in broj_licne)
+            {
+                if (i != 4 && (c < '0' || c > '9'))
+                {
+                        return false;
+                }
+                i++;
+
+            }
+            */
             return true;
         }
 

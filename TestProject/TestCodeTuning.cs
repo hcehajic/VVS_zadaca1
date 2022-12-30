@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Zadaca1;
@@ -19,36 +20,34 @@ namespace TestProject
          * 
          * NAPOMENA: OGRANIČENJE U DODAVANJU ISTIH KANDIDATA RAZLIČITIM STRANKAMA NIJE ZADOVOLJENO IZ RAZLOGA JER TO NIJE POENTA TESTIRANJA
          */
+
+
+        //izvrsavanje oko 31 sekundu
         [TestMethod]
         public void codeTuningPerformancesTest()
         {
-            Kandidat k1 = new Kandidat("Nezir Nezirovic", "NP");
-            Kandidat k2 = new Kandidat("Hamid Hamidovic", "NP");
-            Kandidat k3 = new Kandidat("Pero Peric", "Nasa stranka");
-            Kandidat k4 = new Kandidat("Ana Anic", "Nasa stranka");
-            Kandidat r1 = new Kandidat("Šefik Šefic", "Nasa stranka");
-            Kandidat r2 = new Kandidat("Šefi Šefi", "NP");
-
-            List<Stranka> stranke = new List<Stranka> { new Stranka("NP", new List<Kandidat> { k1, k2, r2}),
-                                                         new Stranka("Nasa stranka", new List<Kandidat> { k3, k4, r1}),
-                                                        new Stranka("SDP", new List<Kandidat> { k2, k3, r2 }),
-                                                    new Stranka("Seljačka stranka", new List<Kandidat> { k1, k2, r2 })};
-            List<Kandidat> kandidati = new List<Kandidat> { k1, k2, k3, k4, r1, r2, new Kandidat("Nezavisni Kandidat", null), new Kandidat("Nezavisni Kandidatopet", null),
-            new Kandidat("Nezavisni KandidatOpetJosJedan", null)};
-            stranke[0].rukovodstvoStranke = new List<Kandidat> { r2 };
-            stranke[1].rukovodstvoStranke = new List<Kandidat> { r1 };
-            List<Glasac> glasaci = new List<Glasac>();
-            string datum = "07.20.2000.00:00:00";
-            DateTime dt;
-            dt = new DateTime(2000, 7, 20, 0, 0, 0);
-            Glasac glasac = new Glasac("Harun", "Cehajic", "Ovdje moze sta hoces jer je adresa", dt, "2034K5678", "2007000170005");
-            glasaci.Add(glasac);
-            glasaci.Add(new Glasac("Neko", "Nekic", "Izmisljena bb", dt, "1234K5678", "2007000170009"));
-            glasaci.Add(new Glasac("Ena", "Enic", "Gradacacka bb", dt, "1234K5678", "2007000170009"));
+            string brojLicne = "1234K5678";
+            int prviStop = 0;
+            for (long i = 0; i < 286200550; i++)
+            {
+                Kandidat.ValidirajBrojLicneKarte(brojLicne);
+            }
+            int drugiStop = 0;
+        }
 
 
-            Izbori izbori = new Izbori(stranke, kandidati, glasaci);
 
+        //izvrasanje oko 25 26 sekundi
+        [TestMethod]
+        public void codeTuningPerformancesTestRefactored()
+        {
+            string brojLicne = "1234K5678";
+            int prviStop = 0;
+            for (int i = 0; i < 286200550; i++)
+            {
+                Kandidat.ValidirajBrojLicneKarteRefactoring1(brojLicne);
+            }
+            int drugiStop = 0;
         }
     }
 }
