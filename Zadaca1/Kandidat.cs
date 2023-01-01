@@ -91,7 +91,8 @@ namespace Zadaca1
          * POČETNA CIKLOMATSKA KOMPLEKSNOST: 12 
          * Iteracija 1: [ahajro2] 25-26 sekundi izvršavanje u odnosu na 31 sekundu prije refactoringa
          *              Metoda ima veću ciklomatsku kompleksnost, ali brže se izvršava
-         * Iteracija 2: [abrulic1] 
+         * Iteracija 2: [abrulic1] ciklomatska kompleksnost je ista kao u prethodnom refaktorinu, ali ima veci MI +
+         *              brze se izvrsava
          * Iteracija 3: ...
          * Iteracija 4: ...
          * Iteracija 5: ...

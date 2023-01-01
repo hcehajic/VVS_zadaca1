@@ -22,13 +22,14 @@ namespace TestProject
          */
 
 
-        //izvrsavanje oko 31 sekundu
+        //[ahajro2]izvrsavanje oko 31 sekundu: stara verzija 
+        //[abrulic1] izvrsavanje 34.27s, CPU 25%, Heap Size 283KB
         [TestMethod]
         public void codeTuningPerformancesTest()
         {
             string brojLicne = "1234K5678";
             int prviStop = 0;
-            for (long i = 0; i < 286200550; i++)
+            for (long i = 0; i < 450000000; i++)
             {
                 Kandidat.ValidirajBrojLicneKarte(brojLicne);
             }
@@ -37,27 +38,28 @@ namespace TestProject
 
 
 
-        //izvrasanje oko 25 26 sekundi
+        //[ahajro2] izvrasanje oko 25 26 sekundi: stara verzija
+        //[abrulic1] izvrsavanje 29.05s, CPU 25%, Heap Size 190.7KB
         [TestMethod]
         public void codeTuningPerformancesTestRefactored()
         {
             string brojLicne = "1234K5678";
             int prviStop = 0;
-            for (int i = 0; i < 286200550; i++)
+            for (int i = 0; i < 450000000; i++)
             {
                 Kandidat.ValidirajBrojLicneKarteRefactoring1(brojLicne);
             }
             int drugiStop = 0;
         }
 
-        //ova iznad se kod mene izvrsava 18.22s, CPU 25% i Heap Size 284KB
-        //izvrasanje 17.21s, CPU 25% i Heap Size 238.26KB
+        //
+        //[abrulic1] izvrsavanje 27.43, CPU 25%, Heap Size 240.3KB
         [TestMethod]
         public void codeTuningPerformancesTestRefactored2()
         {
             string brojLicne = "1234K5678";
             int prviStop = 0;
-            for (int i = 0; i < 286200550; i++)
+            for (int i = 0; i < 450000000; i++)
             {
                 Kandidat.ValidirajBrojLicneKarteRefactoring2(brojLicne);
             }
