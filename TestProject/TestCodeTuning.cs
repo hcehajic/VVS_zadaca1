@@ -49,5 +49,20 @@ namespace TestProject
             }
             int drugiStop = 0;
         }
+
+        //ova iznad se kod mene izvrsava 18.22s, CPU 25% i Heap Size 284KB
+        //izvrasanje 17.21s, CPU 25% i Heap Size 238.26KB
+        [TestMethod]
+        public void codeTuningPerformancesTestRefactored2()
+        {
+            string brojLicne = "1234K5678";
+            int prviStop = 0;
+            for (int i = 0; i < 286200550; i++)
+            {
+                Kandidat.ValidirajBrojLicneKarteRefactoring2(brojLicne);
+            }
+            int drugiStop = 0;
+        }
+
     }
 }

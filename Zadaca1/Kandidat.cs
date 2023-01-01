@@ -91,7 +91,7 @@ namespace Zadaca1
          * POČETNA CIKLOMATSKA KOMPLEKSNOST: 12 
          * Iteracija 1: [ahajro2] 25-26 sekundi izvršavanje u odnosu na 31 sekundu prije refactoringa
          *              Metoda ima veću ciklomatsku kompleksnost, ali brže se izvršava
-         * Iteracija 2: ...
+         * Iteracija 2: [abrulic1] 
          * Iteracija 3: ...
          * Iteracija 4: ...
          * Iteracija 5: ...
@@ -131,6 +131,26 @@ namespace Zadaca1
             }
             */
             return true;
+        }
+
+       //izvrsavanje 17.21 s
+        public static bool ValidirajBrojLicneKarteRefactoring2(string broj_licne)
+        {
+            int duzina = broj_licne.Length;
+            char cetvrti = broj_licne[4];
+            if (duzina!=9 || cetvrti != 'E' && cetvrti != 'K' &&
+                    cetvrti != 'J' && cetvrti != 'M' && cetvrti != 'T') return false;
+
+                for (int i = 0; i < duzina - 1; i += 2)
+            {
+                if (i == 4) i--;
+
+                else if (broj_licne[i] < '0' || broj_licne[i] > '9' || broj_licne[i + 1] < '0' || broj_licne[i + 1] > '9')
+                    return false;
+
+            }
+            return true; 
+
         }
 
         public string Ime_prezime
