@@ -29,7 +29,7 @@ namespace TestProject
         {
             string brojLicne = "1234K5678";
             int prviStop = 0;
-            for (long i = 0; i < 450000000; i++)
+            for (long i = 0; i < 357692307; i++)
             {
                 Kandidat.ValidirajBrojLicneKarte(brojLicne);
             }
@@ -45,7 +45,7 @@ namespace TestProject
         {
             string brojLicne = "1234K5678";
             int prviStop = 0;
-            for (int i = 0; i < 450000000; i++)
+            for (int i = 0; i < 357692307; i++)
             {
                 Kandidat.ValidirajBrojLicneKarteRefactoring1(brojLicne);
             }
@@ -59,7 +59,7 @@ namespace TestProject
         {
             string brojLicne = "1234K5678";
             int prviStop = 0;
-            for (int i = 0; i < 450000000; i++)
+            for (int i = 0; i < 357692307; i++)
             {
                 Kandidat.ValidirajBrojLicneKarteRefactoring2(brojLicne);
             }

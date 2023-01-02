@@ -250,7 +250,30 @@ void Glasaj(std::shared_ptr<Glasac> trenutni_glasac)
 
 
 
+        public void ispisStranakaIKandidata()
+        {
+            int brojac_ukupni = 0;
+            Console.WriteLine("Kandidati koji su osvojili mandat za sada (min 20% glasova stranke) su:");
 
+            foreach (Stranka s in stranke)
+            {
+                foreach (Kandidat k in kandidati)
+                {
+                    double postotak = ((k.BrojGlasova * 1.0) / s.brojGlasova) * 100;
+                    if (postotak > 20 && k.Stranka.Equals(s.naziv))
+                    {
+                        brojac_ukupni++;
+                        Console.WriteLine("Stranka: " + s.naziv + " Kandidat: " + k.Ime_prezime);
+                    }
+
+                }
+            }
+            if (brojac_ukupni == 0)
+                Console.WriteLine("Za sada nema takvih");
+
+            Console.WriteLine("ENTER za nastavak...");
+            Console.ReadLine();
+        }
 
 
         public void TrenutnoStanje()
@@ -272,7 +295,9 @@ void Glasaj(std::shared_ptr<Glasac> trenutni_glasac)
             }
             if (brojac_ukupni == 0)
                 Console.WriteLine("Za sada nema takvih");
+            ispisStranakaIKandidata();
 
+            /*
             Console.WriteLine("Kandidati koji su osvojili mandat za sada (min 20% glasova stranke) su:");
             brojac_ukupni = 0;
 
@@ -294,6 +319,7 @@ void Glasaj(std::shared_ptr<Glasac> trenutni_glasac)
 
             Console.WriteLine("ENTER za nastavak...");
             Console.ReadLine();
+            */
         }
 
         public void GlasaciNaIzborima()
