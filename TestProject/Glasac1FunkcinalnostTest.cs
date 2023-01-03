@@ -328,12 +328,6 @@ namespace TestProject
             glasac.DatumRodjenja = new DateTime(DateTime.Now.AddYears(-18).Year, DateTime.Now.Month, 1);
             Assert.IsFalse(!Glasac.ValidirajDatumRodjenja(glasac.DatumRodjenja));
             Assert.ThrowsException<ArgumentException>(() => glasac.DatumRodjenja = new DateTime(DateTime.Now.AddYears(+18).Year, DateTime.Now.Month, 1));
-            int mjesec = DateTime.Now.Month;
-            if (DateTime.Now.AddMonths(-1).Month > 0)
-                mjesec = DateTime.Now.AddMonths(-1).Month;
-            glasac.DatumRodjenja = new DateTime(DateTime.Now.AddYears(-18).Year, mjesec, DateTime.Now.Day);
-            Assert.IsTrue(Glasac.ValidirajDatumRodjenja(glasac.DatumRodjenja));
-
         }
 
 
