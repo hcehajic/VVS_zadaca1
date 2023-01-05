@@ -158,6 +158,25 @@ namespace Zadaca1
 
         }
 
+        public static bool ValidirajBrojLicneKarteRefactoring3(string broj_licne)
+        {
+            char cetvrti = broj_licne[4];
+            if (broj_licne.Length != 9 || cetvrti != 'E' && cetvrti != 'K' &&
+                    cetvrti != 'J' && cetvrti != 'M' && cetvrti != 'T') return false;
+
+            for (int i = 0; i < broj_licne.Length - 1; i += 4)
+            {
+                if (i == 4) i = 1;
+
+                else if (broj_licne[i] < '0' || broj_licne[i] > '9' || broj_licne[i + 1] < '0' || broj_licne[i + 1] > '9' 
+                    || broj_licne[i + 2] < '0' || broj_licne[i + 2] > '9' || broj_licne[i + 3] < '0' || broj_licne[i + 3] > '9')
+                    return false;
+
+            }
+            return true;
+
+        }
+
         public string Ime_prezime
         {
             get { return ime_prezime; }

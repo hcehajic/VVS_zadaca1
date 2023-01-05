@@ -252,6 +252,7 @@ void Glasaj(std::shared_ptr<Glasac> trenutni_glasac)
 
         public void ispisStranakaIKandidata()
         {
+            const int MINIMALAN_POSTOTAK_GLASOVA = 20;
             int brojac_ukupni = 0;
             Console.WriteLine("Kandidati koji su osvojili mandat za sada (min 20% glasova stranke) su:");
 
@@ -259,8 +260,8 @@ void Glasaj(std::shared_ptr<Glasac> trenutni_glasac)
             {
                 foreach (Kandidat k in kandidati)
                 {
-                    double postotak = ((k.BrojGlasova * 1.0) / s.brojGlasova) * 100;
-                    if (postotak > 20 && k.Stranka.Equals(s.naziv))
+                    double postotakDobijenihGlasova = (Convert.ToDouble(k.BrojGlasova) / s.brojGlasova) * 100;
+                    if (postotakDobijenihGlasova > MINIMALAN_POSTOTAK_GLASOVA && k.Stranka.Equals(s.naziv))
                     {
                         brojac_ukupni++;
                         Console.WriteLine("Stranka: " + s.naziv + " Kandidat: " + k.Ime_prezime);
@@ -278,16 +279,18 @@ void Glasaj(std::shared_ptr<Glasac> trenutni_glasac)
 
         public void TrenutnoStanje()
         {
+            const int MINIMALAN_BROJ_GLASOVA = 2;
             int izlaznost = 0;
             foreach (Glasac g in glasaci)
                 if (g.birao == true) izlaznost++;
 
-            Console.WriteLine("\nBroj mogucih glasaca je " + glasaci.Count + ", od kojih je glasalo " + izlaznost + ", sto je ukupno " + ((izlaznost * 1.0) / glasaci.Count) * 100 + "%.");
+            Console.WriteLine("\nBroj mogucih glasaca je " + glasaci.Count + ", od kojih je glasalo " + izlaznost + ", sto je ukupno " + (Convert.ToDouble(izlaznost) / glasaci.Count) * 100 + "%.");
             Console.WriteLine("Stranke koje su osvojile mandate za sada (min 2% glasova) su: ");
             int brojac_ukupni = 0;
             foreach (Stranka s in stranke)
             {
-                if ((s.brojGlasova * 1.0) / ukupno_glasova_na_izborima >= 2)
+                double potrebanBroj = Convert.ToDouble(s.brojGlasova) / ukupno_glasova_na_izborima;
+                if (potrebanBroj >= MINIMALAN_BROJ_GLASOVA)
                 {
                     brojac_ukupni++;
                     Console.WriteLine(s.naziv);
