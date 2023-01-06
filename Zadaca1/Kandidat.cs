@@ -8,7 +8,7 @@ namespace Zadaca1
 {
     public class Kandidat
     {
-        
+
         private string ime_prezime { get; set; }
         private int brojGlasova { get; set; }
         private string stranka { get; set; }
@@ -34,7 +34,7 @@ namespace Zadaca1
             this.ime_prezime = ime_prezime;
             this.stranka = stranka;
             brojGlasova = 0;
-            identifikacioniBroj = ime_prezime + "/" +  stranka;
+            identifikacioniBroj = ime_prezime + "/" + stranka;
         }
 
         public Kandidat(string ime_prezime, int brojGlasova, string stranka, string identifikacioniBroj)
@@ -61,7 +61,7 @@ namespace Zadaca1
             return rezultat;
         }
 
-        
+
 
         public static bool ValidirajBrojLicneKarte(string broj_licne)
         {
@@ -105,18 +105,18 @@ namespace Zadaca1
 
         public static bool ValidirajBrojLicneKarteRefactoring1(string broj_licne)
         {
-            if(broj_licne.Length != 9) return false;
+            if (broj_licne.Length != 9) return false;
             char cetvrti = broj_licne[4];
             if (cetvrti != 'E' && cetvrti != 'K' &&
                     cetvrti != 'J' && cetvrti != 'M' && cetvrti != 'T')
             {
                 return false;
             }
-            
+
             int provjera = 0;
-            
+
             int duzina = broj_licne.Length;
-            for (int i = 0; i <  duzina - 1; i += 2)
+            for (int i = 0; i < duzina - 1; i += 2)
             {
                 if (i == 4) i--;
 
@@ -138,15 +138,15 @@ namespace Zadaca1
             return true;
         }
 
-       //izvrsavanje 17.21 s
+        //izvrsavanje 17.21 s
         public static bool ValidirajBrojLicneKarteRefactoring2(string broj_licne)
         {
             int duzina = broj_licne.Length;
             char cetvrti = broj_licne[4];
-            if (duzina!=9 || cetvrti != 'E' && cetvrti != 'K' &&
+            if (duzina != 9 || cetvrti != 'E' && cetvrti != 'K' &&
                     cetvrti != 'J' && cetvrti != 'M' && cetvrti != 'T') return false;
 
-                for (int i = 0; i < duzina - 1; i += 2)
+            for (int i = 0; i < duzina - 1; i += 2)
             {
                 if (i == 4) i--;
 
@@ -154,7 +154,7 @@ namespace Zadaca1
                     return false;
 
             }
-            return true; 
+            return true;
 
         }
 
@@ -168,13 +168,32 @@ namespace Zadaca1
             {
                 if (i == 4) i = 1;
 
-                else if (broj_licne[i] < '0' || broj_licne[i] > '9' || broj_licne[i + 1] < '0' || broj_licne[i + 1] > '9' 
+                else if (broj_licne[i] < '0' || broj_licne[i] > '9' || broj_licne[i + 1] < '0' || broj_licne[i + 1] > '9'
                     || broj_licne[i + 2] < '0' || broj_licne[i + 2] > '9' || broj_licne[i + 3] < '0' || broj_licne[i + 3] > '9')
                     return false;
 
             }
             return true;
 
+        }
+
+        public static bool ValidirajBrojLicneKarteRefactoring4(string broj_licne)
+        {
+            char cetvrti = broj_licne[4];
+            if (broj_licne.Length != 9
+                || (cetvrti != 'E' && cetvrti != 'K' && cetvrti != 'J' && cetvrti != 'M' && cetvrti != 'T')
+                || broj_licne[0] > '9' || broj_licne[0] < '0'
+                || broj_licne[1] > '9' || broj_licne[1] < '0'
+                || broj_licne[2] > '9' || broj_licne[2] < '0'
+                || broj_licne[3] > '9' || broj_licne[3] < '0'
+                || broj_licne[5] > '9' || broj_licne[5] < '0'
+                || broj_licne[6] > '9' || broj_licne[6] < '0'
+                || broj_licne[7] > '9' || broj_licne[7] < '0'
+                || broj_licne[8] > '9' || broj_licne[8] < '0')
+
+                return false;
+
+            return true;
         }
 
         public string Ime_prezime
