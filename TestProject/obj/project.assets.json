@@ -1915,6 +1915,22 @@
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
       },
+      "xunit.assert/2.4.2": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.1/xunit.assert.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard1.1/xunit.assert.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Zadaca1/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -6809,6 +6825,20 @@
         "system.xml.xmldocument.nuspec"
       ]
     },
+    "xunit.assert/2.4.2": {
+      "sha512": "pxJISOFjn2XTTi1mcDCkRZrTFb9OtRRCtx2kZFNF51GdReLr1ls2rnyxvAS4JO247K3aNtflvh5Q0346K5BROA==",
+      "type": "package",
+      "path": "xunit.assert/2.4.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "_content/logo-128-transparent.png",
+        "lib/netstandard1.1/xunit.assert.dll",
+        "lib/netstandard1.1/xunit.assert.xml",
+        "xunit.assert.2.4.2.nupkg.sha512",
+        "xunit.assert.nuspec"
+      ]
+    },
     "Zadaca1/1.0.0": {
       "type": "project",
       "path": "../Zadaca1/Zadaca1.csproj",
@@ -6822,23 +6852,24 @@
       "MSTest.TestFramework >= 2.2.10",
       "Microsoft.NET.Test.Sdk >= 17.3.2",
       "Zadaca1 >= 1.0.0",
-      "coverlet.collector >= 3.1.2"
+      "coverlet.collector >= 3.1.2",
+      "xunit.assert >= 2.4.2"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\harun\\.nuget\\packages\\": {}
+    "C:\\Users\\samirak\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\harun\\Source\\Repos\\VVS_zadaca3\\TestProject\\TestProject.csproj",
+      "projectUniqueName": "C:\\Users\\samirak\\source\\repos\\VVS_zadaca1\\TestProject\\TestProject.csproj",
       "projectName": "TestProject",
-      "projectPath": "C:\\Users\\harun\\Source\\Repos\\VVS_zadaca3\\TestProject\\TestProject.csproj",
-      "packagesPath": "C:\\Users\\harun\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\harun\\Source\\Repos\\VVS_zadaca3\\TestProject\\obj\\",
+      "projectPath": "C:\\Users\\samirak\\source\\repos\\VVS_zadaca1\\TestProject\\TestProject.csproj",
+      "packagesPath": "C:\\Users\\samirak\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\samirak\\source\\repos\\VVS_zadaca1\\TestProject\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\harun\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\samirak\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6852,8 +6883,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\harun\\Source\\Repos\\VVS_zadaca3\\Zadaca1\\Zadaca1.csproj": {
-              "projectPath": "C:\\Users\\harun\\Source\\Repos\\VVS_zadaca3\\Zadaca1\\Zadaca1.csproj"
+            "C:\\Users\\samirak\\source\\repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj": {
+              "projectPath": "C:\\Users\\samirak\\source\\repos\\VVS_zadaca1\\Zadaca1\\Zadaca1.csproj"
             }
           }
         }
@@ -6887,6 +6918,10 @@
           "coverlet.collector": {
             "target": "Package",
             "version": "[3.1.2, )"
+          },
+          "xunit.assert": {
+            "target": "Package",
+            "version": "[2.4.2, )"
           }
         },
         "imports": [
@@ -6905,7 +6940,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
