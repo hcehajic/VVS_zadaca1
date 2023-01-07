@@ -30,6 +30,16 @@ namespace TestProject
             Assert.IsFalse(Kandidat.ValidirajBrojLicneKarte("0000A0009"));
             Assert.IsTrue(Kandidat.ValidirajBrojLicneKarte("0000E0009"));
         }
+
+        [TestMethod]
+        public void TestPotpuniObuhvatPetlji()
+        {
+            Assert.IsFalse(Kandidat.ValidirajBrojLicneKarte("C000E0009"));
+            Assert.IsFalse(Kandidat.ValidirajBrojLicneKarte("C000A0009"));
+            Assert.IsFalse(Kandidat.ValidirajBrojLicneKarte("C000E0009"));
+            Assert.IsFalse(Kandidat.ValidirajBrojLicneKarte("0000A0009"));
+            Assert.IsTrue(Kandidat.ValidirajBrojLicneKarte("0000E0009"));
+        }
     }
     
 }
