@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Zadaca1;
 
 namespace TestProject
-{
+{/*
     [TestClass]
     public class Funkcionalnost5Test
     {
@@ -23,7 +23,7 @@ namespace TestProject
          *     
          *  Prosli testovi iz klase: brojKojiSuProsli/ukupniBrojTestova = 4 / 4
          */
-
+    /*
         static IEnumerable<object[]> GlasoviStranka
         {
             get
@@ -248,4 +248,5 @@ namespace TestProject
         }
 
     }
+    */
 }

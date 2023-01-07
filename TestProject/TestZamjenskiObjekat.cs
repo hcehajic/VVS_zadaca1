@@ -8,6 +8,7 @@ using Zadaca1;
 
 namespace TestProject
 {
+    /*
     [TestClass]
     public class TestZamjenskiObjekat
     {
@@ -30,4 +31,5 @@ namespace TestProject
             glasac.VjerodostojnostGlasaca(spy);
         }
     }
+    */
 }

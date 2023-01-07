@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestProject
 {
+    
     [TestClass]
     public class ObuhvatTest
     {
@@ -30,4 +31,5 @@ namespace TestProject
             Assert.IsTrue(Kandidat.ValidirajBrojLicneKarte("0000E0009"));
         }
     }
+    
 }

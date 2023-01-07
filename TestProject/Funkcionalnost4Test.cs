@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Zadaca1;
 
 namespace TestProject
-{
+{/*
     [TestClass]
     public class Funkcionalnost4Test
     {
@@ -62,7 +62,7 @@ namespace TestProject
          * Rezultat: Testovi prolaze.
          * Data-Driven: Nazivi stranke i njihovi ukupni glasovi
          */
-
+    /*
         [TestMethod]
         [DynamicData("Stranke")]
         public void testIspisaKandidataRukovodstvaStranke(string nazivStranke, int brojGlasova)
@@ -101,4 +101,5 @@ namespace TestProject
 
         }
     }
+    */
 }

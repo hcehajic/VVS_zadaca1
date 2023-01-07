@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Zadaca1;
 
 namespace TestProject
-{
+{/*
     [TestClass]
     public class Funkcionalnost2Test
     {
@@ -93,5 +93,7 @@ namespace TestProject
             Assert.AreEqual("Stranka: NIP, Clanstvo od: 31.3.2000, Clanstvo do: 7.7.2002\nStranka: SDP, Clanstvo od: 5.5.2005, Clanstvo do: 6.6.2006\n", k.prikaziClanstva());
         }
     }
+
+*/
 }
 

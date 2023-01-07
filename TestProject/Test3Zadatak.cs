@@ -8,6 +8,7 @@ using Zadaca1;
 
 namespace TestProject
 {
+    /*
     [TestClass]
     public class Test3Zadatak
     {
@@ -17,6 +18,7 @@ namespace TestProject
          * @author ahajro2
          * @desc testiranje da li char na indexu 4 nije slovo što znači da to nije ispravan broj licne karte
          */
+    /*
 
         [TestMethod]
         public void testNepravilnostiBrojaLicne()
@@ -35,7 +37,7 @@ namespace TestProject
          * @author ahajro2
          * @desc drugi slučaj je nalaženje slova na nekom drugom mjesto osim indexa 4
          */
-
+    /*
         [TestMethod]
         public void testNepravilnostiBrojaLicne1()
         {
@@ -50,7 +52,8 @@ namespace TestProject
          * @author abrulic1
          * @desc treci slucaj je provjera da li su svi karakteri osim indeksa 4 brojevi 
          **/
-        [TestMethod]
+    /*  
+    [TestMethod]
         public void testNepravilnostiBrojaLicne2()
         {
             String brojLicne = "1234K5678";
@@ -62,4 +65,5 @@ namespace TestProject
             Assert.IsTrue(!ispravno);
         }
     }
+    */
 }

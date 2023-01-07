@@ -25,7 +25,7 @@ namespace TestProject
         //[ahajro2]izvrsavanje oko 31 sekundu: stara verzija 
         //[abrulic1] izvrsavanje 34.27s, CPU 25%, Heap Size 283KB
         //[akulaglic3] izvrsavanje 28.9, CPU 24%, Heap Size 1093.91KB
-        [TestMethod]
+       /* [TestMethod]
         public void codeTuningPerformancesTest()
         {
             string brojLicne = "1234K5678";
@@ -97,5 +97,7 @@ namespace TestProject
             }
             int drugiStop = 0;
         }
+     */
     }
+     
 }

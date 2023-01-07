@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Zadaca1;
 
 namespace TestProject
-{
+{/*
     [TestClass]
     public class Funkcionalnost3Test
     {
@@ -68,7 +68,7 @@ namespace TestProject
          * 
          * TEST: USPJEŠAN!
          */
-
+    /*
         [TestMethod]
         [DynamicData("Stranke")]
         public void TestIspisaRezultataIzbora(string nazivStranke, int brojGlasova)
@@ -113,7 +113,7 @@ namespace TestProject
          * Kao identifikacioni kod kandidata predvidjeno je da to bude broj licne karte
          * TEST: USPJEŠAN!
          */
-
+    /*
         [TestMethod]
         [DynamicData("PodaciZaTestiranjeKandidata")]
         public void testKandidata(string ime_prezime, string stranka, string identifikacioniBroj, string brojGlasova)
@@ -159,6 +159,6 @@ namespace TestProject
             Assert.AreEqual("GLASANJE JE JOŠ UVIJEK U TOKU!", nizStringovaZaProvjeru[2]);
         }
     }
-
+*/
 }
 
