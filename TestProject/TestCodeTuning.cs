@@ -84,5 +84,18 @@ namespace TestProject
             }
             int drugiStop = 0;
         }
+
+        //[hcehajic] izvrsavanje 21.7333, CPU 25%, Heap Size 1485.32KB
+        [TestMethod]
+        public void codeTuningPerformancesTestRefactored4()
+        {
+            string brojLicne = "1234K5678";
+            int prviStop = 0;
+            for (long i = 0; i < 357692307; i++)
+            {
+                Kandidat.ValidirajBrojLicneKarteRefactoring4(brojLicne);
+            }
+            int drugiStop = 0;
+        }
     }
 }

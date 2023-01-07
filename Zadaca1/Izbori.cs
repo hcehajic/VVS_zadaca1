@@ -461,6 +461,61 @@ void Glasaj(std::shared_ptr<Glasac> trenutni_glasac)
             return rezultatIzbora;
         }
 
+        public void SmanjiGlasoveNezavisnimKandidatima(Glasac g)
+        {
+            int brojac = 1;
+            foreach (Kandidat k in Kandidati)
+            {
+                if (k.Stranka == null)
+                {
+                    if (brojac == g.Glaso[0])
+                    {
+                        Console.WriteLine("Brisem glasove kandidatu: " + k.Ime_prezime);
+                        k.BrojGlasova--;
+                        break;
+                    }
+                    brojac++;
+                }
+            }
+        }
+
+        public void SmanjiGlasoveStranki(Glasac g)
+        {
+            for (int i = 0; i < Kandidati.Count; i++)
+            {
+                if (Kandidati[i].Stranka == Stranke[g.Glaso[1] - 1].naziv && Kandidati[i].Stranka != null)
+                {
+                    Console.WriteLine("Brisem glasove za kandidata: " + Kandidati[i].Ime_prezime);
+                    Console.WriteLine("Brisem glasove stranki: " + Stranke[g.Glaso[1] - 1].naziv);
+                    Kandidati[i].BrojGlasova--;
+                    Stranke[g.Glaso[1] - 1].brojGlasova--;
+                }
+            }
+        }
+
+        public void SmanjiGlasoveNekimKandidatima(Glasac g)
+        {
+            List<Kandidat> obrisano = new List<Kandidat>();
+            for (int i = g.Glaso[2]; i < g.Glaso.Count; i++)
+            {
+                int broj = 1;
+                for (int j = 0; j < Kandidati.Count; j++)
+                {
+                    var kan = obrisano.Find(k => k.Ime_prezime.Equals(kandidati[j].Ime_prezime));
+                    if (kandidati[j].Stranka == stranke[g.Glaso[1] - 1].naziv && Kandidati[j].Stranka != null && kan == null)
+                    {
+                        if (broj == g.Glaso[i])
+                        {
+                            obrisano.Add(kandidati[j]);
+                            Kandidati[j].BrojGlasova--;
+                            Stranke[g.Glaso[1] - 1].brojGlasova--;
+                        }
+                        broj++;
+                    }
+                }
+            }
+        }
+
         /*
          * 
          * Autor: Harun Cehajic
@@ -475,57 +530,18 @@ void Glasaj(std::shared_ptr<Glasac> trenutni_glasac)
             }
 
             // smanjenje broja glasova za nezavisne kandidate
-            int brojac = 1;
-            foreach(Kandidat k in Kandidati)
-            {
-                if (k.Stranka == null)
-                {
-                    if (brojac == g.Glaso[0])
-                    {
-                        Console.WriteLine("Brisem glasove kandidatu: " + k.Ime_prezime);
-                        k.BrojGlasova--;
-                        break;
-                    }
-                    brojac++;
-                }
-            }
+            SmanjiGlasoveNezavisnimKandidatima(g);
 
             // ukoliko je glasao samo za stranku
             if (g.Glaso.Count < 3)
             {
                 // smanjivanje broja glasova za stranku i sve njene clanove
-                for (int i = 0; i < Kandidati.Count; i++)
-                {
-                    if (Kandidati[i].Stranka == Stranke[g.Glaso[1] - 1].naziv && Kandidati[i].Stranka != null)
-                    {
-                        Console.WriteLine("Brisem glasove za kandidata: " + Kandidati[i].Ime_prezime);
-                        Console.WriteLine("Brisem glasove stranki: " + Stranke[g.Glaso[1] - 1].naziv);
-                        Kandidati[i].BrojGlasova--;
-                        Stranke[g.Glaso[1] - 1].brojGlasova--;
-                    }
-                }
+                SmanjiGlasoveStranki(g);
             }
             else
             {
-                List<Kandidat> obrisano = new List<Kandidat>();
-                for (int i = g.Glaso[2]; i < g.Glaso.Count; i++)
-                {
-                    int broj = 1;
-                    for (int j = 0; j < Kandidati.Count; j++)
-                    {
-                        var kan = obrisano.Find(k => k.Ime_prezime.Equals(kandidati[j].Ime_prezime));
-                        if (kandidati[j].Stranka == stranke[g.Glaso[1] - 1].naziv && Kandidati[j].Stranka != null && kan == null)
-                        {
-                            if (broj == g.Glaso[i])
-                            {
-                                obrisano.Add(kandidati[j]);
-                                Kandidati[j].BrojGlasova--;
-                                Stranke[g.Glaso[1] - 1].brojGlasova--;
-                            }
-                            broj++;
-                        }
-                    }
-                }          
+                // ukoliko je glasao za neke clanove stranki
+                SmanjiGlasoveNekimKandidatima(g);       
             }
                
             g.birao = false;
