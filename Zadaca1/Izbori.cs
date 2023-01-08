@@ -60,7 +60,27 @@ namespace Zadaca1
             }
         }
 
-        private void projveriInformacijeZaKandidate(Stranka s ,ref string[] uneseno, ref int brojac_kandidati, ref int brojac_niz_uneseni, ref List<Kandidat> kandidati)
+        private void projveriInformacijeZaKandidate(Stranka s, ref string[] uneseno, ref int brojac_kandidati, ref int brojac_niz_uneseni, ref List<Kandidat> kandidati)
+        {
+            foreach (Kandidat k in kandidati)
+            {
+                if (k.Stranka != null && k.Stranka.Equals(s.naziv))
+                {
+                    if (uneseno.Length >= 1)
+                    {
+                        k.BrojGlasova += 1;
+                        s.brojGlasova += 1;
+                    }
+                    if (uneseno.Length > 1 && brojac_kandidati == Convert.ToInt32(uneseno[brojac_niz_uneseni]) && brojac_niz_uneseni < uneseno.Length)
+                    {
+                        brojac_niz_uneseni++;
+                    }
+                }
+                
+            }
+        }
+
+        /*private void projveriInformacijeZaKandidate(Stranka s ,ref string[] uneseno, ref int brojac_kandidati, ref int brojac_niz_uneseni, ref List<Kandidat> kandidati)
         {
             foreach (Kandidat k in kandidati)
             {
@@ -76,7 +96,7 @@ namespace Zadaca1
                     s.brojGlasova += 1;
                 }
             }
-        }
+        }*/
 
         public void Glasaj(Glasac trenutni_glasac)
         {
